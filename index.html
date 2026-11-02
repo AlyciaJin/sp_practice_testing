@@ -1,0 +1,868 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>어디 살아요? 말하기 연습</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gaegu:wght@700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* Layout: one working column. The lesson steps stay on top and the current activity fills the sheet below. */
+:root {
+  --bg: #eaeef5; --sheet: #ffffff; --ink: #1b2436; --muted: #566076; --line: #c9d1df; --soft: #f2f4f9;
+  --accent: #2343c4; --on-accent: #ffffff; --good: #116a3b; --bad: #b3261e; --rec: #c2261c;
+  --noun-bg: #d9ebf7; --noun-fg: #0b4569; --noun-bd: #2a7fb0;
+  --part-bg: #f8dfed; --part-fg: #771449; --part-bd: #b8377f;
+  --end-bg: #fbeac4; --end-fg: #643d00; --end-bd: #bd8614;
+  --font-display: "Gaegu", "Noto Sans KR", sans-serif;
+  --font-body: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #121723; --sheet: #1b2230; --ink: #e8ecf4; --muted: #a3adc0; --line: #3a4557; --soft: #242c3b;
+  --accent: #8fa6ff; --on-accent: #101626; --good: #6fd39c; --bad: #ff9c94; --rec: #ff8177;
+  --noun-bg: #143449; --noun-fg: #bfe2f8; --noun-bd: #4ba0d3;
+  --part-bg: #451a33; --part-fg: #f7cbe3; --part-bd: #d9659f;
+  --end-bg: #41300d; --end-fg: #f8e0a8; --end-bd: #d8a53a;
+  color-scheme: dark;
+} }
+:root[data-theme="dark"] {
+  --bg: #121723; --sheet: #1b2230; --ink: #e8ecf4; --muted: #a3adc0; --line: #3a4557; --soft: #242c3b;
+  --accent: #8fa6ff; --on-accent: #101626; --good: #6fd39c; --bad: #ff9c94; --rec: #ff8177;
+  --noun-bg: #143449; --noun-fg: #bfe2f8; --noun-bd: #4ba0d3;
+  --part-bg: #451a33; --part-fg: #f7cbe3; --part-bd: #d9659f;
+  --end-bg: #41300d; --end-fg: #f8e0a8; --end-bd: #d8a53a;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 400 16px/1.6 var(--font-body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 20px 48px;
+}
+.wrap { max-width: 760px; margin: 0 auto; display: grid; gap: 14px; }
+header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
+h1 { font: 700 2.1rem/1.15 var(--font-display); margin: 0; }
+.sub { color: var(--muted); font-size: .9rem; }
+.status { font-size: .84rem; color: var(--muted); display: grid; gap: 6px; }
+.status summary { cursor: pointer; }
+.status .warn { color: var(--bad); }
+.status select { font: inherit; max-width: 100%; padding: 4px; color: var(--ink); background: var(--sheet); border: 1px solid var(--line); border-radius: 4px; }
+.voice-row { display: flex; flex-wrap: wrap; gap: 8px 18px; padding-top: 6px; }
+.voice-row label { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; min-width: 0; }
+nav { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; }
+@media (max-width: 480px) { nav { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+nav button {
+  font: inherit; font-size: .8rem; line-height: 1.3; text-align: left; color: var(--muted); cursor: pointer;
+  background: transparent; border: 0; border-top: 3px solid var(--line); padding: 7px 4px 4px; min-width: 0;
+}
+nav button b { display: block; font-size: .92rem; }
+nav button[aria-current="step"] { color: var(--ink); border-top-color: var(--accent); }
+nav button.done { border-top-color: var(--good); }
+nav button.done b::after { content: " ✓"; color: var(--good); }
+nav button[aria-current="step"].done { border-top-color: var(--accent); }
+main { background: var(--sheet); border: 1px solid var(--line); border-radius: 6px; padding: 20px; display: grid; gap: 16px; min-width: 0; }
+@media (max-width: 480px) { main { padding: 16px 14px; } nav button span { display: none; } }
+h2 { font-size: 1.2rem; line-height: 1.35; margin: 0; text-wrap: balance; }
+.lead { margin: 4px 0 0; color: var(--muted); }
+.row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.btn {
+  font: 500 .95rem/1.2 var(--font-body); min-height: 44px; padding: 10px 16px; border-radius: 6px; cursor: pointer;
+  border: 1px solid var(--line); background: var(--sheet); color: var(--ink); display: inline-flex; align-items: center; gap: 8px;
+}
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.btn.rec { background: var(--rec); border-color: var(--rec); color: var(--on-accent); }
+.btn.rec.on { animation: pulse 1.2s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: .7; } }
+@media (prefers-reduced-motion: reduce) { .btn.rec.on { animation: none; } }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+svg.i { width: 1em; height: 1em; fill: currentColor; flex: none; }
+.msg { margin: 0; padding: 10px 12px; border-radius: 6px; background: var(--soft); }
+.msg.good { color: var(--good); font-weight: 500; }
+.msg.bad { color: var(--bad); }
+
+/* Drag tokens */
+.tok {
+  font: 500 1.02rem/1.3 var(--font-body); color: var(--ink); background: var(--soft); border: 1.5px solid var(--line);
+  padding: 6px 11px; min-height: 38px; cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; border-radius: 4px;
+}
+.tok:disabled { cursor: default; }
+.tok.selected { outline: 3px solid var(--accent); outline-offset: 1px; }
+.tok.ghost { opacity: .3; }
+.tok.floating { position: fixed; z-index: 50; pointer-events: none; margin: 0; cursor: grabbing; box-shadow: 0 6px 16px rgb(0 0 0 / .28); }
+.tok.n { background: var(--noun-bg); color: var(--noun-fg); border-color: var(--noun-bd); border-radius: 3px; }
+.tok.p { background: var(--part-bg); color: var(--part-fg); border-color: var(--part-bd); border-radius: 999px; }
+.tok.e { background: var(--end-bg); color: var(--end-fg); border-color: var(--end-bd); border-radius: 3px 16px 16px 3px; }
+.tok.en { width: 100%; text-align: left; font-weight: 400; }
+.slot { border: 1.5px dashed var(--line); border-radius: 5px; background: var(--soft); cursor: pointer; }
+.slot.over { border-color: var(--accent); border-style: solid; }
+.slot.wrong { border: 2px solid var(--bad); }
+.slot.filled { border-style: solid; border-color: transparent; background: transparent; }
+.slot.wrong.filled { border-color: var(--bad); }
+.bank { border: 1px solid var(--line); border-radius: 6px; padding: 12px; display: grid; gap: 10px; min-height: 64px; }
+.bank.over { border-color: var(--accent); }
+.bank-group { display: grid; grid-template-columns: 7.6rem minmax(0, 1fr); gap: 8px; align-items: start; }
+@media (max-width: 480px) { .bank-group { grid-template-columns: minmax(0, 1fr); gap: 4px; } }
+.bank-label { font-size: .8rem; color: var(--muted); padding-top: 8px; }
+@media (max-width: 480px) { .bank-label { padding-top: 0; } }
+.toks { display: flex; flex-wrap: wrap; gap: 7px; min-width: 0; }
+.bank-empty { color: var(--muted); font-size: .88rem; }
+
+/* Activity 1 */
+.order { display: grid; gap: 8px; }
+.order-row { display: grid; grid-template-columns: 1.6rem minmax(0, 1fr); gap: 8px; align-items: center; }
+.order-row > b { color: var(--muted); font-variant-numeric: tabular-nums; text-align: right; }
+.order .slot { min-height: 44px; display: flex; }
+.stack { display: grid; gap: 7px; }
+
+/* Activity 2 */
+.dlg { display: grid; gap: 10px; }
+.dlg-line { display: grid; grid-template-columns: 3.6rem minmax(0, 1fr); gap: 8px; align-items: baseline; }
+.who { font-size: .85rem; color: var(--muted); font-weight: 500; }
+.dlg-parts { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; font-size: 1.05rem; min-width: 0; }
+.dlg-parts .slot { min-width: 3.4rem; min-height: 40px; display: inline-flex; }
+.dlg-parts .slot .tok { width: 100%; }
+.ko-big { font-size: 1.28rem; font-weight: 500; line-height: 1.5; }
+.reveal { border-left: 4px solid var(--good); padding: 4px 0 4px 12px; display: grid; gap: 6px; }
+
+/* Activity 3 */
+.line-dots { display: flex; flex-wrap: wrap; gap: 5px; }
+.line-dots button { font: inherit; font-size: .85rem; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--line); background: transparent; color: var(--muted); cursor: pointer; font-variant-numeric: tabular-nums; }
+.line-dots button.now { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.line-dots button.done { color: var(--good); border-color: var(--good); }
+.speeds { display: flex; gap: 6px; flex-wrap: wrap; }
+.speed { font-size: .86rem; padding: 3px 10px; border: 1px solid var(--line); border-radius: 4px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.speed.now { border-color: var(--accent); color: var(--accent); font-weight: 700; }
+.speed.done { border-color: var(--good); color: var(--good); }
+.pron { color: var(--muted); font-size: 1.02rem; }
+.en-big { font-size: 1.1rem; }
+
+/* Whole-dialogue follow-along */
+.follow { display: grid; gap: 10px; }
+.follow-row { display: grid; grid-template-columns: 3.6rem minmax(0, 1fr) auto; gap: 8px; align-items: center; }
+@media (max-width: 480px) { .follow-row { grid-template-columns: 3.6rem minmax(0, 1fr); } .follow-row > .row { grid-column: 2; } }
+.say-box {
+  font: 500 1.05rem/1.4 var(--font-body); color: var(--ink); text-align: left; cursor: pointer; width: 100%; min-width: 0; min-height: 48px;
+  display: flex; align-items: center; gap: 10px; padding: 8px 12px; background: var(--soft); border: 1.5px solid var(--line); border-radius: 4px; overflow-wrap: anywhere;
+}
+.say-box svg.i { color: var(--accent); }
+.say-box:disabled { opacity: .45; cursor: not-allowed; }
+.say-box.now { border-color: var(--accent); }
+.say-box.playing { border-color: var(--accent); background: transparent; }
+.follow-row .btn { min-height: 48px; }
+
+/* Speaking activities */
+.turns { display: grid; gap: 8px; }
+.turn { padding: 10px 12px; border-radius: 6px; background: var(--soft); display: grid; gap: 6px; min-width: 0; }
+.turn.mine { border: 1.5px solid var(--accent); background: transparent; }
+.turn.past { background: transparent; border: 1px solid var(--line); }
+.turn-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; }
+.linkbtn { font: inherit; font-size: .88rem; background: none; border: 0; color: var(--accent); cursor: pointer; padding: 4px 0; display: inline-flex; gap: 5px; align-items: center; }
+.heard { margin: 0; overflow-wrap: anywhere; }
+.hint { margin: 0; color: var(--muted); font-style: italic; }
+
+/* Test log */
+.log { font-size: .86rem; color: var(--muted); }
+.log summary { cursor: pointer; padding: 4px 0; }
+.log-body { display: grid; gap: 8px; padding-top: 6px; }
+.log-scroll { overflow-x: auto; }
+.log table { border-collapse: collapse; width: 100%; min-width: 520px; font-size: .82rem; }
+.log th, .log td { text-align: left; padding: 4px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.log td.n { font-variant-numeric: tabular-nums; white-space: nowrap; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1 lang="ko">어디 살아요?</h1>
+    <span class="sub">Korean 101 · Dialogue practice · Teacher test version</span>
+  </header>
+  <details class="status" id="status"><summary id="status-line">Checking speech tools…</summary><div id="status-body"></div></details>
+  <nav id="steps" aria-label="Activities"></nav>
+  <main id="main" aria-live="polite"></main>
+  <details class="log" id="log"><summary id="log-sum">Speech log (0)</summary><div class="log-body" id="log-body"></div></details>
+</div>
+
+<script>
+/* ============================================================
+   LESSON CONTENT. Edit this block to change the dialogue.
+   parts: plain strings stay visible in Activity 2.
+          [text, type] become draggable pieces.
+          type: n = 명사, p = 조사, e = 어미 결합형
+   pron:  shown in the first Repeat round.
+   tts:   optional text for the voice when it differs from ko.
+   ============================================================ */
+const LESSON = {
+  speakers: { A: "소피아", B: "마이클" },
+  speedRounds: [0.9, 0.95, 1],   // Activity 3 order
+  repeatShow: [["ko", "pron", "en"], ["en"], []],  // What each speed shows: ko = Korean, pron = pronunciation, en = meaning
+  maxAttempts: 3,                // First try plus two more
+  lines: [
+    { who: "A", ko: "마이클 씨, 어디 살아요?", en: "Michael, where do you live?",
+      pron: "[마이클 씨, 어디 사라요]",
+      parts: ["마이클 씨,", ["어디","n"], ["살아요","e"], "?"] },
+    { who: "B", ko: "저는 둘루스에 살아요.", en: "I live in Duluth.",
+      pron: "[저는 둘루스에 사라요]",
+      parts: [["저","n"], ["는","p"], ["둘루스","n"], ["에","p"], ["살아요","e"], "."] },
+    { who: "A", ko: "집이 가까워요, 멀어요?", en: "Is your home close or far?",
+      pron: "[지비 가까워요, 머러요]",
+      parts: [["집","n"], ["이","p"], ["가까워요","e"], ",", ["멀어요","e"], "?"] },
+    { who: "B", ko: "조금 멀어요.", en: "It's a little far.",
+      pron: "[조금 머러요]",
+      parts: ["조금", ["멀어요","e"], "."] },
+    { who: "A", ko: "집에서 학교까지 얼마나 걸려요?", en: "How long does it take from your home to school?",
+      pron: "[지베서 학꾜까지 얼마나 걸려요]",
+      parts: [["집","n"], ["에서","p"], ["학교","n"], ["까지","p"], "얼마나", ["걸려요","e"], "?"] },
+    { who: "B", ko: "집에서 학교까지 차로 30분쯤 걸려요.", en: "It takes about 30 minutes by car from my home to school.",
+      pron: "[지베서 학꾜까지 차로 삼십뿐쯤 걸려요]", tts: "집에서 학교까지 차로 삼십 분쯤 걸려요.",
+      parts: [["집","n"], ["에서","p"], ["학교","n"], ["까지","p"], ["차","n"], ["로","p"], "30분쯤", ["걸려요","e"], "."] },
+  ],
+};
+const TYPE_LABEL = { n: "명사 Noun", p: "조사 Particle", e: "어미 결합형 Verb + ending" };
+
+/* Helpers */
+const $ = (id) => document.getElementById(id);
+function el(tag, props, ...kids) {
+  const n = document.createElement(tag);
+  for (const [k, v] of Object.entries(props || {})) {
+    if (v === undefined || v === null || v === false) continue;
+    if (k === "class") n.className = v;
+    else if (k === "text") n.textContent = v;
+    else if (k.startsWith("on")) n.addEventListener(k.slice(2), v);
+    else if (k === "dataset") Object.assign(n.dataset, v);
+    else if (k === "disabled") n.disabled = !!v;
+    else n.setAttribute(k, v === true ? "" : v);
+  }
+  for (const c of kids.flat()) if (c !== null && c !== undefined && c !== false) n.append(c);
+  return n;
+}
+function icon(name) {
+  const paths = {
+    play: "M4 2l10 6-10 6z", stop: "M3 3h10v10H3z",
+    mic: "M8 1a2.5 2.5 0 0 0-2.5 2.5v4a2.5 2.5 0 0 0 5 0v-4A2.5 2.5 0 0 0 8 1zM3.5 7a.75.75 0 0 1 1.5 0 3 3 0 0 0 6 0 .75.75 0 0 1 1.5 0 4.5 4.5 0 0 1-3.75 4.44V14h1.5v1h-4.5v-1h1.5v-2.56A4.5 4.5 0 0 1 3.5 7z",
+  };
+  const s = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  s.setAttribute("viewBox", "0 0 16 16"); s.setAttribute("class", "i"); s.setAttribute("aria-hidden", "true");
+  const p = document.createElementNS("http://www.w3.org/2000/svg", "path"); p.setAttribute("d", paths[name]); s.append(p);
+  return s;
+}
+const ko = (text, cls) => el("span", { lang: "ko", class: cls, text });
+function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+const nameOf = (who) => LESSON.speakers[who];
+
+/* ---------- Voice (text to speech) ---------- */
+const TTS = {
+  supported: "speechSynthesis" in window, voices: [], pick: { A: null, B: null }, current: null,
+  load() {
+    if (!this.supported) return;
+    const all = speechSynthesis.getVoices();
+    this.voices = all.filter((v) => /^ko/i.test(v.lang));
+    if (!this.pick.A && this.voices[0]) this.pick.A = this.voices[0];
+    if (!this.pick.B && this.voices[0]) this.pick.B = this.voices[1] || this.voices[0];
+  },
+  cancel() { if (this.supported) speechSynthesis.cancel(); },
+  speak(line, rate = 1) {
+    return new Promise((resolve) => {
+      if (!this.supported) return resolve(false);
+      speechSynthesis.cancel();
+      const text = line.tts || line.ko;
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = "ko-KR"; u.rate = rate;
+      const v = this.pick[line.who];
+      if (v) u.voice = v;
+      // With only one Korean voice on the device, a lower pitch separates the two speakers.
+      if (line.who === "B" && this.pick.A === this.pick.B) u.pitch = 0.8;
+      let finished = false;
+      const end = (ok) => { if (!finished) { finished = true; clearTimeout(guard); resolve(ok); } };
+      const guard = setTimeout(() => end(false), Math.max(6000, text.length * 500 / rate));
+      u.onend = () => end(true); u.onerror = () => end(false);
+      this.current = u; // Holds a reference so the browser does not drop the end event.
+      setTimeout(() => speechSynthesis.speak(u), 60);
+    });
+  },
+};
+
+/* ---------- Speech recognition ---------- */
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+const STT = {
+  supported: !!SR, mode: "online", localState: "unknown", rec: null, active: false,
+  async checkLocal() {
+    if (!SR || typeof SR.available !== "function") return;
+    try {
+      this.localState = await SR.available({ langs: ["ko-KR"], processLocally: true });
+      if (this.localState === "available") this.mode = "device";
+    } catch (e) { this.localState = "unavailable"; }
+  },
+  async install() {
+    try {
+      const ok = await SR.install({ langs: ["ko-KR"], processLocally: true });
+      if (ok) { this.localState = "available"; this.mode = "device"; }
+      return ok;
+    } catch (e) { return false; }
+  },
+  listen() {
+    return new Promise((resolve) => {
+      const rec = new SR();
+      rec.lang = "ko-KR"; rec.interimResults = true; rec.maxAlternatives = 1;
+      rec.continuous = !/Android/i.test(navigator.userAgent);
+      if (this.mode === "device") rec.processLocally = true;
+      let text = "", error = null, finished = false;
+      const finish = () => { if (finished) return; finished = true; clearTimeout(limit); clearTimeout(this.after); this.active = false; this.rec = null; resolve({ text: text.trim(), error }); };
+      const limit = setTimeout(() => this.stop(), 15000);
+      rec.onresult = (e) => { let t = ""; for (const r of e.results) t += r[0].transcript + " "; text = t; };
+      rec.onerror = (e) => { if (e.error !== "no-speech" && e.error !== "aborted") error = e.error; };
+      rec.onend = finish;
+      this.rec = rec; this.finish = finish; this.active = true;
+      try { rec.start(); } catch (e) { error = "start-failed"; finish(); }
+    });
+  },
+  stop() {
+    if (!this.rec) return;
+    try { this.rec.stop(); } catch (e) {}
+    clearTimeout(this.after);
+    this.after = setTimeout(() => this.finish && this.finish(), 4000); // Some browsers never fire the end event.
+  },
+  abort() { if (this.rec) { try { this.rec.abort(); } catch (e) {} } },
+};
+function errorMessage(code) {
+  if (code === "not-allowed" || code === "service-not-allowed") return "The microphone is blocked. Allow it for this page in the browser's address bar, then try again.";
+  if (code === "audio-capture") return "No microphone was found. Connect one, then try again.";
+  if (code === "network") return "Speech recognition needs an internet connection. Check the connection, then try again.";
+  if (code === "language-not-supported") return "Korean recognition is not available on this device. Switched to the online service. Try again.";
+  return "Speech recognition stopped. Try again.";
+}
+function handleSttError(code) { if (code === "language-not-supported" && STT.mode === "device") { STT.mode = "online"; renderStatus(); } }
+function normalize(s) {
+  return s.toLowerCase().replace(/michael/g, "마이클").replace(/duluth/g, "둘루스").replace(/30/g, "삼십")
+    .replace(/[\s.,?!·'"…~]/g, "");
+}
+const matches = (heard, line) => normalize(heard) === normalize(line.ko);
+
+/* ---------- App state ---------- */
+const STEPS = [
+  { key: "a1", short: "Order", label: "Put meanings in order" },
+  { key: "a2", short: "Build", label: "Build the dialogue" },
+  { key: "a3", short: "Repeat", label: "Repeat at three speeds" },
+  { key: "follow", short: "Follow", label: "Follow the whole dialogue" },
+  { key: "a4", short: "Speak A", label: "Speak as 소피아" },
+  { key: "a5", short: "Speak B", label: "Speak as 마이클" },
+];
+const S = { step: 0, done: {}, log: [], run: 0, a1: null, a2: null, a3: null, follow: null, a4: null, a5: null };
+function stopAll() { S.run++; TTS.cancel(); STT.abort(); }
+
+/* One place for saved activity. A later login and database version only needs to send these entries to the server. */
+function record(entry) {
+  S.log.push({ time: new Date().toLocaleTimeString(), ...entry });
+  renderLog();
+}
+function complete(key) { S.done[key] = true; renderSteps(); }
+
+/* ---------- Drag board shared by Activities 1 and 2 ---------- */
+function newBoard(tokens, slots) {
+  const place = {}; slots.forEach((s) => (place[s.id] = null));
+  return { tokens, slots, place, attempts: 0, wrong: new Set(), state: "working", selected: null, note: null };
+}
+const slotOf = (b, tid) => Object.keys(b.place).find((s) => b.place[s] === tid) || null;
+const tokenById = (b, id) => b.tokens.find((t) => t.id === id);
+function moveToken(b, tid, target) {
+  const from = slotOf(b, tid);
+  if (from === target) return;
+  if (target) {
+    const other = b.place[target];
+    b.place[target] = tid;
+    if (from) b.place[from] = other; // Swap with whatever was in the target slot.
+    b.wrong.delete(target);
+  } else if (from) b.place[from] = null;
+  if (from) b.wrong.delete(from);
+  b.selected = null; b.note = null;
+}
+function checkBoard(b) {
+  b.attempts++; b.wrong = new Set();
+  for (const s of b.slots) if (tokenById(b, b.place[s.id]).text !== s.answer) b.wrong.add(s.id);
+  return b.wrong.size === 0;
+}
+function revealBoard(b) {
+  const pool = b.tokens.slice();
+  for (const s of b.slots) { const i = pool.findIndex((t) => t.text === s.answer); b.place[s.id] = pool.splice(i, 1)[0].id; }
+  b.wrong = new Set();
+}
+function tokenEl(b, t) {
+  return el("button", {
+    type: "button", lang: b.tokensLang, disabled: b.state !== "working",
+    class: "tok " + (t.cls || "") + (b.selected === t.id ? " selected" : ""),
+    dataset: { tok: t.id, fk: "t" + t.id }, text: t.text,
+  });
+}
+function slotEl(b, s, label) {
+  const tid = b.place[s.id];
+  const n = el("div", {
+    role: "button", tabindex: b.state === "working" ? 0 : -1, "aria-label": label,
+    class: "slot" + (tid ? " filled" : "") + (b.wrong.has(s.id) ? " wrong" : ""),
+    dataset: { slot: s.id, fk: "s" + s.id },
+  });
+  if (tid) n.append(tokenEl(b, tokenById(b, tid)));
+  return n;
+}
+function boardControls(b, key, solvedText, revealText) {
+  const allIn = Object.values(b.place).every(Boolean);
+  const left = LESSON.maxAttempts - b.attempts;
+  const nodes = [];
+  if (b.note) nodes.push(el("p", { class: "msg bad", text: b.note }));
+  if (b.state === "working") {
+    nodes.push(el("div", { class: "row" },
+      el("button", { type: "button", class: "btn primary", disabled: !allIn, text: "Check", onclick: () => {
+        stopAll();
+        const ok = checkBoard(b);
+        if (ok) { b.state = "solved"; record({ activity: key, type: "check", attempt: b.attempts, result: "correct" }); complete(key); }
+        else {
+          record({ activity: key, type: "check", attempt: b.attempts, result: b.wrong.size + " wrong" });
+          if (b.attempts >= LESSON.maxAttempts) { b.state = "revealed"; revealBoard(b); complete(key); }
+          else b.note = `${b.wrong.size} ${b.wrong.size === 1 ? "piece is" : "pieces are"} in the wrong place. Drag the marked ${b.wrong.size === 1 ? "one" : "ones"} to fix ${b.wrong.size === 1 ? "it" : "them"}. ${LESSON.maxAttempts - b.attempts} ${LESSON.maxAttempts - b.attempts === 1 ? "try" : "tries"} left.`;
+        }
+        render();
+      } }),
+      el("span", { class: "sub", text: left === LESSON.maxAttempts ? `${left} tries` : `${left} ${left === 1 ? "try" : "tries"} left` })));
+  } else {
+    nodes.push(el("p", { class: "msg good", text: b.state === "solved" ? solvedText : revealText }));
+  }
+  return nodes;
+}
+function nextButton() {
+  if (S.step >= STEPS.length - 1) return el("p", { class: "msg good", text: "All activities are finished." });
+  return el("div", { class: "row" }, el("button", { type: "button", class: "btn primary", text: "Next activity: " + STEPS[S.step + 1].label, onclick: () => go(S.step + 1) }));
+}
+function playAllButton(st) {
+  const playing = st.playing;
+  return el("button", { type: "button", class: "btn", onclick: async () => {
+    if (st.playing) { st.playing = false; stopAll(); render(); return; }
+    stopAll(); const run = S.run; st.playing = true; render();
+    for (const line of LESSON.lines) { await TTS.speak(line, 1); if (run !== S.run) return; await wait(350); if (run !== S.run) return; }
+    st.playing = false; render();
+  } }, icon(playing ? "stop" : "play"), playing ? "Stop" : "Play the dialogue");
+}
+
+/* Drag handling. Tokens also work by tap or keyboard: choose a piece, then choose a slot. */
+let drag = null, suppressClick = false;
+const currentBoard = () => (S.step === 0 ? S.a1 : S.step === 1 ? S.a2 : null);
+function dropTarget(x, y) {
+  const under = document.elementFromPoint(x, y);
+  return under ? under.closest(".slot, .bank") : null;
+}
+function clearOver() { document.querySelectorAll(".over").forEach((n) => n.classList.remove("over")); }
+document.addEventListener("pointerdown", (e) => {
+  const t = e.target.closest && e.target.closest(".tok");
+  const b = currentBoard();
+  if (!t || !b || b.state !== "working" || (e.button && e.button !== 0)) return;
+  drag = { id: t.dataset.tok, node: t, sx: e.clientX, sy: e.clientY, moving: false, clone: null, pid: e.pointerId };
+});
+document.addEventListener("pointermove", (e) => {
+  if (!drag || e.pointerId !== drag.pid) return;
+  if (!drag.moving) {
+    if (Math.hypot(e.clientX - drag.sx, e.clientY - drag.sy) < 6) return;
+    drag.moving = true;
+    const r = drag.node.getBoundingClientRect();
+    drag.ox = e.clientX - r.left; drag.oy = e.clientY - r.top;
+    drag.clone = drag.node.cloneNode(true);
+    drag.clone.classList.add("floating"); drag.clone.classList.remove("selected");
+    drag.clone.style.width = r.width + "px";
+    document.body.append(drag.clone);
+    drag.node.classList.add("ghost");
+  }
+  e.preventDefault();
+  drag.clone.style.left = e.clientX - drag.ox + "px";
+  drag.clone.style.top = e.clientY - drag.oy + "px";
+  drag.x = e.clientX; drag.y = e.clientY;
+  if (!drag.scrolling) { drag.scrolling = true; requestAnimationFrame(autoScroll); }
+  clearOver();
+  const tgt = dropTarget(e.clientX, e.clientY);
+  if (tgt) tgt.classList.add("over");
+});
+/* On a phone the blanks and the word box do not fit on one screen, so holding a piece near an edge scrolls the page. */
+function autoScroll() {
+  if (!drag || !drag.moving) return;
+  const edge = 90, h = window.innerHeight;
+  const dy = drag.y < edge ? -(edge - drag.y) / 6 : drag.y > h - edge ? (drag.y - (h - edge)) / 6 : 0;
+  if (dy) {
+    window.scrollBy(0, dy);
+    clearOver();
+    const tgt = dropTarget(drag.x, drag.y);
+    if (tgt) tgt.classList.add("over");
+  }
+  requestAnimationFrame(autoScroll);
+}
+function endDrag(e, cancelled) {
+  if (!drag || e.pointerId !== drag.pid) return;
+  const d = drag; drag = null;
+  if (!d.moving) return;
+  d.clone.remove(); d.node.classList.remove("ghost"); clearOver();
+  suppressClick = true; setTimeout(() => (suppressClick = false), 50);
+  if (cancelled) return;
+  const b = currentBoard(); if (!b) return;
+  const tgt = dropTarget(e.clientX, e.clientY);
+  if (tgt && tgt.dataset.slot) moveToken(b, d.id, tgt.dataset.slot);
+  else if (tgt && tgt.classList.contains("bank")) moveToken(b, d.id, null);
+  render();
+}
+document.addEventListener("pointerup", (e) => endDrag(e, false));
+document.addEventListener("pointercancel", (e) => endDrag(e, true));
+document.addEventListener("click", (e) => {
+  const b = currentBoard();
+  if (!b || b.state !== "working" || suppressClick || !e.target.closest) return;
+  const tok = e.target.closest(".tok"), slot = e.target.closest(".slot"), bank = e.target.closest(".bank");
+  if (!tok && !slot && !bank) return;
+  if (b.selected) {
+    if (tok && tok.dataset.tok === b.selected) b.selected = null;
+    else if (slot) moveToken(b, b.selected, slot.dataset.slot);
+    else if (tok) b.selected = tok.dataset.tok;
+    else if (bank) moveToken(b, b.selected, null);
+  } else if (tok) b.selected = tok.dataset.tok;
+  else return;
+  render();
+});
+document.addEventListener("keydown", (e) => {
+  if ((e.key === "Enter" || e.key === " ") && e.target.classList && e.target.classList.contains("slot")) { e.preventDefault(); e.target.click(); }
+});
+
+/* ---------- Activity 1 ---------- */
+function viewA1() {
+  if (!S.a1) {
+    const tokens = shuffle(LESSON.lines.map((l, i) => ({ id: "e" + i, text: l.en, cls: "en" })));
+    const slots = LESSON.lines.map((l, i) => ({ id: "o" + i, answer: l.en }));
+    S.a1 = newBoard(tokens, slots); S.a1.tokensLang = "en";
+  }
+  const b = S.a1;
+  const inBank = b.tokens.filter((t) => !slotOf(b, t.id));
+  return [
+    el("div", {}, el("h2", { text: "Listen, then put the English meanings in order" }),
+      el("p", { class: "lead", text: "Drag each sentence to its place in the dialogue. You can move a sentence again at any time before you check." })),
+    el("div", { class: "row" }, playAllButton(b)),
+    el("div", { class: "order" }, b.slots.map((s, i) => el("div", { class: "order-row" }, el("b", { text: i + 1 }), slotEl(b, s, "Position " + (i + 1))))),
+    el("div", { class: "bank", dataset: { fk: "bank" } }, inBank.length ? el("div", { class: "stack" }, inBank.map((t) => tokenEl(b, t))) : el("span", { class: "bank-empty", text: "All sentences are placed. Drag one back here to remove it." })),
+    boardControls(b, "a1", "Correct. All six sentences are in order.", "Here is the correct order. Listen again and follow along."),
+    b.state !== "working" && nextButton(),
+  ];
+}
+
+/* ---------- Activity 2 ---------- */
+function viewA2() {
+  if (!S.a2) {
+    const tokens = [], slots = [];
+    LESSON.lines.forEach((l, li) => l.parts.forEach((p, pi) => {
+      if (Array.isArray(p)) { tokens.push({ id: `w${li}_${pi}`, text: p[0], cls: p[1] }); slots.push({ id: `b${li}_${pi}`, answer: p[0] }); }
+    }));
+    S.a2 = newBoard(shuffle(tokens), slots); S.a2.tokensLang = "ko";
+  }
+  const b = S.a2;
+  const lineEls = LESSON.lines.map((l, li) => el("div", { class: "dlg-line" },
+    el("span", { class: "who", lang: "ko", text: nameOf(l.who) }),
+    el("div", { class: "dlg-parts", lang: "ko" }, l.parts.map((p, pi) => Array.isArray(p) ? slotEl(b, { id: `b${li}_${pi}` }, `Blank in line ${li + 1}`) : el("span", { text: p })))));
+  const groups = ["n", "p", "e"].map((c) => {
+    const items = b.tokens.filter((t) => t.cls === c && !slotOf(b, t.id));
+    return el("div", { class: "bank-group" }, el("span", { class: "bank-label", lang: "ko", text: TYPE_LABEL[c] }), el("div", { class: "toks" }, items.map((t) => tokenEl(b, t))));
+  });
+  const finished = b.state !== "working";
+  return [
+    el("div", {}, el("h2", { text: "Listen, then build the dialogue" }),
+      el("p", { class: "lead", text: "Drag the words and grammar pieces into the blanks. Drag a placed piece to another blank to change your answer, or back to the box to remove it." })),
+    el("div", { class: "row" }, playAllButton(b)),
+    finished
+      ? el("div", { class: "reveal", lang: "ko" }, LESSON.lines.map((l) => el("div", { class: "dlg-line" }, el("span", { class: "who", text: nameOf(l.who) }), el("span", { text: l.ko }))))
+      : el("div", { class: "dlg" }, lineEls),
+    !finished && el("div", { class: "bank", dataset: { fk: "bank" } }, groups),
+    boardControls(b, "a2", "Correct. Here is the full dialogue.", "Here is the full dialogue. Compare it with your answer as you listen again."),
+    finished && nextButton(),
+  ];
+}
+
+/* ---------- Shared record button ---------- */
+function recordButton(st, onResult, disabled) {
+  if (!STT.supported) return null;
+  if (STT.active && st.listening) {
+    return el("button", { type: "button", class: "btn rec on", onclick: () => { st.listening = false; st.checking = true; STT.stop(); render(); } }, icon("stop"), "Stop");
+  }
+  if (st.checking) return el("button", { type: "button", class: "btn", disabled: true, text: "Checking…" });
+  return el("button", { type: "button", class: "btn rec", disabled, onclick: async () => {
+    TTS.cancel(); const run = S.run;
+    st.listening = true; const p = STT.listen(); render();
+    const res = await p;
+    st.listening = false; st.checking = false;
+    if (run !== S.run) return;
+    if (res.error) handleSttError(res.error);
+    onResult(res); render();
+  } }, icon("mic"), "Record");
+}
+
+/* ---------- Activity 3 ---------- */
+function viewA3() {
+  if (!S.a3) S.a3 = { line: 0, round: 0, heard: null, attempted: false, listened: false, playing: false, error: null, finished: false, lineDone: {} };
+  const st = S.a3, line = LESSON.lines[st.line], rate = LESSON.speedRounds[st.round], pct = Math.round(rate * 100);
+  if (st.finished) return [
+    el("div", {}, el("h2", { text: "Repeat at three speeds" })),
+    el("div", { class: "reveal", lang: "ko" }, LESSON.lines.map((l) => el("div", { class: "dlg-line" }, el("span", { class: "who", text: nameOf(l.who) }), el("span", { text: l.ko })))),
+    el("p", { class: "msg good", text: "You repeated all six lines." }),
+    el("div", { class: "row" }, el("button", { type: "button", class: "btn", text: "Practice again", onclick: () => { S.a3 = null; render(); } })),
+    nextButton(),
+  ];
+  const play = async (r = rate) => {
+    stopAll(); const run = S.run; st.playing = true; render();
+    await TTS.speak(line, r);
+    if (run !== S.run) return;
+    st.playing = false; st.listened = true; render();
+  };
+  st.play = play;
+  const advance = () => {
+    stopAll(); st.heard = null; st.error = null; st.attempted = false; st.listened = false; st.playing = false;
+    if (st.round < LESSON.speedRounds.length - 1) st.round++;
+    else {
+      st.lineDone[st.line] = true; st.round = 0;
+      if (st.line < LESSON.lines.length - 1) st.line++;
+      else { st.finished = true; complete("a3"); render(); return; }
+    }
+    render(); S.a3.play(LESSON.speedRounds[st.round]);
+  };
+  const show = LESSON.repeatShow[st.round] || [];
+  return [
+    el("div", {}, el("h2", { text: "Listen and repeat" }),
+      el("p", { class: "lead", text: "Listen, press Record, say the line, then press Stop. This activity counts your attempt and does not mark it." })),
+    el("div", { class: "line-dots", role: "group", "aria-label": "Lines" }, LESSON.lines.map((l, i) => el("button", {
+      type: "button", class: (i === st.line ? "now" : st.lineDone[i] ? "done" : ""), text: i + 1, "aria-label": "Line " + (i + 1),
+      onclick: () => { stopAll(); Object.assign(st, { line: i, round: 0, heard: null, error: null, attempted: false, listened: false, playing: false }); render(); },
+    }))),
+    el("div", { class: "speeds" }, LESSON.speedRounds.map((r, i) => el("span", { class: "speed" + (i === st.round ? " now" : i < st.round ? " done" : ""), text: Math.round(r * 100) + "%" }))),
+    show.length
+      ? el("div", { class: "turn" },
+          show.includes("ko") && ko(line.ko, "ko-big"),
+          show.includes("pron") && ko(line.pron, "pron"),
+          show.includes("en") && el("span", { class: show.length === 1 ? "en-big" : "sub", text: line.en }))
+      : el("p", { class: "msg", text: "Listen and repeat without any text." }),
+    el("div", { class: "row" },
+      el("button", { type: "button", class: "btn", disabled: st.playing || STT.active, onclick: () => play() }, icon("play"), st.playing ? "Playing…" : `Listen at ${pct}%`),
+      recordButton(st, (res) => {
+        if (res.error) { st.error = errorMessage(res.error); return; }
+        st.error = null; st.heard = res.text; st.attempted = true;
+        record({ activity: "a3", type: "repeat", line: st.line + 1, speed: pct + "%", target: line.ko, heard: res.text, result: res.text ? (matches(res.text, line) ? "same" : "different") : "nothing heard" });
+      }, st.playing || !(st.listened || !TTS.supported)),
+      !STT.supported && el("button", { type: "button", class: "btn", text: "I said it", onclick: () => { st.attempted = true; record({ activity: "a3", type: "repeat", line: st.line + 1, speed: pct + "%", target: line.ko, heard: "", result: "no recognition" }); render(); } }),
+      el("button", { type: "button", class: "btn primary", disabled: !st.attempted || STT.active, text: st.round < LESSON.speedRounds.length - 1 ? "Next speed" : st.line < LESSON.lines.length - 1 ? "Next line" : "Finish", onclick: advance })),
+    st.error && el("p", { class: "msg bad", text: st.error }),
+    st.attempted && STT.supported && el("p", { class: "msg heard", lang: "ko" }, st.heard ? `I heard "${st.heard}"` : "I didn't catch that. You can record again or move on."),
+  ];
+}
+
+/* ---------- Follow the whole dialogue ---------- */
+function viewFollow() {
+  if (!S.follow) S.follow = { playing: null, rows: LESSON.lines.map(() => ({ listened: false, attempted: false, heard: "", error: null, note: null, listening: false, checking: false })) };
+  const st = S.follow;
+  const finished = st.rows.every((r) => r.attempted);
+  const nowIndex = st.rows.findIndex((r) => !r.attempted);
+  const busy = () => st.playing !== null || STT.active || st.rows.some((r) => r.checking);
+  const rows = LESSON.lines.map((line, i) => {
+    const row = st.rows[i];
+    const unlocked = i === 0 || st.rows[i - 1].attempted;
+    const attempt = (heard, result) => {
+      row.attempted = true; row.heard = heard;
+      record({ activity: "follow", type: "repeat", line: i + 1, target: line.ko, heard, result });
+      if (st.rows.every((r) => r.attempted)) complete("follow");
+    };
+    const box = el("button", {
+      type: "button", class: "say-box" + (st.playing === i ? " playing" : i === nowIndex ? " now" : ""), lang: "ko",
+      disabled: !unlocked || (busy() && st.playing !== i), "aria-label": `Play line ${i + 1}, ${nameOf(line.who)}`,
+      onclick: async () => {
+        stopAll(); const run = S.run; st.playing = i; render();
+        await TTS.speak(line, 1);
+        if (run !== S.run) return;
+        st.playing = null; row.listened = true; render();
+      },
+    }, icon("play"), el("span", { text: row.heard }));
+    return el("div", { class: "follow-row" },
+      el("span", { class: "who", lang: "ko", text: nameOf(line.who) }),
+      box,
+      el("div", { class: "row" },
+        recordButton(row, (res) => {
+          if (res.error) { row.error = errorMessage(res.error); return; }
+          row.error = null;
+          row.note = res.text ? null : "I didn't catch that. You can record again or move on.";
+          attempt(res.text, res.text ? (matches(res.text, line) ? "same" : "different") : "nothing heard");
+        }, !unlocked || !(row.listened || !TTS.supported) || st.playing !== null || (STT.active && !row.listening)),
+        !STT.supported && el("button", { type: "button", class: "btn", disabled: !unlocked, text: "I said it", onclick: () => { attempt("", "no recognition"); render(); } })),
+      row.error && el("p", { class: "msg bad", style: "grid-column: 1 / -1", text: row.error }),
+      row.note && el("p", { class: "msg", style: "grid-column: 1 / -1", text: row.note }));
+  });
+  return [
+    el("div", {}, el("h2", { text: "Follow the whole dialogue" }),
+      el("p", { class: "lead", text: "Click a box to hear the line. Press Record, say the line, then press Stop. What you said appears in the box. Go from the first line to the last." })),
+    el("div", { class: "follow" }, rows),
+    finished && el("div", { class: "reveal", lang: "ko" }, LESSON.lines.map((l) => el("div", { class: "dlg-line" }, el("span", { class: "who", text: nameOf(l.who) }), el("span", { text: l.ko })))),
+    finished && el("div", { class: "row" }, el("button", { type: "button", class: "btn", text: "Practice again", onclick: () => { stopAll(); S.follow = null; render(); } })),
+    finished && nextButton(),
+  ];
+}
+
+/* ---------- Speaking activities ---------- */
+function viewSpeak(key, role) {
+  if (!S[key]) S[key] = { i: 0, started: false, phase: "idle", tries: 0, misses: 0, hint: false, history: [], feedback: null, error: null };
+  const st = S[key], other = role === "A" ? "B" : "A";
+  const advance = async () => {
+    const run = S.run;
+    st.tries = 0; st.misses = 0; st.hint = false; st.feedback = null; st.error = null;
+    while (true) {
+      const line = LESSON.lines[st.i];
+      if (!line) { st.phase = "done"; complete(key); render(); return; }
+      if (line.who === role) { st.phase = "mine"; render(); return; }
+      st.phase = "partner"; render();
+      await wait(500); if (run !== S.run) return;
+      await TTS.speak(line, 1); if (run !== S.run) return;
+      st.history.push({ line: st.i, partner: true });
+      st.i++;
+    }
+  };
+  const finishTurn = async (text) => {
+    const run = S.run;
+    st.history.push({ line: st.i, partner: false, text });
+    st.i++; st.phase = "pause"; st.feedback = null; render();
+    await wait(1000); if (run !== S.run) return;
+    advance();
+  };
+  const onResult = (res) => {
+    const line = LESSON.lines[st.i];
+    if (res.error) { st.error = errorMessage(res.error); return; }
+    st.error = null;
+    if (!res.text) {
+      st.misses++;
+      record({ activity: key, type: "speak", line: st.i + 1, target: line.ko, heard: "", result: "nothing heard" });
+      if (st.misses >= 2) finishTurn(`I didn't catch that. The line is "${line.ko}".`);
+      else st.feedback = "I didn't catch that.";
+      return;
+    }
+    const ok = matches(res.text, line);
+    record({ activity: key, type: "speak", line: st.i + 1, try: st.tries + 1, target: line.ko, heard: res.text, result: ok ? "match" : "no match" });
+    if (ok) finishTurn(`I heard "${res.text}"`);
+    else {
+      st.tries++;
+      if (st.tries >= 2) finishTurn(`I heard "${res.text}". You meant "${line.ko}", right?`);
+      else st.feedback = `I heard "${res.text}". Try once more?`;
+    }
+  };
+  const replay = (lineIdx) => el("button", { type: "button", class: "linkbtn", disabled: st.phase === "partner" || STT.active, onclick: () => TTS.speak(LESSON.lines[lineIdx], 1) }, icon("play"), "Play again");
+  const past = st.history.map((h) => {
+    const l = LESSON.lines[h.line];
+    return el("div", { class: "turn past" },
+      el("div", { class: "turn-head" }, el("span", { class: "who", lang: "ko", text: nameOf(l.who) + (h.partner ? "" : " (you)") }), h.partner && replay(h.line)),
+      h.partner ? el("span", { class: "sub", text: "Spoken line" }) : el("p", { class: "heard", lang: "ko", text: h.text }));
+  });
+  const nodes = [
+    el("div", {}, el("h2", {}, "Speak as ", ko(nameOf(role)), ` (${role})`),
+      el("p", { class: "lead" }, ko(nameOf(other)), role === "A" ? " answers you by voice. You start. " : " starts by voice. You answer. ", "Your own lines stay blank. Use Hint if you need the meaning.")),
+  ];
+  if (st.phase === "idle") {
+    nodes.push(el("div", { class: "row" }, el("button", { type: "button", class: "btn primary", onclick: () => { stopAll(); st.started = true; advance(); } }, icon("play"), "Start the conversation")));
+    return nodes;
+  }
+  nodes.push(el("div", { class: "turns" }, past,
+    st.phase === "partner" && el("div", { class: "turn" }, el("span", { class: "who", lang: "ko", text: nameOf(other) }), el("span", { class: "sub", text: "Speaking…" })),
+    st.phase === "mine" && (() => {
+      const line = LESSON.lines[st.i];
+      return el("div", { class: "turn mine" },
+        el("div", { class: "turn-head" }, el("span", { class: "who", lang: "ko", text: nameOf(role) + " (you)" }),
+          !st.hint && el("button", { type: "button", class: "linkbtn", text: "Hint", onclick: () => { st.hint = true; record({ activity: key, type: "hint", line: st.i + 1 }); render(); } })),
+        st.hint && el("p", { class: "hint", text: line.en }),
+        st.feedback && el("p", { class: "heard", lang: "ko", text: st.feedback }),
+        st.error && el("p", { class: "msg bad", text: st.error }),
+        el("div", { class: "row" },
+          recordButton(st, onResult, false),
+          !STT.supported && el("button", { type: "button", class: "btn", text: "I said it", onclick: () => { record({ activity: key, type: "speak", line: st.i + 1, target: line.ko, heard: "", result: "no recognition" }); finishTurn(`The line is "${line.ko}".`); } })));
+    })()));
+  if (st.phase === "done") nodes.push(
+    el("div", { class: "reveal", lang: "ko" }, LESSON.lines.map((l) => el("div", { class: "dlg-line" }, el("span", { class: "who", text: nameOf(l.who) }), el("span", { text: l.ko })))),
+    el("div", { class: "row" }, el("button", { type: "button", class: "btn", text: "Practice again", onclick: () => { stopAll(); S[key] = null; render(); } })),
+    nextButton());
+  return nodes;
+}
+
+/* ---------- Page shell ---------- */
+function renderSteps() {
+  const nav = $("steps"); nav.textContent = "";
+  STEPS.forEach((s, i) => nav.append(el("button", {
+    type: "button", class: S.done[s.key] ? "done" : "", "aria-current": i === S.step ? "step" : null, onclick: () => go(i),
+  }, el("b", { text: `${i + 1} ${s.short}` }), el("span", { lang: "ko", text: s.label }))));
+}
+function go(i) {
+  stopAll(); S.step = i;
+  const key = STEPS[i].key, st = S[key];
+  if (st) {
+    st.listening = false; st.checking = false;
+    if (key === "follow") { st.playing = null; st.rows.forEach((r) => { r.listening = false; r.checking = false; }); }
+    else st.playing = false;
+    if ((key === "a4" || key === "a5") && st.phase !== "done" && st.phase !== "idle") S[key] = null;
+    if (key === "a3") st.listened = false;
+  }
+  renderSteps(); render(); window.scrollTo({ top: 0 });
+}
+function render() {
+  const focused = document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.fk : null;
+  const view = { a1: viewA1, a2: viewA2, a3: viewA3, follow: viewFollow, a4: () => viewSpeak("a4", "A"), a5: () => viewSpeak("a5", "B") }[STEPS[S.step].key]();
+  const main = $("main"); main.textContent = "";
+  main.append(...view.flat().filter(Boolean));
+  if (focused) { const n = main.querySelector(`[data-fk="${focused}"]`); if (n) n.focus({ preventScroll: true }); }
+}
+function renderLog() {
+  $("log-sum").textContent = `Speech log (${S.log.filter((e) => e.target).length})`;
+  const body = $("log-body"); body.textContent = "";
+  const rows = S.log.filter((e) => e.target);
+  if (!rows.length) { body.append(el("span", { text: "What the recognizer returns appears here, so you can compare it with what you actually said. It stays in this tab and clears when the page reloads." })); return; }
+  const cols = ["time", "activity", "line", "speed", "target", "heard", "result"];
+  body.append(el("div", { class: "log-scroll" }, el("table", {},
+    el("thead", {}, el("tr", {}, cols.map((c) => el("th", { text: c })))),
+    el("tbody", {}, rows.map((r) => el("tr", {}, cols.map((c) => el("td", { class: c === "time" || c === "line" ? "n" : "", lang: c === "target" || c === "heard" ? "ko" : null, text: r[c] ?? "" }))))))));
+  const copyMsg = el("span", {});
+  body.append(el("div", { class: "row" }, el("button", { type: "button", class: "btn", text: "Copy for a spreadsheet", onclick: () => {
+    const tsv = [cols.join("\t"), ...rows.map((r) => cols.map((c) => r[c] ?? "").join("\t"))].join("\n");
+    navigator.clipboard.writeText(tsv).then(() => (copyMsg.textContent = "Copied"), () => (copyMsg.textContent = "Copy was blocked by the browser"));
+  } }), copyMsg));
+}
+function renderStatus() {
+  const noVoice = !TTS.supported || !TTS.voices.length;
+  const parts = [];
+  parts.push(noVoice ? "No Korean voice on this device" : `Korean voice ready (${TTS.voices.length})`);
+  parts.push(!STT.supported ? "Speech recognition not available" : STT.mode === "device" ? "Recognition runs on this device" : "Recognition uses an online service");
+  $("status-line").textContent = parts.join(" · ");
+  const body = $("status-body"); body.textContent = "";
+  if (noVoice) body.append(el("p", { class: "warn", text: "Install a Korean voice in the system settings or open this page in Chrome, Edge or Safari. The dialogue will not play without one." }));
+  if (!STT.supported) body.append(el("p", { class: "warn", text: "This browser has no speech recognition. Use desktop Chrome for this test. An 'I said it' button replaces Record here." }));
+  else if (STT.mode === "online") {
+    body.append(el("p", { class: "warn", text: "Speech goes to the browser's online service (Google, in Chrome). Use this version with teacher voices only." }));
+    if (STT.localState === "unknown" && typeof SR.available === "function") {
+      // Runs only on request: this browser call has crashed a page in a build without the on-device service.
+      body.append(el("div", { class: "row" }, el("button", { type: "button", class: "btn", text: "Check for on-device Korean recognition", onclick: async () => { await STT.checkLocal(); renderStatus(); } })));
+    } else if (STT.localState === "unavailable") {
+      body.append(el("p", { text: "On-device Korean recognition is not available in this browser." }));
+    }
+    if (STT.localState === "downloadable") {
+      const msg = el("span", {});
+      body.append(el("div", { class: "row" }, el("button", { type: "button", class: "btn", text: "Download Korean recognition to this device", onclick: async () => { msg.textContent = "Downloading…"; const ok = await STT.install(); msg.textContent = ok ? "" : "The download did not finish. The online service stays on."; renderStatus(); } }), msg));
+    }
+  } else body.append(el("p", { text: "Speech stays on this device." }));
+  if (TTS.voices.length) {
+    const select = (who) => el("label", {}, el("span", { lang: "ko", text: nameOf(who) }),
+      (() => {
+        const s = el("select", { id: "voice-" + who, onchange: (e) => { TTS.pick[who] = TTS.voices[+e.target.value]; } });
+        TTS.voices.forEach((v, i) => { const o = el("option", { value: i, text: v.name }); if (TTS.pick[who] === v) o.selected = true; s.append(o); });
+        return s;
+      })());
+    body.append(el("div", { class: "voice-row" }, select("A"), select("B")));
+  }
+}
+
+/* ---------- Start ---------- */
+TTS.load();
+if (TTS.supported) speechSynthesis.addEventListener("voiceschanged", () => { TTS.load(); renderStatus(); });
+renderSteps(); render(); renderLog(); renderStatus();
+window.addEventListener("pagehide", stopAll);
+</script>
+</body>
+</html>
