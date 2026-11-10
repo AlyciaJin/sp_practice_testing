@@ -3,36 +3,38 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>어디 살아요? 말하기 연습</title>
+<title>Speaking Performance Pre-Task</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Patrick+Hand&family=Noto+Sans+KR:wght@400;500;700&display=swap">
 <style>
 /* Layout: one working column. The lesson steps stay on top and the current activity fills the sheet below. */
 :root {
-  --bg: #eaeef5; --sheet: #ffffff; --ink: #1b2436; --muted: #566076; --line: #c9d1df; --soft: #f2f4f9;
+  --bg: #F7F5F0; --sheet: #ffffff; --ink: #1b2436; --title: #000000; --brand: #0A7762; --muted: #566076; --line: #d6d2c8; --soft: #f3f1ec;
   --accent: #2343c4; --on-accent: #ffffff; --good: #116a3b; --bad: #b3261e; --rec: #c2261c;
   --noun-bg: #d9ebf7; --noun-fg: #0b4569; --noun-bd: #2a7fb0;
   --part-bg: #f8dfed; --part-fg: #771449; --part-bd: #b8377f;
   --end-bg: #fbeac4; --end-fg: #643d00; --end-bd: #bd8614;
-  --sofia: #FF9933; --michael: #33CC33; --avatar-ink: #1b2436;
-  --font-display: "Gaegu", "Noto Sans KR", sans-serif;
+  --etc-bg: #e2efda; --etc-fg: #2c4a1c; --etc-bd: #5f9447;
+  --jenny: #9966FF; --michael: #33CC33; --emily: #FF9933; --james: #3399FF; --avatar-ink: #1b2436;
   --font-body: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --bg: #121723; --sheet: #1b2230; --ink: #e8ecf4; --muted: #a3adc0; --line: #3a4557; --soft: #242c3b;
+  --bg: #15181d; --sheet: #1e2228; --ink: #e8ecf4; --title: #ffffff; --brand: #5cc7a9; --muted: #a3adc0; --line: #3a414c; --soft: #272c34;
   --accent: #8fa6ff; --on-accent: #101626; --good: #6fd39c; --bad: #ff9c94; --rec: #ff8177;
   --noun-bg: #143449; --noun-fg: #bfe2f8; --noun-bd: #4ba0d3;
   --part-bg: #451a33; --part-fg: #f7cbe3; --part-bd: #d9659f;
   --end-bg: #41300d; --end-fg: #f8e0a8; --end-bd: #d8a53a;
+  --etc-bg: #22371a; --etc-fg: #cfe8c2; --etc-bd: #7fb866;
   color-scheme: dark;
 } }
 :root[data-theme="dark"] {
-  --bg: #121723; --sheet: #1b2230; --ink: #e8ecf4; --muted: #a3adc0; --line: #3a4557; --soft: #242c3b;
+  --bg: #15181d; --sheet: #1e2228; --ink: #e8ecf4; --title: #ffffff; --brand: #5cc7a9; --muted: #a3adc0; --line: #3a414c; --soft: #272c34;
   --accent: #8fa6ff; --on-accent: #101626; --good: #6fd39c; --bad: #ff9c94; --rec: #ff8177;
   --noun-bg: #143449; --noun-fg: #bfe2f8; --noun-bd: #4ba0d3;
   --part-bg: #451a33; --part-fg: #f7cbe3; --part-bd: #d9659f;
   --end-bg: #41300d; --end-fg: #f8e0a8; --end-bd: #d8a53a;
+  --etc-bg: #22371a; --etc-fg: #cfe8c2; --etc-bd: #7fb866;
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
@@ -45,9 +47,10 @@ body {
   padding-right: max(16px, env(safe-area-inset-right, 0px));
   padding-block: 20px 48px;
 }
-.wrap { max-width: 820px; margin: 0 auto; display: grid; gap: 14px; }
-header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
-h1 { font: 700 2.1rem/1.15 var(--font-display); margin: 0; }
+.wrap { max-width: 860px; margin: 0 auto; display: grid; gap: 14px; }
+header { display: grid; gap: 2px; }
+.eyebrow { margin: 0; color: var(--brand); font-size: .92rem; font-weight: 500; }
+h1 { font: 700 2rem/1.2 var(--font-body); color: var(--title); margin: 0; text-wrap: balance; }
 .sub { color: var(--muted); font-size: .9rem; }
 .status { font-size: .84rem; color: var(--muted); display: grid; gap: 6px; }
 .status summary { cursor: pointer; }
@@ -58,10 +61,9 @@ h1 { font: 700 2.1rem/1.15 var(--font-display); margin: 0; }
 nav { display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: 6px; }
 @media (max-width: 640px) { nav { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 nav button {
-  font: inherit; font-size: .8rem; line-height: 1.3; text-align: left; color: var(--muted); cursor: pointer;
+  font: inherit; font-size: .8rem; line-height: 1.25; text-align: center; color: var(--muted); cursor: pointer;
   background: transparent; border: 0; border-top: 3px solid var(--line); padding: 7px 4px 4px; min-width: 0;
 }
-nav button { font-size: .8rem; line-height: 1.25; text-align: center; }
 nav button b { display: block; font-size: .92rem; }
 nav button[aria-current="step"] { color: var(--ink); border-top-color: var(--accent); }
 nav button.done { border-top-color: var(--good); }
@@ -70,6 +72,7 @@ nav button[aria-current="step"].done { border-top-color: var(--accent); }
 main { background: var(--sheet); border: 1px solid var(--line); border-radius: 6px; padding: 20px; display: grid; gap: 16px; min-width: 0; }
 @media (max-width: 480px) { main { padding: 16px 14px; } }
 h2 { font-size: 1.2rem; line-height: 1.35; margin: 0; text-wrap: balance; }
+h3 { font-size: 1rem; margin: 0; }
 .lead { margin: 4px 0 0; color: var(--muted); }
 .row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .btn {
@@ -88,7 +91,7 @@ svg.i { width: 1em; height: 1em; fill: currentColor; flex: none; }
 .msg.good { color: var(--good); font-weight: 500; }
 .msg.bad { color: var(--bad); }
 
-/* Drag tokens */
+/* Drag tokens. Each type has its own shape, and an empty blank has the same shape as the piece it takes. */
 .tok {
   font: 500 1.02rem/1.3 var(--font-body); color: var(--ink); background: var(--soft); border: 1.5px solid var(--line);
   padding: 6px 11px; min-height: 38px; cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; border-radius: 4px;
@@ -100,8 +103,13 @@ svg.i { width: 1em; height: 1em; fill: currentColor; flex: none; }
 .tok.n { background: var(--noun-bg); color: var(--noun-fg); border-color: var(--noun-bd); border-radius: 3px; }
 .tok.p { background: var(--part-bg); color: var(--part-fg); border-color: var(--part-bd); border-radius: 999px; }
 .tok.e { background: var(--end-bg); color: var(--end-fg); border-color: var(--end-bd); border-radius: 3px 16px 16px 3px; }
+.tok.x { background: var(--etc-bg); color: var(--etc-fg); border-color: var(--etc-bd); border-radius: 12px 3px 12px 3px; }
 .tok.en { width: 100%; text-align: left; font-weight: 400; }
 .slot { border: 1.5px dashed var(--line); border-radius: 5px; background: var(--soft); cursor: pointer; }
+.slot.n { border-color: var(--noun-bd); background: color-mix(in srgb, var(--noun-bg) 55%, transparent); border-radius: 3px; }
+.slot.p { border-color: var(--part-bd); background: color-mix(in srgb, var(--part-bg) 55%, transparent); border-radius: 999px; }
+.slot.e { border-color: var(--end-bd); background: color-mix(in srgb, var(--end-bg) 55%, transparent); border-radius: 3px 16px 16px 3px; }
+.slot.x { border-color: var(--etc-bd); background: color-mix(in srgb, var(--etc-bg) 55%, transparent); border-radius: 12px 3px 12px 3px; }
 .slot.over { border-color: var(--accent); border-style: solid; }
 .slot.wrong { border: 2px solid var(--bad); }
 .slot.filled { border-style: solid; border-color: transparent; background: transparent; }
@@ -116,6 +124,9 @@ svg.i { width: 1em; height: 1em; fill: currentColor; flex: none; }
 .bank-empty { color: var(--muted); font-size: .88rem; }
 
 /* Activity 1 */
+.textbook { margin: 0; display: grid; gap: 6px; justify-items: start; }
+.textbook img { max-width: 100%; max-height: 420px; border-radius: 6px; border: 1px solid var(--line); }
+.textbook figcaption { font-size: .85rem; color: var(--muted); }
 .order { display: grid; gap: 8px; }
 .order-row { display: grid; grid-template-columns: 1.6rem minmax(0, 1fr); gap: 8px; align-items: center; }
 .order-row > b { color: var(--muted); font-variant-numeric: tabular-nums; text-align: right; }
@@ -123,8 +134,8 @@ svg.i { width: 1em; height: 1em; fill: currentColor; flex: none; }
 .stack { display: grid; gap: 7px; }
 
 /* Activity 2 */
-.dlg { display: grid; gap: 10px; }
-.dlg-line { display: grid; grid-template-columns: 3.6rem minmax(0, 1fr); gap: 8px; align-items: baseline; }
+.dlg { display: grid; gap: 12px; }
+.dlg-line { display: grid; grid-template-columns: 5.2rem minmax(0, 1fr); gap: 8px; align-items: center; }
 .who { font-size: .85rem; color: var(--muted); font-weight: 500; }
 .dlg-parts { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; font-size: 1.05rem; min-width: 0; }
 .dlg-parts .slot { min-width: 3.4rem; min-height: 40px; display: inline-flex; }
@@ -137,19 +148,20 @@ svg.i { width: 1em; height: 1em; fill: currentColor; flex: none; }
 .line-dots button { font: inherit; font-size: .85rem; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--line); background: transparent; color: var(--muted); cursor: pointer; font-variant-numeric: tabular-nums; }
 .line-dots button.now { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
 .line-dots button.done { color: var(--good); border-color: var(--good); }
-.speeds { display: flex; gap: 6px; flex-wrap: wrap; }
-.speed { font-size: .86rem; padding: 3px 10px; border: 1px solid var(--line); border-radius: 4px; color: var(--muted); font-variant-numeric: tabular-nums; }
-.speed.now { border-color: var(--accent); color: var(--accent); font-weight: 700; }
-.speed.done { border-color: var(--good); color: var(--good); }
+.flow-steps { display: flex; gap: 6px; flex-wrap: wrap; }
+.flow-steps span { font-size: .84rem; padding: 3px 10px; border: 1px solid var(--line); border-radius: 4px; color: var(--muted); }
+.flow-steps span.now { border-color: var(--accent); color: var(--accent); font-weight: 700; }
+.flow-steps span.done { border-color: var(--good); color: var(--good); }
 .pron { color: var(--muted); font-size: 1.02rem; }
 .en-big { font-size: 1.1rem; }
+.en-cue { margin: 0; font-size: 1.05rem; }
 
 /* Whole-dialogue follow-along */
-.follow { display: grid; gap: 10px; }
-.follow-row { display: grid; grid-template-columns: 3.6rem minmax(0, 1fr) auto; gap: 8px; align-items: center; }
-@media (max-width: 480px) { .follow-row { grid-template-columns: 3.6rem minmax(0, 1fr); } .follow-row > .row { grid-column: 2; } }
+.follow { display: grid; gap: 14px; }
+.follow-row { display: grid; grid-template-columns: 5.2rem minmax(0, 1fr) auto; gap: 8px; align-items: center; }
+@media (max-width: 480px) { .follow-row { grid-template-columns: 5.2rem minmax(0, 1fr); } .follow-row > .row { grid-column: 2; } }
 .say-box {
-  font: 500 1.05rem/1.4 var(--font-body); color: var(--ink); text-align: left; cursor: pointer; width: 100%; min-width: 0; min-height: 48px;
+  font: 500 1rem/1.4 var(--font-body); color: var(--ink); text-align: left; cursor: pointer; width: 100%; min-width: 0; min-height: 48px;
   display: flex; align-items: center; gap: 10px; padding: 8px 12px; background: var(--soft); border: 1.5px solid var(--line); border-radius: 4px; overflow-wrap: anywhere;
 }
 .say-box svg.i { color: var(--accent); }
@@ -157,6 +169,10 @@ svg.i { width: 1em; height: 1em; fill: currentColor; flex: none; }
 .say-box.now { border-color: var(--accent); }
 .say-box.playing { border-color: var(--accent); background: transparent; }
 .follow-row .btn { min-height: 48px; }
+.tries { grid-column: 2 / -1; display: grid; gap: 6px; }
+@media (max-width: 480px) { .tries { grid-column: 1 / -1; } }
+.try { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; padding: 6px 10px; border: 1px solid var(--line); border-radius: 6px; }
+.try .heard { flex: 1 1 200px; }
 
 /* Speaking activities */
 .turns { display: grid; gap: 8px; }
@@ -167,6 +183,35 @@ svg.i { width: 1em; height: 1em; fill: currentColor; flex: none; }
 .linkbtn { font: inherit; font-size: .88rem; background: none; border: 0; color: var(--accent); cursor: pointer; padding: 4px 0; display: inline-flex; gap: 5px; align-items: center; }
 .heard { margin: 0; overflow-wrap: anywhere; }
 .hint { margin: 0; color: var(--muted); font-style: italic; }
+.round { font-size: .88rem; color: var(--muted); font-weight: 500; }
+
+/* Scene: two people talking, with an optional background picture */
+.scene {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: end; gap: 10px;
+  padding: 16px 12px 12px; border-radius: 8px; background: var(--soft) center / cover no-repeat; min-height: 250px;
+}
+.scene-mid { align-self: center; display: grid; justify-items: center; gap: 8px; min-width: 0; }
+@media (max-width: 560px) { .scene { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .scene-mid { grid-column: 1 / -1; grid-row: 2; } }
+.actor { display: grid; justify-items: center; gap: 8px; min-width: 0; transition: opacity .2s, filter .2s; }
+.actor.dim { opacity: .45; filter: saturate(.4); }
+.actor .figure { height: clamp(140px, 28vw, 230px); width: auto; max-width: 100%; object-fit: contain; display: block; }
+.actor .figure-ph { width: clamp(90px, 18vw, 130px); aspect-ratio: 1; border-radius: 50%; background: var(--c); color: var(--avatar-ink); display: grid; place-items: center; font: 700 2.3rem/1 var(--font-body); }
+.actor .photo { width: clamp(100px, 20vw, 150px); aspect-ratio: 1; object-fit: cover; border-radius: 14px; border: 4px solid var(--c); display: block; }
+.actor .tag { background: rgb(255 255 255 / .94); color: #1b2436; border-radius: 999px; padding: 2px 10px; font-size: .85rem; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; box-shadow: inset 0 0 0 2px var(--c); max-width: 100%; }
+.actor .tag .mini { width: 20px; height: 20px; border-radius: 50%; object-fit: cover; }
+.bubble {
+  visibility: hidden; position: relative; background: #fff; color: #1b2436; border: 2px solid var(--c); border-radius: 14px;
+  padding: 5px 12px; font-size: .85rem; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; min-height: 34px; margin-bottom: 6px;
+}
+.bubble::after { content: ""; position: absolute; left: 50%; bottom: -8px; width: 13px; height: 13px; background: #fff; border-right: 2px solid var(--c); border-bottom: 2px solid var(--c); transform: translateX(-50%) rotate(45deg); }
+.actor.speaking .bubble { visibility: visible; animation: blink 1s ease-in-out infinite; }
+@keyframes blink { 50% { opacity: .55; } }
+.dots { display: inline-flex; gap: 4px; }
+.dots i { width: 7px; height: 7px; border-radius: 50%; background: var(--c); animation: dot 1s infinite; }
+.dots i:nth-child(2) { animation-delay: .15s; }
+.dots i:nth-child(3) { animation-delay: .3s; }
+@keyframes dot { 0%, 80%, 100% { transform: translateY(0); opacity: .4; } 40% { transform: translateY(-4px); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .actor.speaking .bubble, .dots i { animation: none; } .dots i { opacity: 1; } }
 
 /* Listening player (Activities 1 and 2) */
 .player { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
@@ -182,15 +227,49 @@ svg.i { width: 1em; height: 1em; fill: currentColor; flex: none; }
 .speak-cue.live { color: var(--rec); }
 .speak-cue.live::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--rec); }
 
-/* Cue card and free conversation */
-.cue-card { border: 1.5px solid var(--ink); border-radius: 6px; padding: 12px 14px; display: grid; gap: 4px; max-width: 420px; }
+/* Cue cards */
+.cue-card { border: 1.5px solid var(--ink); border-radius: 8px; padding: 12px 14px; display: grid; gap: 4px; max-width: 420px; background: var(--sheet); }
 .cue-card h3 { margin: 0 0 4px; font-size: .8rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
 .cue-row { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); gap: 8px; align-items: baseline; }
 .cue-row span:first-child { color: var(--muted); font-size: .88rem; }
-.cue-row span:last-child { font-weight: 700; font-size: 1.1rem; }
-.answers { width: 100%; border-collapse: collapse; font-size: .92rem; }
-.answers th, .answers td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
-.answers th { font-size: .8rem; color: var(--muted); font-weight: 500; }
+.cue-row span:last-child { font-weight: 700; font-size: 1.08rem; overflow-wrap: anywhere; }
+.deck { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.card-back, .card-mini { width: 76px; height: 106px; border-radius: 8px; flex: none; }
+.card-back { border: 3px solid #fff; cursor: pointer; box-shadow: 0 3px 8px rgb(0 0 0 / .22); background: repeating-linear-gradient(45deg, #0A7762 0 7px, #12957c 7px 14px); }
+.card-back:disabled { opacity: .55; cursor: default; }
+.card-mini { background: #fff; color: #1b2436; border: 2px solid #c9c4b8; display: grid; align-content: center; justify-items: center; gap: 2px; padding: 4px; font-size: .74rem; text-align: center; line-height: 1.25; }
+.card-mini.now { border: 3px solid #0A7762; }
+.card-mini b { font-size: .7rem; letter-spacing: .05em; text-transform: uppercase; color: #566076; }
+.cue-two { display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-start; }
+.cue-two > * { flex: 1 1 260px; }
+.choices { display: flex; flex-wrap: wrap; gap: 12px; }
+.choice { font: inherit; color: inherit; text-align: left; cursor: pointer; padding: 0; border: 0; background: none; border-radius: 10px; flex: 1 1 240px; max-width: 420px; }
+.choice .cue-card { border-width: 2px; }
+.choice:disabled { cursor: default; color: inherit; opacity: 1; }
+.choice.right .cue-card { border: 3px solid var(--good); }
+.choice.picked-wrong .cue-card { border: 3px solid var(--bad); }
+.mycard { display: grid; gap: 10px; max-width: 420px; }
+.mycard label { display: grid; gap: 3px; font-size: .9rem; color: var(--muted); }
+.mycard input { font: inherit; color: var(--ink); padding: 9px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--sheet); }
+
+.split { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 16px; align-items: start; }
+.split-side { position: sticky; top: 12px; display: grid; gap: 10px; }
+.split-main { display: grid; gap: 12px; min-width: 0; }
+.split-side .cue-row { grid-template-columns: 6.8rem minmax(0, 1fr); }
+.split-main .choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.split-main .choice .cue-row { grid-template-columns: 6.8rem minmax(0, 1fr); }
+@media (max-width: 700px) { .split { grid-template-columns: minmax(0, 1fr); } .split-side { position: static; } }
+
+.who { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.who-face { width: 24px; height: 24px; border-radius: 50%; object-fit: cover; flex: none; }
+.actor .face-big { width: clamp(110px, 20vw, 160px); aspect-ratio: 1; border-radius: 50%; object-fit: cover; border: 4px solid var(--c); display: block; background: var(--sheet); }
+
+/* Feedback icons: your own pictures in the images folder, or the device's emoji */
+.fb { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; }
+.fb-img { height: 40px; width: auto; }
+.fb-emoji { font-size: 1.6rem; line-height: 1; }
+.fb.big .fb-img { height: 72px; }
+.fb.big .fb-emoji { font-size: 3rem; }
 
 /* Session recording */
 .recorder { background: var(--sheet); border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px; display: grid; gap: 10px; }
@@ -216,17 +295,18 @@ body.recbar-on { padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px));
 .checklist .ok { color: var(--good); }
 .checklist .no { color: var(--muted); }
 .box { border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; display: grid; gap: 8px; }
-.box h3 { margin: 0; font-size: 1rem; }
 .box video { width: 100%; max-width: 420px; border-radius: 4px; background: #000; }
 
-/* Speakers */
+/* Small avatars */
 .stage { display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: flex-start; }
 .avatar { display: grid; justify-items: center; gap: 5px; transition: opacity .2s; min-width: 64px; }
 .avatar .face {
-  width: 56px; height: 56px; border-radius: 50%; background: var(--c); color: var(--avatar-ink);
+  width: 56px; height: 56px; border-radius: 50%; background: var(--c); color: var(--avatar-ink); overflow: hidden;
   display: grid; place-items: center; font: 700 1.3rem/1 var(--font-body);
   transform: scale(calc(1 + var(--lvl, 0) * .18)); transition: transform .08s linear;
 }
+.avatar .face img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.avatar.student .face { box-shadow: 0 0 0 3px var(--c); }
 .avatar .nm { font-size: .82rem; color: var(--muted); display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
 .avatar.dim { opacity: .38; }
 .avatar.speaking .face { animation: talk 1s ease-out infinite; }
@@ -246,7 +326,7 @@ body.recbar-on { padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px));
 
 /* Hint note */
 .postit {
-  background: #FFF3A1; color: #3a3000; max-width: 440px; padding: 14px 18px 16px; border-radius: 2px;
+  background: #FFF3A1; color: #3a3000; max-width: 460px; padding: 14px 18px 16px; border-radius: 2px;
   transform: rotate(-1.2deg); box-shadow: 0 7px 16px rgba(0, 0, 0, .18);
   font: 400 1.32rem/1.35 "Patrick Hand", "Gaegu", "Comic Sans MS", cursive; display: grid; gap: 8px;
 }
@@ -256,6 +336,8 @@ body.recbar-on { padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px));
 .postit .rows .ko { font-size: 1.4rem; }
 .postit .rows .en { font-size: 1.15rem; }
 .postit .eg { grid-column: 1 / -1; font-size: 1.05rem; color: #6b5c00; margin: -2px 0 4px 14px; }
+.postit .big { font-size: 1.5rem; }
+.postit .pr { font-size: 1.2rem; color: #6b5c00; }
 .verdict { margin: 0; font-weight: 500; }
 .verdict.ok { color: var(--good); }
 .verdict.no { color: var(--bad); }
@@ -267,10 +349,13 @@ body.recbar-on { padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px));
 .steps-guide { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
 .steps-guide li { display: grid; grid-template-columns: 3.4rem minmax(0, 1fr); gap: 10px; align-items: baseline; }
 .steps-guide b { font-variant-numeric: tabular-nums; }
+.cam { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+.cam video, .cam img { width: 200px; aspect-ratio: 1; object-fit: cover; border-radius: 14px; background: #000; display: block; }
+.cam video { transform: scaleX(-1); }
+.cam img { border: 4px solid var(--c, #4DC3FF); }
 .swatches { display: flex; flex-wrap: wrap; gap: 10px; }
 .swatch { width: 38px; height: 38px; border-radius: 50%; border: 0; background: var(--c); cursor: pointer; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15); }
 .swatch[aria-checked="true"] { box-shadow: 0 0 0 3px var(--sheet), 0 0 0 5px var(--ink); }
-.pick-row { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; }
 .confirm { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; flex-basis: 100%; }
 .confirm p { margin: 0; font-weight: 500; }
 
@@ -279,7 +364,7 @@ body.recbar-on { padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px));
 .log summary { cursor: pointer; padding: 4px 0; }
 .log-body { display: grid; gap: 8px; padding-top: 6px; }
 .log-scroll { overflow-x: auto; }
-.log table { border-collapse: collapse; width: 100%; min-width: 520px; font-size: .82rem; }
+.log table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: .82rem; }
 .log th, .log td { text-align: left; padding: 4px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
 .log td.n { font-variant-numeric: tabular-nums; white-space: nowrap; }
 </style>
@@ -287,8 +372,8 @@ body.recbar-on { padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px));
 <body>
 <div class="wrap">
   <header>
-    <h1 lang="ko">어디 살아요?</h1>
-    <span class="sub">Korean 101 · Dialogue practice · Teacher test version</span>
+    <p class="eyebrow">KRN 101 · Lesson 6 · <span lang="ko">나의 하루</span> My Day · Conversation 1</p>
+    <h1>Speaking Performance Pre-Task</h1>
   </header>
   <details class="status" id="status"><summary id="status-line">Checking speech tools…</summary><div id="status-body"></div></details>
   <nav id="steps" aria-label="Activities"></nav>
@@ -300,92 +385,143 @@ body.recbar-on { padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px));
 
 <script>
 /* ============================================================
-   LESSON CONTENT. Edit this block to change the dialogue.
-   parts: plain strings stay visible in Activity 2.
-          [text, type] become draggable pieces.
-          type: n = 명사, p = 조사, e = 어미 결합형
-   pron:  shown in the first Repeat round.
-   tts:   optional text for the browser voice. Numbers are read
-          automatically (30분 → 삼십 분, 1시간 → 한 시간).
-   Audio files: put them in the audio folder next to this page, as .mp3 or .wav.
-          Dialogue lines: line1_sophia, line2_michael, ... line6_michael
-          Talk (step 8): talk_q1, talk_q2, talk_q3, talk_end
-          A missing file falls back to the browser voice.
+   LESSON CONTENT. Edit this block to change the lesson.
+   Numbers on screen: native-Korean numbers in Hangul (한 시간, 두 시간),
+   Sino-Korean numbers as Arabic numerals (5분, 20분). Speech that the
+   recognizer heard is shown fully in Hangul (한 시간, 오 분).
+
+   parts (step 2): plain strings stay visible; [text, type] become blanks.
+          type: n = Noun, p = Particle, e = A/V + Ending, x = Etc.
+   audio: file name in the audio folder (.mp3 or .wav). A missing file falls
+          back to the browser voice, which is not recorded in the video.
+   Images: put them in the images folder (.png, .webp or .jpg):
+          textbook          step 1
+          michael_face, jenny_face, emily_face, james_face   small pictures and name labels
+          michael, jenny    steps 5–6 (standing, transparent background)
+          bg1, bg2          Be Jenny rounds 1 and 2
+          bg3, bg4          Be Michael rounds 1 and 2
+          emily, james      steps 7–8 standing (optional; the face is used when missing)
+          bg_cue, bg_talk   steps 7 and 8 (optional)
+          thumbs2, thumbs1, smile, sad   feedback pictures
+          A missing picture is replaced by a coloured circle or the device's emoji.
    ============================================================ */
 const LESSON = {
-  speakers: { A: { name: "소피아", en: "Sophia", file: "sophia" }, B: { name: "마이클", en: "Michael", file: "michael" } },
-  audioFolder: "audio/",
-  listenControls: true,          // Activities 1–2: true = pause and line bar, false = Play/Stop only
-  speedRounds: [0.9, 0.95, 1],   // Activity 3 order
-  repeatShow: [["ko", "pron", "en"], ["en"], []],  // What each speed shows: ko = Korean, pron = pronunciation, en = meaning
-  maxAttempts: 3,                // First try plus two more
-  lines: [
-    { who: "A", ko: "마이클 씨, 어디 살아요?", en: "Michael, where do you live?",
-      pron: "[마이클 씨, 어디 사라요]",
-      parts: ["마이클 씨,", ["어디","n"], ["살아요","e"], "?"] },
-    { who: "B", ko: "저는 둘루스에 살아요.", en: "I live in Duluth.",
-      pron: "[저는 둘루스에 사라요]",
-      parts: [["저","n"], ["는","p"], ["둘루스","n"], ["에","p"], ["살아요","e"], "."] },
-    { who: "A", ko: "집이 가까워요, 멀어요?", en: "Is your home close or far?",
-      pron: "[지비 가까워요, 머러요]",
-      parts: [["집","n"], ["이","p"], ["가까워요","e"], ",", ["멀어요","e"], "?"] },
-    { who: "B", ko: "조금 멀어요.", en: "It's a little far.",
-      pron: "[조금 머러요]",
-      parts: ["조금", ["멀어요","e"], "."] },
-    { who: "A", ko: "집에서 학교까지 얼마나 걸려요?", en: "How long does it take from your home to school?",
-      pron: "[지베서 학꾜까지 얼마나 걸려요]",
-      parts: [["집","n"], ["에서","p"], ["학교","n"], ["까지","p"], "얼마나", ["걸려요","e"], "?"] },
-    { who: "B", ko: "집에서 학교까지 차로 30분쯤 걸려요.", en: "It takes about 30 minutes by car from my home to school.",
-      pron: "[지베서 학꾜까지 차로 삼십뿐쯤 걸려요]",
-      parts: [["집","n"], ["에서","p"], ["학교","n"], ["까지","p"], ["차","n"], ["로","p"], "30분쯤", ["걸려요","e"], "."] },
-  ],
+  audioFolder: "audio/", imageFolder: "images/",
+  speakers: {
+    michael: { name: "마이클", en: "Michael", color: "var(--michael)", voice: "male" },
+    jenny: { name: "제니", en: "Jenny", color: "var(--jenny)", voice: "female" },
+    emily: { name: "에밀리", en: "Emily", color: "var(--emily)", voice: "female" },
+    james: { name: "제임스", en: "James", color: "var(--james)", voice: "male" },
+  },
+  listenControls: true,   // Steps 1–2: true = pause and line bar, false = Play/Stop only
+  maxAttempts: 3,         // Steps 1–2: first try plus two more
 
-  /* Cue cards: one card is picked at random each time. You answer as `role`.
-     `asks` are dialogue line numbers above; their audio is reused for the questions.
-     `models` are the example answers shown at the end, one per question. */
+  /* Steps 1–6 */
+  lines: [
+    { who: "michael", audio: "line1_michael", ko: "제니 씨, 어디 살아요?", en: "Jenny, where do you live?",
+      pron: "[제니 씨, 어디 사라요]",
+      parts: ["제니 씨,", ["어디", "n"], ["살아요", "e"], "?"] },
+    { who: "jenny", audio: "line2_jenny", ko: "한인타운에 살아요.", en: "I live in Koreatown.",
+      pron: "[하닌타우네 사라요]",
+      parts: ["한인타운", ["에", "p"], ["살아요", "e"], "."] },
+    { who: "michael", audio: "line3_michael", ko: "집에서 학교까지 얼마나 걸려요?", en: "How long does it take from your home to school?",
+      pron: "[지베서 학꾜까지 얼마나 걸려요]",
+      parts: [["집", "n"], ["에서", "p"], ["학교", "n"], ["까지", "p"], ["얼마나", "x"], ["걸려요", "e"], "?"] },
+    { who: "jenny", audio: "line4_jenny", ko: "좀 멀어요. 차로 한 시간쯤 걸려요. 마이클 씨는 어디 살아요?", en: "It's a little far. It takes about an hour by car. Michael, where do you live?",
+      pron: "[좀 머러요. 차로 한 시간쯤 걸려요. 마이클 씨는 어디 사라요]", segs: [3, 4],
+      parts: [["좀", "x"], ["멀어요", "e"], ".", ["차", "n"], ["로", "p"], ["한 시간", "n"], ["쯤", "x"], "걸려요.", "마이클 씨는", ["어디", "n"], "살아요?"] },
+    { who: "michael", audio: "line5_michael", ko: "저는 학교 앞 아파트에 살아요. 아주 가까워요. 보통 걸어서 5분 걸려요.", en: "I live in an apartment in front of the school. It's very close. It usually takes 5 minutes on foot.",
+      pron: "[저는 학꾜 아바파트에 사라요. 아주 가까워요. 보통 거러서 오 분 걸려요]", segs: [5, 6],
+      parts: ["저는", ["학교 앞", "n"], ["아파트", "n"], ["에", "p"], "살아요.", "아주", ["가까워요", "e"], ".", ["보통", "x"], ["걸어서", "x"], "5분", ["걸려요", "e"], "."] },
+  ],
+  /* Steps 3–4 use shorter pieces. Lines 4 and 5 are split in two; the first three are the lines above.
+     If line4_jenny or line5_michael is missing but both halves exist, the halves play one after the other. */
+  extraSegments: [
+    { who: "jenny", audio: "line4a_jenny", ko: "좀 멀어요. 차로 한 시간쯤 걸려요.", en: "It's a little far. It takes about an hour by car.", pron: "[좀 머러요. 차로 한 시간쯤 걸려요]" },
+    { who: "jenny", audio: "line4b_jenny", ko: "마이클 씨는 어디 살아요?", en: "Michael, where do you live?", pron: "[마이클 씨는 어디 사라요]" },
+    { who: "michael", audio: "line5a_michael", ko: "저는 학교 앞 아파트에 살아요.", en: "I live in an apartment in front of the school.", pron: "[저는 학꾜 아바파트에 사라요]" },
+    { who: "michael", audio: "line5b_michael", ko: "아주 가까워요. 보통 걸어서 5분 걸려요.", en: "It's very close. It usually takes 5 minutes on foot.", pron: "[아주 가까워요. 보통 거러서 오 분 걸려요]" },
+  ],
+  repeatTimes: 2,                    // Step 3: listen and record this many times per piece
+  follow: { good: 0.8, tries: 3 },   // Step 4: 100% same = two thumbs, at least 80% = one thumb
+  /* Steps 5–6. showEnFirst: round 1 shows the English meaning of your lines; later rounds hide it behind Hint. */
+  roles: {
+    jenny: { bgs: ["bg1", "bg2"], showEnFirst: false },
+    michael: { bgs: ["bg3", "bg4"], showEnFirst: true },
+  },
+  rounds: 2,
+
+  /* Step 7: three face-down cards. The first two you open are answer cards (Emily asks, you answer
+     with the card). The third is an ask card (you ask in Korean, Emily or James answers, then you pick the card you heard). */
   cue: {
-    role: "B",
-    asks: [1, 3, 5],
-    labels: { where: "Where you live", nearFar: "Near or far", how: "How you come", time: "How long" },
-    cards: [
-      { id: "Decatur", where: "Decatur (디케이터)", nearFar: "A little far", how: "Bus", time: "About 20 minutes",
-        models: ["저는 디케이터에 살아요.", "조금 멀어요.", "집에서 학교까지 버스로 20분쯤 걸려요."] },
-      { id: "Marietta", where: "Marietta (매리에타)", nearFar: "Far", how: "Car", time: "About 40 minutes",
-        models: ["저는 매리에타에 살아요.", "멀어요.", "집에서 학교까지 차로 40분쯤 걸려요."] },
-      { id: "Dorm", where: "School dorm (학교 기숙사)", nearFar: "Close", how: "On foot", time: "About 10 minutes",
-        models: ["저는 학교 기숙사에 살아요.", "가까워요.", "기숙사에서 학교까지 걸어서 10분쯤 걸려요."] },
-      { id: "Emory Point", where: "Emory Point (에모리 포인트)", nearFar: "Close", how: "Bicycle", time: "About 5 minutes",
-        models: ["저는 에모리 포인트에 살아요.", "가까워요.", "집에서 학교까지 자전거로 5분쯤 걸려요."] },
+    asker: "emily", maxTries: 3,
+    questions: [
+      { who: "emily", audio: "cue_q1_emily", ko: "어디 살아요?", en: "Where do you live?" },
+      { who: "emily", audio: "cue_q2_emily", ko: "집이 학교에서 가까워요, 멀어요?", en: "Is your home close to school or far?" },
+      { who: "emily", audio: "cue_q3_emily", ko: "집에서 학교까지 얼마나 걸려요?", en: "How long does it take from home to school?" },
+    ],
+    /* aliases: ways the recognizer may write the place. Spaces and capitals do not matter. */
+    answerCards: [
+      { id: "emory", place: "Emory Point", placeKo: "에모리 포인트", aliases: ["에모리포인트", "에머리포인트", "emorypoint"], near: true, how: "walk", minutes: 10 },
+      { id: "campus", place: "Campus Crossing", placeKo: "캠퍼스 크로싱", aliases: ["캠퍼스크로싱", "캠퍼스크로씽", "campuscrossing"], near: true, how: "bicycle", minutes: 5 },
+      { id: "decatur", place: "Decatur", placeKo: "디케이터", aliases: ["디케이터", "디카투어", "데카투어", "decatur"], near: false, how: "bus", minutes: 20 },
+      { id: "midtown", place: "Midtown", placeKo: "미드타운", aliases: ["미드타운", "midtown"], near: false, how: "car", minutes: 30 },
+      { id: "marietta", place: "Marietta", placeKo: "매리에타", aliases: ["매리에타", "마리에타", "메리에타", "marietta"], near: false, how: "car", minutes: 40 },
+    ],
+    askCards: [
+      { id: "ask-emory", who: "emily", place: "Emory Point", placeKo: "에모리 포인트", near: true, how: "walk", minutes: 15,
+        answers: [
+          { who: "emily", audio: "cue_a1_emily", ko: "에모리 포인트에 살아요." },
+          { who: "emily", audio: "cue_a2_emily", ko: "가까워요." },
+          { who: "emily", audio: "cue_a3_emily", ko: "걸어서 15분쯤 걸려요." }] },
+      { id: "ask-midtown", who: "james", place: "Midtown", placeKo: "미드타운", near: false, how: "car", minutes: 35,
+        answers: [
+          { who: "james", audio: "cue_a1_james", ko: "미드타운에 살아요." },
+          { who: "james", audio: "cue_a2_james", ko: "멀어요." },
+          { who: "james", audio: "cue_a3_james", ko: "차로 35분쯤 걸려요." }] },
     ],
   },
 
-  /* Talk (step 8): Sophia asks three questions. A wrong answer brings the question again with a hint note.
-     Hint 1 is the English meaning (`en`); each later wrong answer shows the next entry in `hints`.
-     After the last hint, one more wrong answer moves on so nobody gets stuck.
-     Each hint is a list of rows: ko (Korean pattern), en (English note, optional), eg (examples, optional). */
+  /* Step 8: the student first writes a cue card in English, then James asks three questions.
+     A wrong answer brings the question again with a hint note. Hint 1 is the English meaning;
+     each later wrong answer shows the next entry in `hints`. After the last hint, the next wrong answer moves on. */
   talk: {
-    partner: "A",
+    partner: "james",
     questions: [
-      { id: "q1", ko: "어디 살아요?", en: "Where do you live?", check: "live",
+      { audio: "talk_q1", ko: "어디 살아요?", en: "Where do you live?", check: "live",
         hints: [[{ ko: "○○에 살아요." }]] },
-      { id: "q2", ko: "아, 그래요? 학교까지 가까워요, 멀어요?", en: "Oh, is that so? Is it close to school or far?", check: "nearFar",
-        hints: [[{ ko: "가까워요", en: "if it is close/near" }, { ko: "멀어요", en: "if it is far" }]] },
-      { id: "q3", ko: "집에서 학교까지 얼마나 걸려요?", en: "How long does it take from your home to school?", check: "howLong",
+      { audio: "talk_q2", ko: "아, 그래요? 집이 학교에서 가까워요, 멀어요?", en: "Oh, is that so? Is your home close to school or far?", check: "nearFar",
+        hints: [[{ ko: "가까워요", en: "if it is close" }, { ko: "멀어요", en: "if it is far" }]] },
+      { audio: "talk_q3", ko: "집에서 학교까지 얼마나 걸려요?", en: "How long does it take from home to school?", check: "howLong",
         hints: [
           [{ ko: "[transportation](으)로" }, { ko: "[time]쯤 걸려요." }],
-          [{ ko: "[transportation](으)로", eg: "e.g., 버스로 · 지하철로 · 차로 · 자전거로 · 걸어서" },
-           { ko: "[time]쯤 걸려요.", eg: "e.g., 한 시간 · 이십 분 · 삼십 분" }],
+          [{ ko: "[transportation](으)로", eg: "e.g., 버스로 · 지하철로 · 차로 · 택시로 · 자전거로 · 걸어서" },
+           { ko: "[time]쯤 걸려요.", eg: "e.g., 한 시간 · 두 시간 · 20분 · 30분" }],
         ] },
     ],
-    closing: { id: "end", ko: "아, 그래요? 저는 둘루스에 살아요. 차로 30분쯤 걸려요. 수업에서 봐요!" },
+    closing: { audio: "talk_end", ko: "아, 그래요? 그럼 내일 만나요." },
   },
 };
-const TYPE_LABEL = { n: "Noun", p: "Particle", e: "A/V + Ending" };
+const TYPE_LABEL = { n: "Noun", p: "Particle", e: "A/V + Ending", x: "Etc." };
+const CARD_LABELS = { where: "Where you live", nearFar: "Near or far", how: "How you come", time: "How long" };
+const MEANS = {
+  walk: { en: "Walk", ko: "걸어서", re: "걸어서" },
+  bicycle: { en: "Bicycle", ko: "자전거로", re: "자전거(?:으로|로)?" },
+  bus: { en: "Bus", ko: "버스로", re: "버스(?:으로|로)?" },
+  car: { en: "Car", ko: "차로", re: "차(?:으로|로)?" },
+  subway: { en: "Subway", ko: "지하철로", re: "지하철(?:으로|로)?" },
+  taxi: { en: "Taxi", ko: "택시로", re: "택시(?:으로|로)?" },
+};
+const IMAGE_NAMES = ["textbook", "michael_face", "jenny_face", "emily_face", "james_face", "michael", "jenny", "emily", "james", "bg1", "bg2", "bg3", "bg4", "bg_cue", "bg_talk", "thumbs2", "thumbs1", "smile", "sad"];
 
-/* Every spoken item gets its audio file name. */
-LESSON.lines.forEach((l, i) => { l.base = `${LESSON.audioFolder}line${i + 1}_${LESSON.speakers[l.who].file}`; l.file = l.base + ".mp3"; });
-[...LESSON.talk.questions, LESSON.talk.closing].forEach((t) => { t.who = LESSON.talk.partner; t.base = `${LESSON.audioFolder}talk_${t.id}`; t.file = t.base + ".mp3"; });
-const AUDIO_ITEMS = [...LESSON.lines, ...LESSON.talk.questions, LESSON.talk.closing];
+/* Derived lists */
+LESSON.segments = [...LESSON.lines.slice(0, 3), ...LESSON.extraSegments];
+LESSON.talk.questions.forEach((q) => (q.who = LESSON.talk.partner));
+LESSON.talk.closing.who = LESSON.talk.partner;
+const AUDIO_ITEMS = [...LESSON.lines, ...LESSON.extraSegments, ...LESSON.cue.questions, ...LESSON.cue.askCards.flatMap((c) => c.answers), ...LESSON.talk.questions, LESSON.talk.closing];
+AUDIO_ITEMS.forEach((it) => { it.base = LESSON.audioFolder + it.audio; it.file = it.base + ".mp3"; });
+const cardFace = (c) => ({ where: `${c.place} (${c.placeKo})`, nearFar: c.near ? "Close" : "Far", how: MEANS[c.how].en, time: `About ${c.minutes} minutes` });
+const cardModels = (c) => [`저는 ${c.placeKo}에 살아요.`, c.near ? "가까워요." : "멀어요.", `${MEANS[c.how].ko} ${c.minutes}분쯤 걸려요.`];
 
 /* Helpers */
 const $ = (id) => document.getElementById(id);
@@ -398,6 +534,7 @@ function el(tag, props, ...kids) {
     else if (k.startsWith("on")) n.addEventListener(k.slice(2), v);
     else if (k === "dataset") Object.assign(n.dataset, v);
     else if (k === "disabled") n.disabled = !!v;
+    else if (k === "value") n.value = v;
     else n.setAttribute(k, v === true ? "" : v);
   }
   for (const c of kids.flat(Infinity)) if (c !== null && c !== undefined && c !== false) n.append(c);
@@ -416,12 +553,18 @@ function icon(name) {
 const ko = (text, cls) => el("span", { lang: "ko", class: cls, text });
 function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
-const nameOf = (who) => LESSON.speakers[who].name;
+/* Speaker label with a small face picture when there is one. */
+function whoEl(key, suffix = "") {
+  const src = key === "student" ? S.photo : IMG.src[key + "_face"];
+  return el("span", { class: "who", lang: key === "student" ? null : "ko" }, src && el("img", { class: "who-face", src, alt: "" }), nameOf(key) + suffix);
+}
+const nameOf = (who) => (who === "student" ? (S.name.trim() || "You") : LESSON.speakers[who].name);
 const enName = (who) => LESSON.speakers[who].en;
 
-/* ---------- Reading numbers aloud ----------
-   Screens show Arabic numerals. The browser voice reads hours and other native counters
-   with native numbers (1시간 → 한 시간) and minutes with Sino-Korean numbers (30분 → 삼십 분). */
+/* ---------- Numbers ----------
+   Screens show Arabic numerals. What the student said is shown in Hangul: hours and other native
+   counters with native numbers (1시간 → 한 시간), minutes with Sino-Korean numbers (30분 → 삼십 분).
+   The browser voice reads numbers the same way. */
 const NAT_ONES = ["", "한", "두", "세", "네", "다섯", "여섯", "일곱", "여덟", "아홉"];
 const NAT_TENS = ["", "열", "스물", "서른", "마흔", "쉰", "예순", "일흔", "여든", "아흔"];
 const SINO = ["", "일", "이", "삼", "사", "오", "육", "칠", "팔", "구"];
@@ -437,21 +580,77 @@ function nativeNum(n) {
   return NAT_TENS[Math.floor(n / 10)] + NAT_ONES[n % 10];
 }
 function readNumbers(text) {
-  return text
+  return (text || "")
     .replace(/(\d+)\s*(시간|시|살|개|명|번|마리|잔|권)/g, (m, d, u) => nativeNum(+d) + " " + u)
     .replace(/(\d+)\s*(분|초|년|월|일|원|층|호)/g, (m, d, u) => sinoNum(+d) + " " + u)
     .replace(/\d+/g, (d) => sinoNum(+d));
 }
+const sayable = (t) => readNumbers(t || "").replace(/\s+/g, " ").trim();
+const NAME_MAP = [[/jenny/g, "제니"], [/michael/g, "마이클"], [/emily/g, "에밀리"], [/james/g, "제임스"], [/koreatown/g, "한인타운"]];
+/* Form used for every comparison: numbers in Hangul, no spaces or punctuation. */
+function canon(t) {
+  let s = readNumbers((t || "").toLowerCase());
+  for (const [r, v] of NAME_MAP) s = s.replace(r, v);
+  return s.replace(/[\s.,?!~·'"…]/g, "");
+}
+/* Share of characters that are the same: 1 − edit distance / longer length. */
+function similarity(heard, target) {
+  const a = [...canon(heard)], b = [...canon(target)];
+  if (!a.length || !b.length) return a.length === b.length ? 1 : 0;
+  let prev = Array.from({ length: b.length + 1 }, (_, j) => j);
+  for (let i = 1; i <= a.length; i++) {
+    const cur = [i];
+    for (let j = 1; j <= b.length; j++) cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    prev = cur;
+  }
+  return 1 - prev[b.length] / Math.max(a.length, b.length);
+}
+/* Steps 4–6: 100% same → two thumbs; at least 80% → one thumb; under 80% → try again, then a note,
+   then the line is done whatever the result. */
+function judge(raw, target, n) {
+  const score = similarity(raw, target), F = LESSON.follow;
+  return { raw, score, kind: score >= 0.999 ? "perfect" : score >= F.good ? "good" : n === 1 ? "again" : n < F.tries ? "note" : "last" };
+}
+const MOVE_ON = ["perfect", "good", "last"];
+function noteEl(item) {
+  return el("div", { class: "postit", role: "note" }, el("span", { class: "tag", text: "Read this" }),
+    el("span", { class: "big", lang: "ko", text: item.ko }), el("span", { class: "pr", lang: "ko", text: item.pron }), el("span", { text: item.en }));
+}
+function attemptView(t, item, o = {}) {
+  const fb = t.kind === "perfect" ? fbIcon("thumbs2")
+    : t.kind === "good" ? [o.meant && el("span", { class: "verdict ok", lang: "ko", text: `You meant "${item.ko}", right?` }), fbIcon("thumbs1")]
+    : el("span", { class: "verdict no", text: t.kind === "again" ? (o.again || "Try again.") : t.kind === "note" ? "See the note and read it." : "Let's go on to the next line." });
+  return [el("div", { class: "try" }, el("span", { class: "heard", lang: "ko", text: `I heard "${sayable(t.raw)}"` }), fb), t.kind === "note" && noteEl(item)];
+}
+
+/* ---------- Pictures ---------- */
+const IMG = {
+  src: {},
+  check() {
+    return Promise.all(IMAGE_NAMES.map((n) => new Promise((res) => {
+      const exts = [".png", ".webp", ".jpg", ".jpeg"]; let k = 0;
+      const next = () => {
+        if (k >= exts.length) { this.src[n] = null; return res(); }
+        const url = LESSON.imageFolder + n + exts[k++];
+        const im = new Image(); im.onload = () => { this.src[n] = url; res(); }; im.onerror = next; im.src = url;
+      };
+      next();
+    })));
+  },
+};
+const FB = { thumbs2: ["👍👍", "Perfect"], thumbs1: ["👍", "Good"], smile: ["😊", "Correct"], sad: ["😢", "Not correct"] };
+function fbIcon(kind, big) {
+  const [emoji, label] = FB[kind];
+  return el("span", { class: "fb" + (big ? " big" : "") }, IMG.src[kind] ? el("img", { class: "fb-img", src: IMG.src[kind], alt: label }) : el("span", { class: "fb-emoji", role: "img", "aria-label": label, text: emoji }));
+}
 
 /* ---------- Voice (text to speech) ---------- */
 const TTS = {
-  supported: "speechSynthesis" in window, voices: [], pick: { A: null, B: null }, current: null,
+  supported: "speechSynthesis" in window, voices: [], pick: {}, current: null,
   load() {
     if (!this.supported) return;
-    const all = speechSynthesis.getVoices();
-    this.voices = all.filter((v) => /^ko/i.test(v.lang));
-    if (!this.pick.A && this.voices[0]) this.pick.A = this.voices[0];
-    if (!this.pick.B && this.voices[0]) this.pick.B = this.voices[1] || this.voices[0];
+    this.voices = speechSynthesis.getVoices().filter((v) => /^ko/i.test(v.lang));
+    for (const [k, sp] of Object.entries(LESSON.speakers)) if (!this.pick[k] && this.voices[0]) this.pick[k] = sp.voice === "male" ? (this.voices[1] || this.voices[0]) : this.voices[0];
   },
   cancel() { if (this.supported) speechSynthesis.cancel(); },
   speak(line, rate = 1) {
@@ -463,13 +662,14 @@ const TTS = {
       u.lang = "ko-KR"; u.rate = rate;
       const v = this.pick[line.who];
       if (v) u.voice = v;
-      // With only one Korean voice on the device, a lower pitch separates the two speakers.
-      if (line.who === "B" && this.pick.A === this.pick.B) u.pitch = 0.8;
+      // With only one Korean voice on the device, a lower pitch marks the male speakers.
+      const sp = LESSON.speakers[line.who];
+      if (sp && sp.voice === "male" && this.voices.length < 2) u.pitch = 0.8;
       let finished = false;
       const end = (ok) => { if (!finished) { finished = true; clearTimeout(guard); resolve(ok); } };
       const guard = setTimeout(() => end(false), Math.max(6000, text.length * 500 / rate));
       u.onend = () => end(true); u.onerror = () => end(false);
-      this.current = u; // Holds a reference so the browser does not drop the end event.
+      this.current = u;
       setTimeout(() => speechSynthesis.speak(u), 60);
     });
   },
@@ -478,7 +678,7 @@ const TTS = {
 /* ---------- Partner voice: audio file first, browser voice as fallback ----------
    The player runs through Web Audio once recording starts, so the video captures the partner too. */
 const Voice = {
-  el: new Audio(), ctx: null, src: null, has: {}, token: null, end: null, filePaused: false,
+  el: new Audio(), ctx: null, src: null, has: {}, token: null, end: null, filePaused: false, sayId: 0,
   async check() {
     await Promise.all(AUDIO_ITEMS.map(async (it) => {
       for (const ext of [".mp3", ".wav"]) {
@@ -500,16 +700,24 @@ const Voice = {
     return this.src;
   },
   isFile(item) { return !!(item && this.has[item.file]); },
-  sayId: 0,
   say(item, rate = 1, onProgress) {
     const id = ++this.sayId;
-    const p = this.play(item, rate, onProgress);
     setSpeaker(item.who);
+    const halves = !this.isFile(item) && item.segs && item.segs.map((i) => LESSON.segments[i]);
+    const p = halves && halves.every((h) => this.isFile(h)) ? this.playSeq(halves, rate, onProgress, id) : this.play(item, rate, onProgress);
     p.then(() => { if (this.sayId === id && NOW_SPEAKING === item.who) setSpeaker(null); });
     return p;
   },
+  async playSeq(items, rate, onProgress, id) {
+    for (let k = 0; k < items.length; k++) {
+      const ok = await this.play(items[k], rate, onProgress ? (f) => onProgress((k + f) / items.length) : null);
+      if (!ok || this.sayId !== id) return false;
+      if (k < items.length - 1) await wait(250);
+    }
+    return true;
+  },
   play(item, rate, onProgress) {
-    this.stop();
+    this.halt();
     if (!this.isFile(item)) return TTS.speak(item, rate);
     if (this.src) this.context();
     return new Promise((resolve) => {
@@ -530,11 +738,13 @@ const Voice = {
     TTS.cancel(); return false;
   },
   resume() { if (this.filePaused) { this.filePaused = false; this.el.play().catch(() => {}); return true; } return false; },
-  stop() { this.filePaused = false; try { this.el.pause(); } catch (e) {} if (this.end) this.end(false); TTS.cancel(); if (NOW_SPEAKING === "A" || NOW_SPEAKING === "B") setSpeaker(null); },
+  halt() { this.filePaused = false; try { this.el.pause(); } catch (e) {} if (this.end) this.end(false); TTS.cancel(); },
+  stop() { this.sayId++; this.halt(); if (NOW_SPEAKING && NOW_SPEAKING !== "student") setSpeaker(null); },
 };
 
 /* ---------- Who is speaking ----------
-   Partner avatars light up while their audio plays; the student's avatar lights up while Record is on. */
+   The speaker's picture lights up and shows a speech bubble; the other one dims.
+   The student's picture lights up while Record is on. */
 let NOW_SPEAKING = null;
 function setSpeaker(who) { NOW_SPEAKING = who; paintSpeakers(); }
 function paintSpeakers() {
@@ -542,21 +752,40 @@ function paintSpeakers() {
     const k = a.dataset.avatar;
     const on = !!NOW_SPEAKING && (k === NOW_SPEAKING || (NOW_SPEAKING === "student" && a.dataset.you === "1"));
     a.classList.toggle("speaking", on);
-    a.classList.toggle("dim", !!NOW_SPEAKING && !on && k !== "student");
+    a.classList.toggle("dim", !!NOW_SPEAKING && !on && !(k === "student" && a.classList.contains("avatar")));
   });
 }
 const STUDENT_COLORS = [["Sky", "#4DC3FF"], ["Pink", "#FF7AC6"], ["Lavender", "#B79CFF"], ["Sunshine", "#FFD84D"], ["Aqua", "#3DDBD9"], ["Coral", "#FF8A80"]];
+const bars = () => el("span", { class: "bars", "aria-hidden": "true" }, el("i"), el("i"), el("i"));
 function avatarEl(key, opts = {}) {
   const student = key === "student";
-  const name = student ? (S.name.trim() || "You") : nameOf(key);
-  const initial = student ? (S.name.trim()[0] || "Y").toUpperCase() : nameOf(key)[0];
-  const color = student ? S.color : key === "A" ? "var(--sofia)" : "var(--michael)";
+  const sp = LESSON.speakers[key];
+  const color = student ? S.color : sp.color;
+  const src = student ? S.photo : IMG.src[key + "_face"] || IMG.src[key];
   return el("div", { class: "avatar" + (student ? " student" : ""), "data-avatar": key, "data-you": student || opts.you ? "1" : null, style: `--c:${color}` },
-    el("span", { class: "face", lang: student ? null : "ko", text: initial }),
-    el("span", { class: "nm", lang: student ? null : "ko" }, name + (opts.you ? " (you)" : ""), el("span", { class: "bars", "aria-hidden": "true" }, el("i"), el("i"), el("i"))));
+    el("span", { class: "face", lang: student ? null : "ko" }, src ? el("img", { src, alt: "" }) : (student ? (S.name.trim()[0] || "Y").toUpperCase() : sp.name[0])),
+    el("span", { class: "nm", lang: student ? null : "ko" }, nameOf(key) + (opts.you ? " (you)" : ""), bars()));
 }
-function stage(o = {}) {
-  return el("div", { class: "stage", "aria-hidden": "true" }, (o.who || ["A", "B"]).map((k) => avatarEl(k, { you: o.you === k })));
+function stage(keys = ["michael", "jenny"]) {
+  return el("div", { class: "stage", "aria-hidden": "true" }, keys.map((k) => avatarEl(k)));
+}
+function actorEl(key, opts = {}) {
+  const student = key === "student";
+  const sp = LESSON.speakers[key];
+  const mic = student || opts.you;
+  const pic = student ? (S.photo ? el("img", { class: "photo", src: S.photo, alt: "" }) : el("span", { class: "figure-ph", text: (S.name.trim()[0] || "Y").toUpperCase() }))
+    : IMG.src[key] ? el("img", { class: "figure", src: IMG.src[key], alt: "" })
+    : IMG.src[key + "_face"] ? el("img", { class: "face-big", src: IMG.src[key + "_face"], alt: "" })
+    : el("span", { class: "figure-ph", lang: "ko", text: sp.name[0] });
+  return el("div", { class: "actor", "data-avatar": key, "data-you": mic ? "1" : null, style: `--c:${student ? S.color : sp.color}` },
+    el("div", { class: "bubble", "aria-hidden": "true" }, mic ? [icon("mic"), el("span", { text: "Speak now" })] : el("span", { class: "dots" }, el("i"), el("i"), el("i"))),
+    pic,
+    el("span", { class: "tag", lang: student ? null : "ko" }, nameOf(key) + (opts.you ? " (you)" : ""), opts.you && S.photo && el("img", { class: "mini", src: S.photo, alt: "" })));
+}
+function scene(o) {
+  const bg = o.bg && IMG.src[o.bg];
+  return el("div", { class: "scene", style: bg ? `background-image:url("${bg}")` : null },
+    actorEl(o.left, { you: o.you === o.left }), el("div", { class: "scene-mid" }, o.middle || null), actorEl(o.right, { you: o.you === o.right }));
 }
 
 /* ---------- Speech recognition ---------- */
@@ -625,7 +854,7 @@ const STT = {
       this.sess = s; s.finish = finish; this.active = true;
       begin();
       s.timers.push(setTimeout(() => { s.ready = true; showSpeak(); }, this.READY_MS));
-      s.timers.push(setTimeout(() => { s.audio = true; showSpeak(); }, 1500)); // Some browsers never report audio start.
+      s.timers.push(setTimeout(() => { s.audio = true; showSpeak(); }, 1500));
       s.timers.push(setTimeout(() => phase("long"), this.LONG_MS));
     });
   },
@@ -634,7 +863,7 @@ const STT = {
     s.userStopped = true;
     s.timers.push(setTimeout(() => {
       try { s.rec.stop(); } catch (e) {}
-      s.timers.push(setTimeout(() => s.finish(), 4000)); // Some browsers never fire the end event.
+      s.timers.push(setTimeout(() => s.finish(), 4000));
     }, this.TAIL_MS));
   },
   abort() { const s = this.sess; if (!s) return; s.userStopped = true; try { s.rec.abort(); } catch (e) {} s.finish(); },
@@ -647,11 +876,6 @@ function errorMessage(code) {
   return "Speech recognition stopped. Try again.";
 }
 function handleSttError(code) { if (code === "language-not-supported" && STT.mode === "device") { STT.mode = "online"; renderStatus(); } }
-function normalize(s) {
-  return s.toLowerCase().replace(/michael/g, "마이클").replace(/duluth/g, "둘루스").replace(/30/g, "삼십")
-    .replace(/[\s.,?!·'"…~]/g, "");
-}
-const matches = (heard, line) => normalize(heard) === normalize(line.ko);
 
 /* ---------- App state ---------- */
 const STEPS = [
@@ -659,14 +883,15 @@ const STEPS = [
   { key: "a2", nav: "Build", label: "Build the dialogue" },
   { key: "a3", nav: "Repeat", label: "Listen and repeat" },
   { key: "follow", nav: "Follow", label: "Follow the whole dialogue" },
-  { key: "a4", nav: "Be Sophia", label: "Speak as Sophia" },
-  { key: "a5", nav: "Be Michael", label: "Speak as Michael" },
-  { key: "cue", nav: "Cue card", label: "Answer with a cue card" },
+  { key: "jenny", nav: "Be Jenny", label: "Speak as Jenny" },
+  { key: "michael", nav: "Be Michael", label: "Speak as Michael" },
+  { key: "cue", nav: "Cue card", label: "Practice with cue cards" },
   { key: "talk", nav: "Talk", label: "Talk about yourself" },
   { key: "submit", nav: "Download", label: "Download your files" },
 ];
-const ACT_NAME = { a3: "Repeat", follow: "Follow", a4: "Speak A", a5: "Speak B", cue: "Cue card", talk: "Talk" };
-const S = { started: false, step: 0, done: {}, log: [], run: 0, name: "", color: STUDENT_COLORS[0][1], lastCard: null, a1: null, a2: null, a3: null, follow: null, a4: null, a5: null, cue: null, talk: null };
+const REC_FROM = 4; // Recording starts at step 5 (Be Jenny).
+const ACT_NAME = { a3: "Repeat", follow: "Follow", jenny: "Be Jenny", michael: "Be Michael", cue: "Cue card", talk: "Talk" };
+const S = { started: false, step: 0, done: {}, log: [], run: 0, name: "", photo: null, color: STUDENT_COLORS[0][1], a1: null, a2: null, a3: null, follow: null, jenny: null, michael: null, cue: null, talk: null };
 function stopAll() {
   S.run++; Voice.stop(); STT.abort(); if (NOW_SPEAKING) setSpeaker(null);
   [S.a1, S.a2].forEach((b) => { if (b && b.player) Object.assign(b.player, { state: "stopped", i: 0, frac: 0 }); });
@@ -692,7 +917,7 @@ function moveToken(b, tid, target) {
   if (target) {
     const other = b.place[target];
     b.place[target] = tid;
-    if (from) b.place[from] = other; // Swap with whatever was in the target slot.
+    if (from) b.place[from] = other;
     b.wrong.delete(target);
   } else if (from) b.place[from] = null;
   if (from) b.wrong.delete(from);
@@ -719,7 +944,7 @@ function slotEl(b, s, label) {
   const tid = b.place[s.id];
   const n = el("div", {
     role: "button", tabindex: b.state === "working" ? 0 : -1, "aria-label": label,
-    class: "slot" + (tid ? " filled" : "") + (b.wrong.has(s.id) ? " wrong" : ""),
+    class: "slot" + (s.cls ? " " + s.cls : "") + (tid ? " filled" : "") + (b.wrong.has(s.id) ? " wrong" : ""),
     dataset: { slot: s.id, fk: "s" + s.id },
   });
   if (tid) n.append(tokenEl(b, tokenById(b, tid)));
@@ -753,6 +978,7 @@ function nextButton() {
   if (S.step >= STEPS.length - 1) return el("p", { class: "msg good", text: "All activities are finished." });
   return el("div", { class: "row" }, el("button", { type: "button", class: "btn primary", text: "Next activity: " + STEPS[S.step + 1].label, onclick: () => go(S.step + 1) }));
 }
+const fullDialogue = (list = LESSON.lines) => el("div", { class: "reveal", lang: "ko" }, list.map((l) => el("div", { class: "dlg-line" }, whoEl(l.who), el("span", { text: l.ko }))));
 function playAllButton(st) {
   const playing = st.playing;
   return el("button", { type: "button", class: "btn", onclick: async () => {
@@ -762,7 +988,6 @@ function playAllButton(st) {
     st.playing = false; render();
   } }, icon(playing ? "stop" : "play"), playing ? "Stop" : "Play the dialogue");
 }
-
 function listenPlayer(st) {
   if (!LESSON.listenControls) return playAllButton(st);
   const p = st.player || (st.player = { i: 0, state: "stopped", frac: 0, file: false });
@@ -771,8 +996,9 @@ function listenPlayer(st) {
     stopAll(); const r = S.run;
     Object.assign(p, { state: "playing", i: from, frac: 0 }); render();
     for (let i = from; i < n; i++) {
-      p.i = i; p.frac = 0; p.file = Voice.isFile(LESSON.lines[i]); updateBar(p);
-      await Voice.say(LESSON.lines[i], 1, (f) => { p.frac = f; updateBar(p); });
+      const line = LESSON.lines[i];
+      p.i = i; p.frac = 0; p.file = Voice.isFile(line) || !!(line.segs && line.segs.every((k) => Voice.isFile(LESSON.segments[k]))); updateBar(p);
+      await Voice.say(line, 1, (f) => { p.frac = f; updateBar(p); });
       if (r !== S.run || p.state !== "playing") return;
       p.frac = 1; updateBar(p);
       await wait(350);
@@ -845,7 +1071,6 @@ document.addEventListener("pointermove", (e) => {
   const tgt = dropTarget(e.clientX, e.clientY);
   if (tgt) tgt.classList.add("over");
 });
-/* On a phone the blanks and the word box do not fit on one screen, so holding a piece near an edge scrolls the page. */
 function autoScroll() {
   if (!drag || !drag.moving) return;
   const edge = 90, h = window.innerHeight;
@@ -891,7 +1116,7 @@ document.addEventListener("keydown", (e) => {
   if ((e.key === "Enter" || e.key === " ") && e.target.classList && e.target.classList.contains("slot")) { e.preventDefault(); e.target.click(); }
 });
 
-/* ---------- Activity 1 ---------- */
+/* ---------- 1 Understand ---------- */
 function viewA1() {
   if (!S.a1) {
     const tokens = shuffle(LESSON.lines.map((l, i) => ({ id: "e" + i, text: l.en, cls: "en" })));
@@ -902,42 +1127,42 @@ function viewA1() {
   const inBank = b.tokens.filter((t) => !slotOf(b, t.id));
   return [
     el("div", {}, el("h2", { text: "Listen, then put the English meanings in order" }),
-      el("p", { class: "lead", text: "Drag each sentence to its place in the dialogue. You can move a sentence again at any time before you press Check." })),
+      el("p", { class: "lead", text: "This is the dialogue from your textbook. Drag each sentence to its place in the dialogue. You can move a sentence again at any time before you press Check." })),
+    IMG.src.textbook && el("figure", { class: "textbook" }, el("img", { src: IMG.src.textbook, alt: "The dialogue in the textbook" }), el("figcaption", { text: "Textbook · Lesson 6 · Conversation 1" })),
     stage(),
     listenPlayer(b),
     el("div", { class: "order" }, b.slots.map((s, i) => el("div", { class: "order-row" }, el("b", { text: i + 1 }), slotEl(b, s, "Position " + (i + 1))))),
     el("div", { class: "bank", dataset: { fk: "bank" } }, inBank.length ? el("div", { class: "stack" }, inBank.map((t) => tokenEl(b, t))) : el("span", { class: "bank-empty", text: "All sentences are placed. Drag one back here to remove it." })),
-    boardControls(b, "a1", "Correct. All six sentences are in order.", "Here is the correct order. Listen again and follow along."),
+    boardControls(b, "a1", "Correct. All five sentences are in order.", "Here is the correct order. Listen again and follow along."),
     b.state !== "working" && nextButton(),
   ];
 }
 
-/* ---------- Activity 2 ---------- */
+/* ---------- 2 Build ---------- */
 function viewA2() {
   if (!S.a2) {
     const tokens = [], slots = [];
     LESSON.lines.forEach((l, li) => l.parts.forEach((p, pi) => {
-      if (Array.isArray(p)) { tokens.push({ id: `w${li}_${pi}`, text: p[0], cls: p[1] }); slots.push({ id: `b${li}_${pi}`, answer: p[0] }); }
+      if (Array.isArray(p)) { tokens.push({ id: `w${li}_${pi}`, text: p[0], cls: p[1] }); slots.push({ id: `b${li}_${pi}`, answer: p[0], cls: p[1] }); }
     }));
     S.a2 = newBoard(shuffle(tokens), slots); S.a2.tokensLang = "ko";
   }
   const b = S.a2;
+  const slotById = Object.fromEntries(b.slots.map((s) => [s.id, s]));
   const lineEls = LESSON.lines.map((l, li) => el("div", { class: "dlg-line" },
-    el("span", { class: "who", lang: "ko", text: nameOf(l.who) }),
-    el("div", { class: "dlg-parts", lang: "ko" }, l.parts.map((p, pi) => Array.isArray(p) ? slotEl(b, { id: `b${li}_${pi}` }, `Blank in line ${li + 1}`) : el("span", { text: p })))));
-  const groups = ["n", "p", "e"].map((c) => {
+    whoEl(l.who),
+    el("div", { class: "dlg-parts", lang: "ko" }, l.parts.map((p, pi) => Array.isArray(p) ? slotEl(b, slotById[`b${li}_${pi}`], `${TYPE_LABEL[p[1]]} blank in line ${li + 1}`) : el("span", { text: p })))));
+  const groups = ["n", "p", "e", "x"].map((c) => {
     const items = b.tokens.filter((t) => t.cls === c && !slotOf(b, t.id));
     return el("div", { class: "bank-group" }, el("span", { class: "bank-label", text: TYPE_LABEL[c] }), el("div", { class: "toks" }, items.map((t) => tokenEl(b, t))));
   });
   const finished = b.state !== "working";
   return [
     el("div", {}, el("h2", { text: "Listen, then build the dialogue" }),
-      el("p", { class: "lead", text: "Drag the words and grammar pieces into the blanks. Drag a placed piece to another blank to change your answer, or back to the box to remove it." })),
+      el("p", { class: "lead", text: "Drag the words and grammar pieces into the blanks. Each blank has the same shape as the piece that goes in it. Drag a placed piece to another blank to change your answer, or back to the box to remove it." })),
     stage(),
     listenPlayer(b),
-    finished
-      ? el("div", { class: "reveal", lang: "ko" }, LESSON.lines.map((l) => el("div", { class: "dlg-line" }, el("span", { class: "who", text: nameOf(l.who) }), el("span", { text: l.ko }))))
-      : el("div", { class: "dlg" }, lineEls),
+    finished ? fullDialogue() : el("div", { class: "dlg" }, lineEls),
     !finished && el("div", { class: "bank", dataset: { fk: "bank" } }, groups),
     boardControls(b, "a2", "Correct. Here is the full dialogue.", "Here is the full dialogue. Compare it with your answer as you listen again."),
     finished && nextButton(),
@@ -974,125 +1199,140 @@ function recordButton(st, onResult, disabled) {
     onResult(res); render();
   } }, icon("mic"), "Record");
 }
+const heardText = (raw) => (raw ? `I heard "${sayable(raw)}"` : "I didn't catch that.");
 
-/* ---------- Activity 3 ---------- */
+/* ---------- 3 Repeat: each piece twice at normal speed ---------- */
+const REPEAT_STEPS = ["Listen", "Record", "Listen again", "Record again"];
 function viewA3() {
-  if (!S.a3) S.a3 = { line: 0, round: 0, heard: null, attempted: false, listened: false, playing: false, error: null, finished: false, lineDone: {} };
-  const st = S.a3, line = LESSON.lines[st.line], rate = LESSON.speedRounds[st.round], pct = Math.round(rate * 100);
+  const SEG = LESSON.segments, times = LESSON.repeatTimes;
+  if (!S.a3) S.a3 = { i: 0, stage: 0, heard: [], playing: false, error: null, finished: false, done: {} };
+  const st = S.a3, seg = SEG[st.i];
   if (st.finished) return [
-    el("div", {}, el("h2", { text: "Repeat at three speeds" })),
-    el("div", { class: "reveal", lang: "ko" }, LESSON.lines.map((l) => el("div", { class: "dlg-line" }, el("span", { class: "who", text: nameOf(l.who) }), el("span", { text: l.ko })))),
-    el("p", { class: "msg good", text: "You repeated all six lines." }),
+    el("div", {}, el("h2", { text: "Listen and repeat" })),
+    fullDialogue(),
+    el("p", { class: "msg good", text: "You repeated every line twice." }),
     el("div", { class: "row" }, el("button", { type: "button", class: "btn", text: "Practice again", onclick: () => { S.a3 = null; render(); } })),
     nextButton(),
   ];
-  const play = async (r = rate) => {
+  const listenStage = st.stage % 2 === 0 && st.stage < times * 2;
+  const play = async () => {
     stopAll(); const run = S.run; st.playing = true; render();
-    await Voice.say(line, r);
+    await Voice.say(SEG[st.i], 1);
     if (run !== S.run) return;
-    st.playing = false; st.listened = true; render();
+    st.playing = false; if (st.stage % 2 === 0 && st.stage < times * 2) st.stage++; render();
   };
-  st.play = play;
-  const advance = () => {
-    stopAll(); st.heard = null; st.error = null; st.attempted = false; st.listened = false; st.playing = false;
-    if (st.round < LESSON.speedRounds.length - 1) st.round++;
-    else {
-      st.lineDone[st.line] = true; st.round = 0;
-      if (st.line < LESSON.lines.length - 1) st.line++;
-      else { st.finished = true; complete("a3"); render(); return; }
-    }
-    render(); S.a3.play(LESSON.speedRounds[st.round]);
+  const attempt = (raw, result) => {
+    const n = st.heard.length + 1;
+    st.heard.push(raw);
+    record({ activity: "a3", type: "repeat", line: st.i + 1, try: n, target: seg.ko, heard: sayable(raw), raw, result });
+    st.stage++;
   };
-  const show = LESSON.repeatShow[st.round] || [];
+  const goTo = (i) => { stopAll(); Object.assign(st, { i, stage: 0, heard: [], error: null, playing: false }); render(); };
+  const next = () => {
+    st.done[st.i] = true;
+    if (st.i < SEG.length - 1) { goTo(st.i + 1); play(); }
+    else { stopAll(); st.finished = true; complete("a3"); render(); }
+  };
+  const recordReady = st.stage % 2 === 1;
+  const finishedPiece = st.stage >= times * 2;
   return [
     el("div", {}, el("h2", { text: "Listen and repeat" }),
-      el("p", { class: "lead", text: "Listen, press Record, say the line, then press Stop. Your attempt counts. It is not graded." })),
+      el("p", { class: "lead", text: `Listen, then say the line. Do it ${times === 2 ? "twice" : times + " times"} for each line, then go to the next one. Your attempts count. They are not graded.` })),
     stage(),
-    el("div", { class: "line-dots", role: "group", "aria-label": "Lines" }, LESSON.lines.map((l, i) => el("button", {
-      type: "button", class: (i === st.line ? "now" : st.lineDone[i] ? "done" : ""), text: i + 1, "aria-label": "Line " + (i + 1),
-      onclick: () => { stopAll(); Object.assign(st, { line: i, round: 0, heard: null, error: null, attempted: false, listened: false, playing: false }); render(); },
+    el("div", { class: "line-dots", role: "group", "aria-label": "Lines" }, SEG.map((s, i) => el("button", {
+      type: "button", class: (i === st.i ? "now" : st.done[i] ? "done" : ""), text: i + 1, "aria-label": "Line " + (i + 1), onclick: () => goTo(i),
     }))),
-    el("div", { class: "speeds" }, LESSON.speedRounds.map((r, i) => el("span", { class: "speed" + (i === st.round ? " now" : i < st.round ? " done" : ""), text: Math.round(r * 100) + "%" }))),
-    show.length
-      ? el("div", { class: "turn" },
-          show.includes("ko") && ko(line.ko, "ko-big"),
-          show.includes("pron") && ko(line.pron, "pron"),
-          show.includes("en") && el("span", { class: show.length === 1 ? "en-big" : "sub", text: line.en }))
-      : el("p", { class: "msg", text: "Listen and repeat without any text." }),
+    el("div", { class: "turn" },
+      whoEl(seg.who),
+      ko(seg.ko, "ko-big"), ko(seg.pron, "pron"), el("span", { class: "sub", text: seg.en })),
+    el("div", { class: "flow-steps", "aria-hidden": "true" }, [...REPEAT_STEPS, "Next"].map((t, k) => el("span", { class: k === st.stage ? "now" : k < st.stage ? "done" : "", text: t }))),
     el("div", { class: "row" },
-      el("button", { type: "button", class: "btn", disabled: st.playing || STT.active, onclick: () => play() }, icon("play"), st.playing ? "Playing…" : `Listen at ${pct}%`),
+      el("button", { type: "button", class: "btn" + (listenStage ? " primary" : ""), disabled: st.playing || STT.active, onclick: play }, icon("play"), st.playing ? "Playing…" : st.stage >= 2 ? "Listen again" : "Listen"),
       recordButton(st, (res) => {
         if (res.error) { st.error = errorMessage(res.error); return; }
-        st.error = null; st.heard = res.text; st.attempted = true;
-        record({ activity: "a3", type: "repeat", line: st.line + 1, speed: pct + "%", target: line.ko, heard: res.text, result: res.text ? (matches(res.text, line) ? "same" : "different") : "nothing heard" });
-      }, st.playing || !(st.listened || !TTS.supported)),
-      !STT.supported && el("button", { type: "button", class: "btn", text: "I said it", onclick: () => { st.attempted = true; record({ activity: "a3", type: "repeat", line: st.line + 1, speed: pct + "%", target: line.ko, heard: "", result: "no recognition" }); render(); } }),
-      el("button", { type: "button", class: "btn primary", disabled: !st.attempted || STT.active, text: st.round < LESSON.speedRounds.length - 1 ? "Next speed" : st.line < LESSON.lines.length - 1 ? "Next line" : "Finish", onclick: advance })),
+        st.error = null; attempt(res.text, res.text ? "" : "nothing heard");
+      }, st.playing || !recordReady),
+      !STT.supported && el("button", { type: "button", class: "btn", disabled: !recordReady, text: "I said it", onclick: () => { attempt("", "no recognition"); render(); } }),
+      el("button", { type: "button", class: "btn" + (finishedPiece ? " primary" : ""), disabled: !finishedPiece || STT.active, text: st.i < SEG.length - 1 ? "Next line" : "Finish", onclick: next })),
     st.error && el("p", { class: "msg bad", text: st.error }),
-    st.attempted && STT.supported && el("p", { class: "msg heard", lang: "ko" }, st.heard ? `I heard "${st.heard}"` : "I didn't catch that. Record again, or go on."),
+    st.heard.map((raw, k) => el("p", { class: "heard", lang: "ko", text: `Try ${k + 1}: ` + (raw ? `I heard "${sayable(raw)}"` : "I didn't catch that.") })),
   ];
 }
 
-/* ---------- Follow the whole dialogue ---------- */
+/* ---------- 4 Follow: whole dialogue with feedback ----------
+   100% same → two thumbs, at least 80% → one thumb, and the line is done.
+   Under 80%: first time "Try again" (listen again first), second time a note with the line to read,
+   third time the line is done whatever the result. Every attempt stays on screen and in the log. */
 function viewFollow() {
-  if (!S.follow) S.follow = { playing: null, rows: LESSON.lines.map(() => ({ listened: false, attempted: false, heard: "", error: null, note: null, listening: false, checking: false })) };
+  const SEG = LESSON.segments, F = LESSON.follow;
+  if (!S.follow) S.follow = { playing: null, rows: SEG.map(() => ({ listened: false, tries: [], done: false, note: null, error: null, listening: false })) };
   const st = S.follow;
-  const finished = st.rows.every((r) => r.attempted);
-  const nowIndex = st.rows.findIndex((r) => !r.attempted);
+  const finished = st.rows.every((r) => r.done);
+  const nowIndex = st.rows.findIndex((r) => !r.done);
   const busy = () => st.playing !== null || STT.active || st.rows.some((r) => r.stopping);
-  const rows = LESSON.lines.map((line, i) => {
+  const rows = SEG.map((seg, i) => {
     const row = st.rows[i];
-    const unlocked = i === 0 || st.rows[i - 1].attempted;
-    const attempt = (heard, result) => {
-      row.attempted = true; row.heard = heard;
-      record({ activity: "follow", type: "repeat", line: i + 1, target: line.ko, heard, result });
-      if (st.rows.every((r) => r.attempted)) complete("follow");
+    const unlocked = i === 0 || st.rows[i - 1].done;
+    const attempt = (raw) => {
+      if (!raw) { row.note = "I didn't catch that. Record again."; record({ activity: "follow", type: "repeat", line: i + 1, try: row.tries.length + 1, target: seg.ko, heard: "", raw, result: "nothing heard" }); return; }
+      row.note = null;
+      const n = row.tries.length + 1, t = judge(raw, seg.ko, n), kind = t.kind;
+      row.tries.push(t);
+      record({ activity: "follow", type: "repeat", line: i + 1, try: n, target: seg.ko, heard: sayable(raw), raw, result: `${Math.round(t.score * 100)}% same` });
+      if (kind === "again") row.listened = false;
+      if (kind === "note") row.listened = true;
+      if (MOVE_ON.includes(kind)) { row.done = true; if (st.rows.every((r) => r.done)) complete("follow"); }
     };
     const box = el("button", {
-      type: "button", class: "say-box" + (st.playing === i ? " playing" : i === nowIndex ? " now" : ""), lang: "ko",
-      disabled: !unlocked || (busy() && st.playing !== i), "aria-label": `Play line ${i + 1}, ${nameOf(line.who)}`,
+      type: "button", class: "say-box" + (st.playing === i ? " playing" : i === nowIndex ? " now" : ""),
+      disabled: !unlocked || (busy() && st.playing !== i), "aria-label": `Play line ${i + 1}, ${nameOf(seg.who)}`,
       onclick: async () => {
         stopAll(); const run = S.run; st.playing = i; render();
-        await Voice.say(line, 1);
+        await Voice.say(seg, 1);
         if (run !== S.run) return;
         st.playing = null; row.listened = true; render();
       },
-    }, icon("play"), el("span", { text: row.heard }));
+    }, icon("play"), el("span", { text: st.playing === i ? "Playing…" : `Listen to line ${i + 1}` }));
+    const canRecord = unlocked && !row.done && (row.listened || !TTS.supported) && st.playing === null && !(STT.active && !row.listening);
     return el("div", { class: "follow-row" },
-      el("span", { class: "who", lang: "ko", text: nameOf(line.who) }),
+      whoEl(seg.who),
       box,
       el("div", { class: "row" },
         recordButton(row, (res) => {
           if (res.error) { row.error = errorMessage(res.error); return; }
-          row.error = null;
-          row.note = res.text ? null : "I didn't catch that. Record again, or go on.";
-          attempt(res.text, res.text ? (matches(res.text, line) ? "same" : "different") : "nothing heard");
-        }, !unlocked || !(row.listened || !TTS.supported) || st.playing !== null || (STT.active && !row.listening)),
-        !STT.supported && el("button", { type: "button", class: "btn", disabled: !unlocked, text: "I said it", onclick: () => { attempt("", "no recognition"); render(); } })),
-      row.error && el("p", { class: "msg bad", style: "grid-column: 1 / -1", text: row.error }),
-      row.note && el("p", { class: "msg", style: "grid-column: 1 / -1", text: row.note }));
+          row.error = null; attempt(res.text);
+        }, !canRecord),
+        !STT.supported && el("button", { type: "button", class: "btn", disabled: !unlocked || row.done, text: "I said it", onclick: () => { row.tries.push({ raw: "", score: 0, kind: "last" }); row.done = true; record({ activity: "follow", type: "repeat", line: i + 1, target: seg.ko, heard: "", result: "no recognition" }); if (st.rows.every((r) => r.done)) complete("follow"); render(); } })),
+      (row.tries.length || row.note || row.error) && el("div", { class: "tries" },
+        row.tries.map((t) => attemptView(t, seg, { again: "Try again. Listen and repeat." })),
+        row.note && el("p", { class: "msg", text: row.note }),
+        row.error && el("p", { class: "msg bad", text: row.error })));
   });
   return [
     el("div", {}, el("h2", { text: "Follow the whole dialogue" }),
-      el("p", { class: "lead", text: "Click a box to hear the line. Press Record, say the line, then press Stop. What you said appears in the box. Go from the first line to the last." })),
+      el("p", { class: "lead", text: "Click a line to hear it. Press Record, say the line, then press Stop. Go from the first line to the last." })),
     stage(),
     el("div", { class: "follow" }, rows),
-    finished && el("div", { class: "reveal", lang: "ko" }, LESSON.lines.map((l) => el("div", { class: "dlg-line" }, el("span", { class: "who", text: nameOf(l.who) }), el("span", { text: l.ko })))),
+    finished && fullDialogue(),
     finished && el("div", { class: "row" }, el("button", { type: "button", class: "btn", text: "Practice again", onclick: () => { stopAll(); S.follow = null; render(); } })),
     finished && nextButton(),
   ];
 }
 
-/* ---------- Speaking activities ---------- */
-function viewSpeak(key, role) {
-  if (!S[key]) S[key] = { i: 0, started: false, phase: "idle", tries: 0, misses: 0, hint: false, history: [], feedback: null, error: null };
-  const st = S[key], other = role === "A" ? "B" : "A";
+/* ---------- 5–6 Be Jenny / Be Michael ---------- */
+const newSpeak = (round) => ({ round, i: 0, phase: "idle", attempts: [], hint: false, history: [], feedback: null, error: null });
+function viewSpeak(role) {
+  const R = LESSON.roles[role], other = role === "jenny" ? "michael" : "jenny";
+  if (!S[role]) S[role] = newSpeak(1);
+  const st = S[role];
+  const showEn = R.showEnFirst && st.round === 1;
+  const bg = R.bgs[st.round - 1] || R.bgs[0];
   const advance = async () => {
     const run = S.run;
-    st.tries = 0; st.misses = 0; st.hint = false; st.feedback = null; st.error = null;
+    st.attempts = []; st.hint = false; st.feedback = null; st.error = null;
     while (true) {
       const line = LESSON.lines[st.i];
-      if (!line) { st.phase = "done"; complete(key); render(); return; }
+      if (!line) { st.phase = "done"; if (st.round >= LESSON.rounds) complete(role); render(); return; }
       if (line.who === role) { st.phase = "mine"; render(); return; }
       st.phase = "partner"; render();
       await wait(500); if (run !== S.run) return;
@@ -1101,9 +1341,9 @@ function viewSpeak(key, role) {
       st.i++;
     }
   };
-  const finishTurn = async (text) => {
+  const finishTurn = async () => {
     const run = S.run;
-    st.history.push({ line: st.i, partner: false, text });
+    st.history.push({ line: st.i, partner: false, attempts: st.attempts });
     st.i++; st.phase = "pause"; st.feedback = null; render();
     await wait(1000); if (run !== S.run) return;
     advance();
@@ -1113,146 +1353,232 @@ function viewSpeak(key, role) {
     if (res.error) { st.error = errorMessage(res.error); return; }
     st.error = null;
     if (!res.text) {
-      st.misses++;
-      record({ activity: key, type: "speak", line: st.i + 1, target: line.ko, heard: "", result: "nothing heard" });
-      if (st.misses >= 2) finishTurn(`I didn't catch that. The line is "${line.ko}".`);
-      else st.feedback = "I didn't catch that.";
+      st.feedback = "I didn't catch that. Record again.";
+      record({ activity: role, type: "speak", round: st.round, line: st.i + 1, try: st.attempts.length + 1, target: line.ko, heard: "", result: "nothing heard" });
       return;
     }
-    const ok = matches(res.text, line);
-    record({ activity: key, type: "speak", line: st.i + 1, try: st.tries + 1, target: line.ko, heard: res.text, result: ok ? "match" : "no match" });
-    if (ok) finishTurn(`I heard "${res.text}"`);
-    else {
-      st.tries++;
-      if (st.tries >= 2) finishTurn(`I heard "${res.text}". You meant "${line.ko}", right?`);
-      else st.feedback = `I heard "${res.text}". Try once more?`;
-    }
+    st.feedback = null;
+    const n = st.attempts.length + 1, t = judge(res.text, line.ko, n);
+    st.attempts.push(t);
+    record({ activity: role, type: "speak", round: st.round, line: st.i + 1, try: n, target: line.ko, heard: sayable(res.text), raw: res.text, result: `${Math.round(t.score * 100)}% same` });
+    if (MOVE_ON.includes(t.kind)) finishTurn();
   };
+  const startRound = (round) => { stopAll(); S[role] = newSpeak(round); S[role].autostart = true; render(); };
   const replay = (lineIdx) => el("button", { type: "button", class: "linkbtn", disabled: st.phase === "partner" || STT.active, onclick: () => Voice.say(LESSON.lines[lineIdx], 1) }, icon("play"), "Play again");
   const past = st.history.map((h) => {
     const l = LESSON.lines[h.line];
     return el("div", { class: "turn past" },
-      el("div", { class: "turn-head" }, el("span", { class: "who", lang: "ko", text: nameOf(l.who) + (h.partner ? "" : " (you)") }), h.partner && replay(h.line)),
-      h.partner ? el("span", { class: "sub", text: "Spoken line" }) : el("p", { class: "heard", lang: "ko", text: h.text }));
+      el("div", { class: "turn-head" }, whoEl(l.who, h.partner ? "" : " (you)"), h.partner && replay(h.line)),
+      h.partner ? el("span", { class: "sub", text: "Spoken line" }) : h.attempts.length ? h.attempts.map((t) => attemptView(t, l, { meant: true })) : el("p", { class: "heard", lang: "ko", text: h.text || "" }));
   });
+  const roundLabel = st.round <= LESSON.rounds ? `Round ${st.round} of ${LESSON.rounds}` : "Extra practice";
+  const lead = role === "jenny"
+    ? "Michael asks you questions by voice. Answer as Jenny. Your lines stay blank. Use Hint if you need the meaning. If what you said is far from the line, try again; the second time, a note shows the line."
+    : "You start. Ask Jenny the questions and answer hers, as Michael. In round 1 you see the English meaning of your lines. After that they are hidden; use Hint if you need them. If what you said is far from the line, try again; the second time, a note shows the line.";
   const nodes = [
-    el("div", {}, el("h2", { text: `Speak as ${enName(role)}` }),
-      el("p", { class: "lead", text: `${enName(other)}${role === "A" ? " answers you by voice. You start." : " starts by voice. You answer."} Your own lines stay blank. Use Hint if you need the meaning.` })),
-    stage({ you: role }),
+    el("div", {}, el("h2", { text: `Speak as ${enName(role)}` }), el("p", { class: "lead", text: lead })),
+    el("span", { class: "round", text: roundLabel }),
+    scene({ left: "michael", right: "jenny", you: role, bg }),
   ];
+  if (st.autostart) { st.autostart = false; setTimeout(() => { if (S[role] === st) advance(); }, 0); }
   if (st.phase === "idle") {
-    nodes.push(el("div", { class: "row" }, el("button", { type: "button", class: "btn primary", onclick: () => { stopAll(); st.started = true; advance(); } }, icon("play"), "Start the conversation")));
+    nodes.push(el("div", { class: "row" }, el("button", { type: "button", class: "btn primary", onclick: () => { stopAll(); advance(); } }, icon("play"), "Start the conversation")));
     return nodes;
   }
   nodes.push(el("div", { class: "turns" }, past,
-    st.phase === "partner" && el("div", { class: "turn" }, el("span", { class: "who", lang: "ko", text: nameOf(other) }), el("span", { class: "sub", text: "Speaking…" })),
+    st.phase === "partner" && el("div", { class: "turn" }, whoEl(other), el("span", { class: "sub", text: "Speaking…" })),
     st.phase === "mine" && (() => {
       const line = LESSON.lines[st.i];
       return el("div", { class: "turn mine" },
-        el("div", { class: "turn-head" }, el("span", { class: "who", lang: "ko", text: nameOf(role) + " (you)" }),
-          !st.hint && el("button", { type: "button", class: "linkbtn", text: "Hint", onclick: () => { st.hint = true; record({ activity: key, type: "hint", line: st.i + 1 }); render(); } })),
-        st.hint && el("p", { class: "hint", text: line.en }),
+        el("div", { class: "turn-head" }, whoEl(role, " (you)"),
+          !showEn && !st.hint && el("button", { type: "button", class: "linkbtn", text: "Hint", onclick: () => { st.hint = true; record({ activity: role, type: "hint", round: st.round, line: st.i + 1 }); render(); } })),
+        showEn ? el("p", { class: "en-cue", text: line.en }) : st.hint && el("p", { class: "hint", text: line.en }),
+        st.attempts.map((t) => attemptView(t, line, { meant: true })),
         st.feedback && el("p", { class: "heard", lang: "ko", text: st.feedback }),
         st.error && el("p", { class: "msg bad", text: st.error }),
         el("div", { class: "row" },
           recordButton(st, onResult, false),
-          !STT.supported && el("button", { type: "button", class: "btn", text: "I said it", onclick: () => { record({ activity: key, type: "speak", line: st.i + 1, target: line.ko, heard: "", result: "no recognition" }); finishTurn(`The line is "${line.ko}".`); } })));
+          !STT.supported && el("button", { type: "button", class: "btn", text: "I said it", onclick: () => { record({ activity: role, type: "speak", round: st.round, line: st.i + 1, target: line.ko, heard: "", result: "no recognition" }); st.attempts = []; finishTurn(); } })));
     })()));
-  if (st.phase === "done") nodes.push(
-    el("div", { class: "reveal", lang: "ko" }, LESSON.lines.map((l) => el("div", { class: "dlg-line" }, el("span", { class: "who", text: nameOf(l.who) }), el("span", { text: l.ko })))),
-    el("div", { class: "row" }, el("button", { type: "button", class: "btn", text: "Practice again", onclick: () => { stopAll(); S[key] = null; render(); } })),
-    nextButton());
+  if (st.phase === "done") {
+    nodes.push(fullDialogue());
+    if (st.round < LESSON.rounds) nodes.push(
+      el("p", { class: "msg good", text: `Round ${st.round} is finished. Practice once more in a new place.` }),
+      el("div", { class: "row" }, el("button", { type: "button", class: "btn primary", onclick: () => startRound(st.round + 1) }, icon("play"), `Start round ${st.round + 1}`)));
+    else nodes.push(
+      el("p", { class: "msg good", text: st.round === LESSON.rounds ? "You finished both rounds." : "You finished the extra practice." }),
+      el("div", { class: "row" }, el("button", { type: "button", class: "btn", onclick: () => startRound(st.round + 1) }, "Need one more practice?")),
+      nextButton());
+  }
   return nodes;
 }
 
-/* ---------- Shared pieces for the cue card and the talk ---------- */
+/* ---------- Shared pieces for the cue cards and the talk ---------- */
 function partnerTurn(item, opts = {}) {
   return el("div", { class: "turn" },
     el("div", { class: "turn-head" },
-      el("span", { class: "who", lang: "ko", text: nameOf(item.who) }),
-      el("span", { class: "row" },
-        el("button", { type: "button", class: "linkbtn", disabled: STT.active, onclick: () => Voice.say(item, 1) }, icon("play"), "Play again"),
-        opts.onToggle && el("button", { type: "button", class: "linkbtn", text: opts.shown ? "Hide text" : "Show text", onclick: opts.onToggle }))),
-    opts.speaking ? el("span", { class: "sub", text: opts.repeat ? "Repeating the question…" : "Speaking…" })
-      : opts.shown ? el("p", { class: "heard", lang: "ko", text: item.ko })
-      : el("span", { class: "sub", text: opts.repeat ? "Question repeated" : opts.line ? "Spoken line" : "Spoken question" }));
+      whoEl(item.who),
+      !opts.speaking && el("button", { type: "button", class: "linkbtn", disabled: STT.active, onclick: () => Voice.say(item, 1) }, icon("play"), "Play again")),
+    el("span", { class: "sub", text: opts.speaking ? (opts.repeat ? "Repeating the question…" : "Speaking…") : opts.repeat ? "Question repeated" : opts.label || "Spoken question" }));
 }
-function heardLine(text) { return el("p", { class: "heard", lang: "ko", text: text ? `I heard "${text}"` : "I didn't catch that. Record again, or go on." }); }
+/* Card on the left, conversation on the right. The card stays in view while the conversation scrolls. */
+const split = (left, right) => el("div", { class: "split" }, el("div", { class: "split-side" }, left), el("div", { class: "split-main" }, right));
+function cardEl(title, face, extra) {
+  return el("div", { class: "cue-card" }, el("h3", { text: title }),
+    Object.entries(CARD_LABELS).map(([k, label]) => el("div", { class: "cue-row" }, el("span", { text: label }), el("span", { text: face[k] || "" }))), extra || null);
+}
 
-/* ---------- Cue card ---------- */
-function pickCard() {
-  const n = LESSON.cue.cards.length;
-  let i = Math.floor(Math.random() * n);
-  if (n > 1 && i === S.lastCard) i = (i + 1 + Math.floor(Math.random() * (n - 1))) % n;
-  S.lastCard = i; return i;
+/* ---------- 7 Cue cards ---------- */
+const CUE_CHECKS = [
+  (c, t) => { const s = canon(t); return /살아요/.test(s) && ((c.aliases || []).some((a) => s.includes(canon(a))) || /.에살아요/.test(s)); },
+  (c, t) => (c.near ? /가까워요/ : /멀어요/).test(canon(t)),
+  (c, t) => new RegExp(MEANS[c.how].re + canon(`${c.minutes}분`) + "(?:쯤|정도)?걸려요").test(canon(t)),
+];
+function newCue() {
+  const C = LESSON.cue;
+  const two = shuffle(C.answerCards).slice(0, 2);
+  const ask = C.askCards[Math.floor(Math.random() * C.askCards.length)];
+  return { deck: [{ kind: "answer", card: two[0] }, { kind: "answer", card: two[1] }, { kind: "ask", card: ask }], slots: [null, null, null], opened: 0, cur: null };
 }
+const newTurn = (deck, k) => ({ k, kind: deck[k].kind, card: deck[k].card, phase: deck[k].kind === "answer" ? "ready" : "mine", qi: 0, tries: 0, items: [], note: null, error: null, pick: null });
 function viewCue() {
-  const C = LESSON.cue, role = C.role, partner = role === "A" ? "B" : "A";
-  if (!S.cue) S.cue = { card: pickCard(), i: 0, phase: "idle", answers: [], error: null, justDone: false };
-  const st = S.cue, card = C.cards[st.card];
-  const ask = async (i) => {
+  const C = LESSON.cue;
+  if (!S.cue) S.cue = newCue();
+  const st = S.cue, cur = st.cur;
+  const busy = cur && cur.phase !== "done";
+  const openCard = (p) => {
+    if (busy || st.slots[p] !== null || st.opened >= 3) return;
+    stopAll(); const k = st.opened++; st.slots[p] = k; st.cur = newTurn(st.deck, k); render();
+  };
+  const askQ = async (qi) => {
     stopAll(); const run = S.run;
-    Object.assign(st, { i, phase: "partner", error: null }); render();
+    Object.assign(cur, { qi, phase: "partner", tries: 0, note: null, error: null });
+    cur.items.push({ type: "q", qi }); render();
     await wait(400); if (run !== S.run) return;
-    await Voice.say(LESSON.lines[C.asks[i] - 1], 1); if (run !== S.run) return;
-    st.phase = "mine"; render();
+    await Voice.say(C.questions[qi], 1); if (run !== S.run) return;
+    cur.phase = "mine"; render();
   };
-  const answered = (text) => {
-    const i = st.i, q = LESSON.lines[C.asks[i] - 1];
-    st.answers[i] = text;
-    record({ activity: "cue", card: card.id, type: "speak", line: i + 1, target: card.models[i], question: q.ko, heard: text });
-    const run = S.run;
-    if (i === C.asks.length - 1) {
-      st.phase = "done"; st.justDone = true; complete("cue");
-      setTimeout(() => { if (run === S.run && STEPS[S.step].key === "cue") { st.justDone = false; go(S.step + 1); } }, 3000);
-    } else {
-      st.phase = "between";
-      setTimeout(() => { if (run === S.run) ask(i + 1); }, 900);
-    }
+  const answered = (raw) => {
+    if (!raw) { cur.note = "I didn't catch that. Press Record and try again."; return; }
+    cur.note = null;
+    const qi = cur.qi, ok = CUE_CHECKS[qi](cur.card, raw);
+    cur.tries++;
+    const moveOn = ok || cur.tries >= C.maxTries;
+    cur.items.push({ type: "try", qi, raw, ok, last: !ok && moveOn });
+    record({ activity: "cue", card: cur.card.place, type: "speak", line: qi + 1, try: cur.tries, target: cardModels(cur.card)[qi], heard: sayable(raw), raw, result: ok ? "correct" : moveOn ? "moved on" : "retry" });
+    if (!moveOn) return;
+    cur.phase = "between"; const run = S.run;
+    setTimeout(() => { if (run !== S.run) return; if (qi < 2) askQ(qi + 1); else { cur.phase = "done"; render(); } }, 1200);
   };
-  const cardEl = el("div", { class: "cue-card" }, el("h3", { text: "Your card" }),
-    Object.entries(C.labels).map(([k, label]) => el("div", { class: "cue-row" }, el("span", { text: label }), el("span", { text: card[k] }))));
-  const head = el("div", {}, el("h2", { text: "Answer with a cue card" }),
-    el("p", { class: "lead", text: `You are ${enName(role)}. ${enName(partner)} asks you questions by voice. Answer in full Korean sentences with the information on your card. After you press Stop, the next question comes.` }),
-    stage({ you: role }));
-  if (st.phase === "idle") return [head, cardEl, el("div", { class: "row" }, el("button", { type: "button", class: "btn primary", onclick: () => ask(0) }, icon("play"), "Start"))];
-  const shown = st.phase === "done" ? C.asks.length - 1 : st.i;
-  const turns = [];
-  for (let j = 0; j <= shown; j++) {
-    const q = LESSON.lines[C.asks[j] - 1];
-    turns.push(partnerTurn(q, { speaking: j === st.i && st.phase === "partner" }));
-    if (st.answers[j] !== undefined) turns.push(el("div", { class: "turn past" },
-      el("span", { class: "who", lang: "ko", text: nameOf(role) + " (you)" }),
-      el("p", { class: "heard", lang: "ko", text: st.answers[j] ? `I heard "${st.answers[j]}"` : "I didn't catch that." }),
-      el("p", { class: "expected", lang: "ko", text: `Expected response is "${card.models[j]}"` })));
-    else if (j === st.i && st.phase === "mine") turns.push(el("div", { class: "turn mine" },
-      el("span", { class: "who", lang: "ko", text: nameOf(role) + " (you)" }),
-      st.error && el("p", { class: "msg bad", text: st.error }),
+  const asked = async (raw) => {
+    if (!raw) { cur.note = "I didn't catch that. Press Record and try again."; return; }
+    cur.note = null;
+    const qi = cur.qi;
+    cur.items.push({ type: "ask", qi, raw });
+    record({ activity: "cue", card: cur.card.place + ", asking", type: "speak", line: qi + 1, target: "Ask: " + C.questions[qi].en, heard: sayable(raw), raw });
+    stopAll(); const run = S.run; cur.phase = "partner"; render();
+    await wait(500); if (run !== S.run) return;
+    await Voice.say(cur.card.answers[qi], 1); if (run !== S.run) return;
+    cur.items.push({ type: "ans", qi });
+    if (qi < 2) { cur.qi = qi + 1; cur.phase = "mine"; } else cur.phase = "check";
+    render();
+  };
+  const pick = (id) => {
+    if (cur.pick) return;
+    cur.pick = id;
+    const ok = id === cur.card.id, chosen = C.askCards.find((c) => c.id === id);
+    record({ activity: "cue", card: cur.card.place + ", asking", type: "check", line: "card", target: "Card heard: " + cur.card.place, heard: chosen.place, result: ok ? "correct" : "wrong" });
+    cur.phase = "done"; complete("cue"); render();
+  };
+
+  /* Table: the partner on the left, three cards in the middle, the student on the right. */
+  const partner = cur ? (cur.kind === "answer" ? C.asker : cur.card.who) : C.asker;
+  const deck = el("div", { class: "deck" }, [0, 1, 2].map((p) => {
+    const k = st.slots[p];
+    if (k === null) return el("button", { type: "button", class: "card-back", "aria-label": `Card ${p + 1}, face down. Click to open.`, disabled: busy || st.opened >= 3, onclick: () => openCard(p) });
+    const d = st.deck[k], open = cur && cur.k === k && cur.phase !== "done";
+    return el("div", { class: "card-mini" + (cur && cur.k === k ? " now" : "") },
+      el("b", { text: d.kind === "ask" ? "Ask" : "Answer" }),
+      el("span", { text: d.kind === "ask" && open ? "?" : d.card.place }),
+      !open && el("span", { "aria-label": "done", text: "✓" }));
+  }));
+  const head = el("div", {}, el("h2", { text: "Practice with cue cards" }),
+    el("p", { class: "lead", text: "Click the cards one at a time. With the first two cards, Emily asks you questions and you answer with the information on the card. With the last card, you ask the questions in Korean and listen to the answers." }));
+  const nodes = [head, scene({ left: partner, right: "student", middle: deck, bg: "bg_cue" })];
+  if (!cur) { nodes.push(el("p", { class: "msg", text: "Click a card to start." })); return nodes; }
+
+  const you = nameOf("student"), left = [], right = [];
+  if (cur.kind === "answer") {
+    left.push(cardEl(`Card ${cur.k + 1} · Answer with this card`, cardFace(cur.card)));
+    if (cur.phase === "ready") right.push(el("div", { class: "row" }, el("button", { type: "button", class: "btn primary", onclick: () => askQ(0) }, icon("play"), "Start")));
+    const turns = cur.items.map((it, n) => it.type === "q"
+      ? partnerTurn(C.questions[it.qi], { speaking: cur.phase === "partner" && n === cur.items.length - 1 })
+      : el("div", { class: "turn past" },
+          whoEl("student"),
+          el("p", { class: "heard", lang: "ko", text: `I heard "${sayable(it.raw)}"` }),
+          it.ok ? el("div", { class: "row" }, fbIcon("thumbs1"), el("span", { class: "verdict ok", text: "Good answer." }))
+            : [el("p", { class: "expected", lang: "ko", text: `Expected response is "${cardModels(cur.card)[it.qi]}"` }),
+               el("p", { class: "verdict no", text: it.last ? "Let's go on to the next question." : "Look at the expected response and answer again." })]));
+    if (cur.phase === "mine") turns.push(el("div", { class: "turn mine" },
+      whoEl("student", " (you)"),
+      cur.note && el("p", { class: "heard", text: cur.note }),
+      cur.error && el("p", { class: "msg bad", text: cur.error }),
       el("div", { class: "row" },
-        recordButton(st, (res) => { if (res.error) { st.error = errorMessage(res.error); return; } st.error = null; answered(res.text); }, false),
-        !STT.supported && el("button", { type: "button", class: "btn", text: "I said it", onclick: () => { answered(""); render(); } }))));
+        recordButton(cur, (res) => { if (res.error) { cur.error = errorMessage(res.error); return; } cur.error = null; answered(res.text); }, false),
+        !STT.supported && el("button", { type: "button", class: "btn", text: "I said it", onclick: () => { answered("(no recognition)"); render(); } }))));
+    right.push(el("div", { class: "turns" }, turns));
+  } else {
+    const blank = { where: "?", nearFar: "?", how: "?", time: "?" };
+    left.push(cardEl(`Card ${cur.k + 1} · Ask ${enName(cur.card.who)}`, blank));
+    const turns = cur.items.map((it) => it.type === "ask"
+      ? el("div", { class: "turn past" }, whoEl("student"), el("span", { class: "sub", text: C.questions[it.qi].en }), el("p", { class: "heard", lang: "ko", text: `I heard "${sayable(it.raw)}"` }))
+      : partnerTurn(cur.card.answers[it.qi], { label: "Spoken answer" }));
+    if (cur.phase === "partner") turns.push(partnerTurn(cur.card.answers[cur.qi], { speaking: true }));
+    if (cur.phase === "mine") turns.push(el("div", { class: "turn mine" },
+      whoEl("student", " (you)"),
+      el("p", { class: "en-cue", text: "Ask in Korean: " + C.questions[cur.qi].en }),
+      cur.note && el("p", { class: "heard", text: cur.note }),
+      cur.error && el("p", { class: "msg bad", text: cur.error }),
+      el("div", { class: "row" },
+        recordButton(cur, (res) => { if (res.error) { cur.error = errorMessage(res.error); return; } cur.error = null; asked(res.text); }, false),
+        !STT.supported && el("button", { type: "button", class: "btn", text: "I said it", onclick: () => asked("(no recognition)") }))));
+    right.push(el("div", { class: "turns" }, turns));
+    if (cur.phase === "check" || cur.pick) {
+      const nm = enName(cur.card.who);
+      right.push(el("div", {}, el("h3", { text: `Which card did you hear? Choose ${nm}'s card.` })),
+        el("div", { class: "choices" }, C.askCards.map((c) => el("button", {
+          type: "button", class: "choice" + (cur.pick && c.id === cur.card.id ? " right" : "") + (cur.pick === c.id && c.id !== cur.card.id ? " picked-wrong" : ""),
+          disabled: !!cur.pick, onclick: () => pick(c.id),
+        }, cardEl(c.place, cardFace(c))))));
+      if (cur.pick) {
+        const ok = cur.pick === cur.card.id;
+        right.push(el("div", { class: "row" }, fbIcon(ok ? "smile" : "sad", true),
+          el("span", { class: "verdict " + (ok ? "ok" : "no"), text: ok ? `Right! ${nm} lives in ${cur.card.place}.` : `Not quite. ${nm} lives in ${cur.card.place}.` })));
+      }
+    }
   }
-  const nodes = [head, cardEl, el("div", { class: "turns" }, turns)];
-  if (st.phase === "done") nodes.push(st.justDone
-    ? el("p", { class: "msg good", text: "Well done. Moving on to step 8…" })
-    : [el("div", { class: "row" }, el("button", { type: "button", class: "btn", text: "Practice with a new card", onclick: () => { stopAll(); S.cue = null; render(); } })), nextButton()]);
+  if (cur.phase === "done") {
+    if (st.opened < 3) right.push(el("p", { class: "msg good", text: "Card finished. Click the next card." }));
+    else right.push(
+      el("p", { class: "msg good", text: "You finished all three cards." }),
+      el("div", { class: "row" }, el("button", { type: "button", class: "btn", text: "Practice with new cards", onclick: () => { stopAll(); S.cue = null; render(); } })),
+      nextButton());
+  }
+  nodes.push(split(left, right));
   return nodes;
 }
 
-/* ---------- Talk about yourself ---------- */
-/* Answer checks look at the recognized text with spaces and punctuation removed.
-   Particles and 쯤 are not checked. Time must be native number + 시간 and/or Sino-Korean number + 분
-   (digits are accepted too, because the recognizer usually writes numbers as digits). */
-const squash = (t) => (t || "").replace(/[\s.,?!~·'"…]/g, "");
-const NATIVE_HOURS = "스물네|스물세|스물두|스물한|스물|열아홉|열여덟|열일곱|열여섯|열다섯|열네|열세|열두|열한|열|아홉|여덟|일곱|여섯|다섯|네|세|두|한";
-const SINO_MINUTES = "[이삼사오]?십[일이삼사오육칠팔구]?|[일이삼사오육칠팔구]";
-const MEANS = "(?:(?:버스|지하철|차|자전거)(?:으로|로)?|걸어서)";
-const TIME = `(?:(?:\\d+|${NATIVE_HOURS})시간(?:(?:\\d+|${SINO_MINUTES})분)?|(?:\\d+|${SINO_MINUTES})분)`;
-const HOW_LONG_RE = new RegExp(MEANS + TIME + "쯤?걸려요");
+/* ---------- 8 Talk about yourself ----------
+   Answer checks use the recognized text with numbers in Hangul and no spaces or punctuation.
+   Particles, 쯤 and 정도 are not checked. Time must be a native number + 시간 and/or a Sino-Korean number + 분. */
+const NATIVE_HOURS = "스물네|스물세|스물두|스물한|스무|스물|열아홉|열여덟|열일곱|열여섯|열다섯|열네|열세|열두|열한|열|아홉|여덟|일곱|여섯|다섯|네|세|두|한";
+const SINO_NUM = "[이삼사오육칠팔구]?십[일이삼사오육칠팔구]?|[일이삼사오육칠팔구]";
+const TALK_MEANS = "(?:(?:버스|지하철|차|택시|자전거)(?:으로|로)?|걸어서)";
+const HOW_LONG_RE = new RegExp(TALK_MEANS + `(?:(?:${NATIVE_HOURS})시간(?:(?:${SINO_NUM})분)?|(?:${SINO_NUM})분)` + "(?:쯤|정도)?걸려요");
 const TALK_CHECKS = {
-  live: (t) => /.살아요/.test(squash(t)),               // [place](에) 살아요
-  nearFar: (t) => /가까워요|멀어요/.test(squash(t)),     // 가까워요 or 멀어요
-  howLong: (t) => HOW_LONG_RE.test(squash(t)),          // (집에서 학교까지) [means](으로) [time](쯤) 걸려요
+  live: (t) => /.살아요/.test(canon(t)),
+  nearFar: (t) => /가까워요|멀어요/.test(canon(t)),
+  howLong: (t) => HOW_LONG_RE.test(canon(t)),
 };
 function postIt(q, level) {
   if (!level) return null;
@@ -1265,10 +1591,28 @@ function postIt(q, level) {
       el("span", { class: "ko", lang: "ko", text: r.ko }), el("span", { class: "en", text: r.en || "" }),
       r.eg && el("span", { class: "eg", lang: "ko", text: r.eg })])));
 }
+const cardDone = (c) => Object.keys(CARD_LABELS).every((k) => (c[k] || "").trim());
+function viewMyCard(st) {
+  const C = LESSON.cue, ex = C.answerCards[st.example % C.answerCards.length];
+  const ph = { where: "e.g., Decatur", nearFar: "Close or Far", how: "e.g., Bus", time: "e.g., About 20 minutes" };
+  return [
+    el("div", {}, el("h2", { text: "Make your own cue card" }),
+      el("p", { class: "lead", text: "Write your own information in English, like the example. Your card stays on the screen while James asks you questions." })),
+    el("div", { class: "cue-two" },
+      cardEl("Example", cardFace(ex)),
+      el("div", { class: "cue-card" }, el("h3", { text: "My cue card" }),
+        el("div", { class: "mycard" }, Object.entries(CARD_LABELS).map(([k, label]) => el("label", {}, label,
+          el("input", { type: "text", value: st.card[k], placeholder: ph[k], dataset: { fk: "my-" + k }, oninput: (e) => { st.card[k] = e.target.value; $("card-save").disabled = !cardDone(st.card); } })))))),
+    el("div", { class: "row" }, el("button", { type: "button", class: "btn primary", id: "card-save", disabled: !cardDone(st.card), onclick: () => {
+      st.phase = "ready"; record({ activity: "talk", type: "card", card: { ...st.card } }); render();
+    } }, "Save my card")),
+  ];
+}
 function viewTalk() {
   const T = LESSON.talk, Q = T.questions;
-  if (!S.talk) S.talk = { qi: 0, wrong: 0, phase: "idle", history: [], note: null, error: null };
+  if (!S.talk) S.talk = { card: { where: "", nearFar: "", how: "", time: "" }, example: Math.floor(Math.random() * LESSON.cue.answerCards.length), phase: "card", qi: 0, wrong: 0, history: [], note: null, error: null };
   const st = S.talk;
+  if (st.phase === "card") return viewMyCard(st);
   const say = async (item, then) => {
     stopAll(); const run = S.run;
     st.phase = "partner"; render();
@@ -1290,8 +1634,8 @@ function viewTalk() {
     st.note = null;
     const ok = TALK_CHECKS[q.check](res.text);
     const levels = q.hints.length + 1;
-    st.history.push({ qi: st.qi, level: st.wrong, text: res.text, ok, last: !ok && st.wrong >= levels });
-    record({ activity: "talk", type: "speak", line: `Q${st.qi + 1}`, target: "Q: " + q.ko + (st.wrong ? ` (hint ${st.wrong})` : ""), heard: res.text, result: ok ? "accepted" : "retry" });
+    st.history.push({ qi: st.qi, level: st.wrong, raw: res.text, ok, last: !ok && st.wrong >= levels });
+    record({ activity: "talk", type: "speak", line: `Q${st.qi + 1}`, target: "Q: " + q.ko + (st.wrong ? ` (hint ${st.wrong})` : ""), heard: sayable(res.text), raw: res.text, result: ok ? "accepted" : "retry" });
     st.phase = "between";
     const run = S.run;
     setTimeout(() => {
@@ -1300,37 +1644,40 @@ function viewTalk() {
       else { st.wrong++; record({ activity: "talk", type: "hint shown", line: `Q${st.qi + 1}` }); askCurrent(); }
     }, 1100);
   };
+  const restart = () => { stopAll(); Object.assign(st, { phase: "ready", qi: 0, wrong: 0, history: [], note: null, error: null }); render(); };
   const head = el("div", {}, el("h2", { text: "Talk about yourself" }),
-    el("p", { class: "lead", text: `${enName(T.partner)} asks you three questions about where you live. Answer about yourself in Korean. If your answer does not match, ${enName(T.partner)} asks again and shows a hint.` }),
-    stage({ who: [T.partner, "student"] }));
-  if (st.phase === "idle") return [head, el("div", { class: "row" }, el("button", { type: "button", class: "btn primary", onclick: askCurrent }, icon("play"), "Start the conversation"))];
+    el("p", { class: "lead", text: `${enName(T.partner)} asks you three questions about where you live. Answer in Korean with the information on your card. If your answer does not match, ${enName(T.partner)} asks again and shows a hint.` }),
+    scene({ left: T.partner, right: "student", bg: "bg_talk" }));
+  const editCard = el("button", { type: "button", class: "linkbtn", disabled: !["ready", "done"].includes(st.phase), onclick: () => { stopAll(); Object.assign(st, { phase: "card", qi: 0, wrong: 0, history: [] }); render(); } }, "Edit my card");
+  const side = [cardEl("My cue card", st.card), el("div", {}, editCard)];
+  if (st.phase === "ready") return [head, split(side, [el("div", { class: "row" }, el("button", { type: "button", class: "btn primary", onclick: askCurrent }, icon("play"), "Start the conversation"))])];
   const turns = st.history.map((h) => h.closing
-    ? partnerTurn(T.closing, { line: true })
+    ? partnerTurn(T.closing, { label: "Spoken line" })
     : [partnerTurn(Q[h.qi], { repeat: h.level > 0 }),
-       el("div", { class: "turn past" }, el("span", { class: "who", text: "You" }),
-         el("p", { class: "heard", lang: "ko", text: `I heard "${h.text}"` }),
+       el("div", { class: "turn past" }, whoEl("student"),
+         el("p", { class: "heard", lang: "ko", text: `I heard "${sayable(h.raw)}"` }),
          el("p", { class: "verdict " + (h.ok ? "ok" : "no"), text: h.ok ? "✓ Good answer." : h.last ? "Let's go on to the next question." : "Not quite. Listen to the question again." }))]);
   const closingNow = st.qi >= Q.length;
   const q = Q[Math.min(st.qi, Q.length - 1)];
-  const nodes = [head, el("div", { class: "turns" }, turns,
-    (st.phase === "partner" || st.phase === "mine") && partnerTurn(closingNow ? T.closing : q, { speaking: st.phase === "partner", repeat: !closingNow && st.wrong > 0, line: closingNow }),
+  const right = [el("div", { class: "turns" }, turns,
+    (st.phase === "partner" || st.phase === "mine") && partnerTurn(closingNow ? T.closing : q, { speaking: st.phase === "partner", repeat: !closingNow && st.wrong > 0, label: closingNow ? "Spoken line" : null }),
     st.phase === "mine" && postIt(q, st.wrong),
     st.phase === "mine" && el("div", { class: "turn mine" },
-      el("span", { class: "who", text: "You" }),
+      whoEl("student", " (you)"),
       st.note && el("p", { class: "heard", text: st.note }),
       st.error && el("p", { class: "msg bad", text: st.error }),
       el("div", { class: "row" },
         recordButton(st, onResult, false),
         !STT.supported && el("button", { type: "button", class: "btn", text: "I said it", onclick: () => { onResult({ text: "(no recognition)" }); render(); } }))))];
-  if (st.phase === "done") nodes.push(
+  if (st.phase === "done") right.push(
     el("p", { class: "msg good", text: "The conversation is finished." }),
-    el("div", { class: "row" }, el("button", { type: "button", class: "btn", text: "Practice again", onclick: () => { stopAll(); S.talk = null; render(); } })),
+    el("div", { class: "row" }, el("button", { type: "button", class: "btn", text: "Practice again", onclick: restart })),
     nextButton());
-  return nodes;
+  return [head, split(side, right)];
 }
 
 /* ---------- Session recording ----------
-   Camera and microphone, mixed with the partner's audio files, recorded as one video.
+   Camera and microphone, mixed with the partner's audio files, recorded as one video (steps 5 to 8).
    The student can pause and resume; Finish closes the video for download.
    The video stays in this browser until the student downloads it. Reloading the page loses it. */
 const REC = {
@@ -1345,12 +1692,7 @@ const REC = {
     const audio = { echoCancellation: true, noiseSuppression: true, autoGainControl: true };
     let stream = null, err = null;
     try { stream = await navigator.mediaDevices.getUserMedia({ audio, video: { width: { ideal: 640 }, height: { ideal: 360 }, frameRate: { ideal: 24 } } }); this.hasVideo = true; }
-    catch (e) {
-      err = e;
-      if (["NotFoundError", "OverconstrainedError", "NotReadableError"].includes(e.name)) {
-        try { stream = await navigator.mediaDevices.getUserMedia({ audio }); this.hasVideo = false; } catch (e2) { err = e2; }
-      }
-    }
+    catch (e) { err = e; }
     if (!stream) { this.state = "idle"; this.error = err && err.name === "NotAllowedError" ? "The camera or microphone is blocked. Allow both for this page in the browser's address bar, then press Start recording again." : "The camera or microphone could not start. Close other apps that use them, then try again."; renderRec(); return; }
     const ctx = Voice.context(); Voice.route();
     const dest = ctx.createMediaStreamDestination();
@@ -1358,7 +1700,7 @@ const REC = {
     const an = ctx.createAnalyser(); an.fftSize = 1024;
     mic.connect(dest); mic.connect(an); Voice.src.connect(dest);
     const mixed = new MediaStream([...stream.getVideoTracks(), ...dest.stream.getAudioTracks()]);
-    const types = this.hasVideo ? ["video/webm;codecs=vp8,opus", "video/webm", "video/mp4;codecs=avc1,mp4a", "video/mp4"] : ["audio/webm;codecs=opus", "audio/webm", "audio/mp4"];
+    const types = ["video/webm;codecs=vp8,opus", "video/webm", "video/mp4;codecs=avc1,mp4a", "video/mp4"];
     const mime = types.find((t) => MediaRecorder.isTypeSupported(t));
     let mr;
     try { mr = new MediaRecorder(mixed, { ...(mime ? { mimeType: mime } : {}), videoBitsPerSecond: this.VIDEO_BPS, audioBitsPerSecond: this.AUDIO_BPS }); }
@@ -1366,10 +1708,9 @@ const REC = {
     this.chunks = [];
     mr.ondataavailable = (e) => { if (e.data && e.data.size) this.chunks.push(e.data); };
     mr.onstop = async () => {
-      const type = mr.mimeType || mime || (this.hasVideo ? "video/webm" : "audio/webm");
-      this.ext = /mp4/.test(type) ? (this.hasVideo ? "mp4" : "m4a") : "webm";
+      const type = mr.mimeType || mime || "video/webm";
+      this.ext = /mp4/.test(type) ? "mp4" : "webm";
       let blob = new Blob(this.chunks, { type });
-      // Chrome's WebM files carry no length, so players cannot show or seek the timeline. This adds it.
       if (/webm/.test(type)) { try { await loadScript(WEBM_FIX); blob = await window.ysFixWebmDuration(blob, this.activeMs, { logger: false }); } catch (e) {} }
       this.blob = blob; this.url = URL.createObjectURL(blob);
       this.state = "stopped"; renderRec(); if (STEPS[S.step].key === "submit") render();
@@ -1421,7 +1762,7 @@ const fmtTime = (sec) => `${Math.floor(sec / 60)}:${String(sec % 60).padStart(2,
 const fmtSize = (b) => (b / 1048576).toFixed(1) + " MB";
 function renderRec() {
   const box = $("recorder");
-  box.hidden = !S.started || S.step < 2;
+  box.hidden = !S.started || S.step < REC_FROM;
   box.textContent = "";
   const me = avatarEl("student");
   const missing = AUDIO_ITEMS.length - Voice.found();
@@ -1432,14 +1773,14 @@ function renderRec() {
   } else if (REC.state === "idle" || REC.state === "starting") {
     side = el("div", {},
       el("h2", { text: "Record your practice" }),
-      p("Record steps 3 to 8 in one video. You can pause and resume. Do not reload or close this page until you download the video. Reloading starts everything again from the beginning."),
-      missing > 0 && p(`Partner voices are not in the video yet: ${missing} of ${AUDIO_ITEMS.length} audio files are not installed, so the browser voice plays instead.`),
+      p("Record steps 5 to 8 in one video. You can pause and resume. Do not reload or close this page until you download the video. Reloading starts everything again from the beginning."),
+      missing > 0 && p(`Partner voices are not all in the video yet: ${missing} of ${AUDIO_ITEMS.length} audio files are not installed, so the browser voice plays instead.`),
       REC.error && el("p", { class: "msg bad", text: REC.error }),
       el("div", { class: "row" }, el("button", { type: "button", class: "btn rec", id: "rec-start", disabled: REC.state === "starting", onclick: () => REC.start() }, icon("mic"), REC.state === "starting" ? "Starting…" : "Start recording")));
   } else if (REC.state === "recording" || REC.state === "paused") {
     side = el("div", {},
       el("h2", { text: REC.state === "paused" ? "Recording paused" : "Recording your practice" }),
-      p(REC.state === "paused" ? "Press Resume at the bottom of the screen to continue the same video." : "Go through steps 3 to 8. Use Pause to take a break. After step 8, press Finish recording."));
+      p(REC.state === "paused" ? "Press Resume at the bottom of the screen to continue the same video." : "Go through steps 5 to 8. Use Pause to take a break. After step 8, press Finish recording."));
   } else if (REC.state === "stopping") {
     side = el("div", {}, p("Saving the video…"));
   } else {
@@ -1454,7 +1795,7 @@ function renderRec() {
              el("button", { type: "button", class: "btn", text: "Keep the video", onclick: () => { REC.confirmReplace = false; renderRec(); } })]
           : el("button", { type: "button", class: "btn", text: "Record again", onclick: () => { REC.confirmReplace = true; renderRec(); } })));
   }
-  const v = (REC.state === "recording" || REC.state === "paused") && REC.hasVideo && REC.stream && el("video", { class: "rec-preview", muted: true, playsinline: true, autoplay: true });
+  const v = (REC.state === "recording" || REC.state === "paused") && REC.stream && el("video", { class: "rec-preview", muted: true, playsinline: true, autoplay: true });
   if (v) { v.muted = true; v.srcObject = REC.stream; }
   box.append(el("div", { class: "rec-grid" }, me, v || null, side));
   renderRecBar(); paintSpeakers();
@@ -1487,9 +1828,9 @@ function renderRecBar() {
   w.hidden = !REC.warn; if (w.textContent !== (REC.warn || "")) w.textContent = REC.warn || "";
 }
 
-/* ---------- Submit ---------- */
+/* ---------- 9 Download ---------- */
 function studentSlug() { return (S.name || "").trim().replace(/[\\/:*?"<>|]/g, "").replace(/\s+/g, "_") || "student"; }
-function fileBase() { const d = new Date(); return `KRN101_dialogue_${studentSlug()}_${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`; }
+function fileBase() { const d = new Date(); return `KRN101_L6C1_${studentSlug()}_${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`; }
 function viewSubmit() {
   const st = S.submit || (S.submit = { pdfMsg: null, vidMsg: null, busy: false });
   const needName = () => { if (S.name.trim()) return false; st.nameMsg = "Enter your name first."; render(); return true; };
@@ -1503,7 +1844,7 @@ function viewSubmit() {
       st.nameMsg && el("span", { class: "msg bad", id: "name-msg", text: st.nameMsg })),
     el("ul", { class: "checklist" }, STEPS.slice(0, -1).map((s, i) => el("li", { class: S.done[s.key] ? "ok" : "no", text: `${S.done[s.key] ? "✓" : "○"} ${i + 1}. ${s.label}` }))),
     el("div", { class: "box" }, el("h3", { text: "1. Speech log (PDF)" }),
-      el("p", { class: "sub", style: "margin:0", text: `What the recognizer heard in steps 3 to 8: ${S.log.filter((e) => e.target).length} entries.` }),
+      el("p", { class: "sub", style: "margin:0", text: `Your photo, your cue card, and what the recognizer heard in steps 3 to 8: ${S.log.filter((e) => e.target).length} entries.` }),
       el("div", { class: "row" }, el("button", { type: "button", class: "btn primary", disabled: st.busy, onclick: async () => {
         if (needName()) return;
         st.nameMsg = null; st.busy = true; st.pdfMsg = "Making the PDF…"; render();
@@ -1516,14 +1857,14 @@ function viewSubmit() {
         el("div", { class: "row" }, el("button", { type: "button", class: "btn rec", onclick: () => REC.stop() }, icon("stop"), "Finish recording"))]
       : REC.state === "stopping" ? el("p", { class: "sub", style: "margin:0", text: "Saving the video…" })
       : vid ? [
-        el(REC.hasVideo ? "video" : "audio", { controls: true, src: REC.url, playsinline: true }),
+        el("video", { controls: true, src: REC.url, playsinline: true }),
         el("p", { class: "sub", style: "margin:0", text: `${fmtTime(REC.seconds())} · ${fmtSize(REC.blob.size)}` }),
         el("div", { class: "row" }, el("button", { type: "button", class: "btn primary", onclick: () => {
           if (needName()) return; st.nameMsg = null;
           const a = el("a", { href: REC.url, download: `${fileBase()}.${REC.ext}` }); document.body.append(a); a.click(); a.remove();
           st.vidMsg = "Downloaded. If others use this computer, delete the file after you submit it on Canvas."; render();
         } }, "Download video"), st.vidMsg && el("span", { class: "sub", text: st.vidMsg }))]
-      : el("p", { class: "sub", style: "margin:0", text: "No video yet. Go to step 3 and press Start recording." })),
+      : el("p", { class: "sub", style: "margin:0", text: "No video yet. Go to step 5 and press Start recording." })),
     el("p", { class: "sub", text: "After you download both files, submit them on Canvas." }),
   ];
 }
@@ -1534,6 +1875,9 @@ const PDF_LIBS = ["https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html
 function loadScript(src) {
   return new Promise((res, rej) => { if (document.querySelector(`script[src="${src}"]`)) return res(); const s = el("script", { src }); s.onload = res; s.onerror = rej; document.head.append(s); });
 }
+function logActivity(r) {
+  return ACT_NAME[r.activity] + (r.round ? ` R${r.round}` : "") + (r.card && typeof r.card === "string" ? ` (${r.card})` : "") + (r.try ? ` · try ${r.try}` : "") + (r.result ? ` · ${r.result}` : "");
+}
 async function downloadReport() {
   for (const src of PDF_LIBS) await loadScript(src);
   const W = 794, H = 1123, PAD = 56;
@@ -1543,7 +1887,7 @@ async function downloadReport() {
   const cell = "padding:5px 6px;border-bottom:1px solid #ccc;text-align:left;vertical-align:top;";
   const newTable = (page) => {
     const t = el("table", { style: "width:100%;border-collapse:collapse;table-layout:fixed;" },
-      el("colgroup", {}, ["11%", "15%", "6%", "34%", "34%"].map((w) => el("col", { style: `width:${w}` }))),
+      el("colgroup", {}, ["10%", "20%", "6%", "32%", "32%"].map((w) => el("col", { style: `width:${w}` }))),
       el("thead", {}, el("tr", {}, ["Time", "Activity", "#", "Target", "Heard"].map((h) => el("th", { style: cell + "font-weight:700;border-bottom:2px solid #111;", text: h })))),
       el("tbody", {}));
     page.append(t); return t.tBodies[0];
@@ -1551,18 +1895,27 @@ async function downloadReport() {
   const rows = S.log.filter((e) => e.target);
   const hints = S.log.filter((e) => e.type === "hint").length;
   const shows = S.log.filter((e) => e.type === "hint shown").length;
+  const card = S.talk && cardDone(S.talk.card) ? S.talk.card : null;
   let page = newPage();
   page.append(
-    el("div", { style: "font-size:20px;font-weight:700;margin-bottom:2px;", text: "Korean 101 · 어디 살아요? · Speech log" }),
-    el("div", { style: "margin-bottom:12px;color:#444;", text: `Name: ${S.name.trim()}   ·   Date: ${new Date().toLocaleString()}` }),
+    el("div", { style: "font-size:20px;font-weight:700;margin-bottom:2px;", text: "KRN 101 · Lesson 6 · Conversation 1 · Speech log" }),
+    el("div", { style: "display:flex;gap:18px;align-items:flex-start;margin:10px 0 14px;" },
+      S.photo && el("img", { src: S.photo, style: "width:110px;height:110px;object-fit:cover;border-radius:8px;" }),
+      el("div", { style: "display:grid;gap:4px;flex:1;" },
+        el("div", { text: `Name: ${S.name.trim()}` }),
+        el("div", { style: "color:#444;", text: `Date: ${new Date().toLocaleString()}` }),
+        el("div", { style: "color:#444;", text: `Video: ${REC.blob ? `${fileBase()}.${REC.ext} (${fmtTime(REC.seconds())})` : "not recorded"}` })),
+      card && el("div", { style: "border:1.5px solid #111;border-radius:6px;padding:8px 12px;min-width:250px;" },
+        el("div", { style: "font-size:11px;font-weight:700;letter-spacing:.06em;color:#555;margin-bottom:4px;", text: "MY CUE CARD (STEP 8)" }),
+        Object.entries(CARD_LABELS).map(([k, label]) => el("div", { style: "display:flex;gap:10px;" }, el("span", { style: "color:#555;width:100px;", text: label }), el("b", { text: card[k] }))))),
     el("div", { style: "margin-bottom:6px;font-weight:700;", text: "Completed activities" }),
-    el("div", { style: "margin-bottom:10px;display:grid;grid-template-columns:1fr 1fr;gap:1px 24px;" }, STEPS.slice(0, -1).map((s, i) => el("div", { lang: "ko", text: `${S.done[s.key] ? "✓" : "○"}  ${i + 1}. ${s.label}` }))),
-    el("div", { style: "margin-bottom:14px;color:#444;", text: `Hints used in Speak as Sophia/Michael: ${hints}   ·   Hints shown in Talk: ${shows}   ·   Video: ${REC.blob ? `${fileBase()}.${REC.ext} (${fmtTime(REC.seconds())})` : "not recorded"}` }),
-    el("div", { style: "margin-bottom:12px;color:#444;font-size:12px;", text: "\"Heard\" is what automatic speech recognition returned. It can differ from what was actually said; the video is the record of the speech." }));
+    el("div", { style: "margin-bottom:10px;display:grid;grid-template-columns:1fr 1fr;gap:1px 24px;" }, STEPS.slice(0, -1).map((s, i) => el("div", { text: `${S.done[s.key] ? "✓" : "○"}  ${i + 1}. ${s.label}` }))),
+    el("div", { style: "margin-bottom:14px;color:#444;", text: `Hints used in Be Jenny / Be Michael: ${hints}   ·   Hints shown in Talk: ${shows}` }),
+    el("div", { style: "margin-bottom:12px;color:#444;font-size:12px;", text: "\"Heard\" is what automatic speech recognition returned, with numbers written in Hangul. It can differ from what was actually said; the video is the record of the speech." }));
   let body = newTable(page);
   if (!rows.length) body.append(el("tr", {}, el("td", { colspan: 5, style: cell, text: "No speaking entries yet." })));
   for (const r of rows) {
-    const tr = el("tr", {}, [r.time, ACT_NAME[r.activity] + (r.speed ? ` ${r.speed}` : "") + (r.card ? ` (${r.card})` : "") + (r.activity === "talk" && r.result ? ` · ${r.result}` : ""), r.line, r.target, r.heard || "(nothing heard)"].map((v, i) => el("td", { style: cell + "word-break:break-word;", lang: i > 2 ? "ko" : null, text: String(v ?? "") })));
+    const tr = el("tr", {}, [r.time, logActivity(r), r.line, r.target, r.heard || "(nothing heard)"].map((v, i) => el("td", { style: cell + "word-break:break-word;", lang: i > 2 ? "ko" : null, text: String(v ?? "") })));
     body.append(tr);
     if (page.scrollHeight > H) { tr.remove(); page = newPage(); body = newTable(page); body.append(tr); }
   }
@@ -1579,39 +1932,75 @@ async function downloadReport() {
   } finally { holder.remove(); }
 }
 
-/* ---------- Start page ---------- */
+/* ---------- Start page: name and photo ----------
+   A camera is required, because steps 5 to 8 are recorded as a video. The photo stays in this browser. */
+const CAM = {
+  stream: null, error: null, starting: false,
+  async open() {
+    if (this.stream || this.starting) return;
+    this.starting = true; this.error = null; render();
+    try {
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) throw { name: "NotSupported" };
+      this.stream = await navigator.mediaDevices.getUserMedia({ video: { width: { ideal: 640 }, height: { ideal: 480 } }, audio: false });
+    } catch (e) {
+      this.error = e && e.name === "NotAllowedError"
+        ? "The camera is blocked. Allow the camera for this page in the browser's address bar, then press Turn on camera again."
+        : "No camera was found. This practice needs a camera, because steps 5 to 8 are recorded as a video. Connect a camera, then press Turn on camera again.";
+    }
+    this.starting = false; render();
+  },
+  close() { if (this.stream) this.stream.getTracks().forEach((t) => t.stop()); this.stream = null; },
+  snap() {
+    const v = document.getElementById("cam-video");
+    if (!v || !v.videoWidth) return;
+    const c = document.createElement("canvas"), n = 360, s = Math.min(v.videoWidth, v.videoHeight);
+    c.width = c.height = n;
+    const g = c.getContext("2d"); g.translate(n, 0); g.scale(-1, 1);
+    g.drawImage(v, (v.videoWidth - s) / 2, (v.videoHeight - s) / 2, s, s, 0, 0, n, n);
+    S.photo = c.toDataURL("image/jpeg", 0.85);
+    this.close(); render();
+  },
+};
+const canBegin = () => !!(S.name.trim() && S.photo);
 function viewStart() {
-  const begin = el("button", { type: "button", class: "btn primary", id: "begin", disabled: !S.name.trim(), onclick: () => { if (!S.name.trim()) return; S.started = true; go(0); } }, "Begin");
+  const begin = el("button", { type: "button", class: "btn primary", id: "begin", disabled: !canBegin(), onclick: () => { if (!canBegin()) return; CAM.close(); S.started = true; go(0); } }, "Begin");
+  let cam;
+  if (S.photo) cam = el("div", { class: "cam", style: `--c:${S.color}` }, el("img", { src: S.photo, alt: "Your photo" }),
+    el("div", { class: "row" }, el("button", { type: "button", class: "btn", onclick: () => { S.photo = null; CAM.open(); } }, "Retake photo")));
+  else if (CAM.stream) {
+    const v = el("video", { id: "cam-video", autoplay: true, playsinline: true, muted: true });
+    v.muted = true; v.srcObject = CAM.stream;
+    cam = el("div", { class: "cam" }, v, el("div", { class: "row" }, el("button", { type: "button", class: "btn primary", onclick: () => CAM.snap() }, "Take photo")));
+  } else cam = el("div", { class: "row" }, el("button", { type: "button", class: "btn primary", disabled: CAM.starting, onclick: () => CAM.open() }, CAM.starting ? "Starting the camera…" : "Turn on camera"));
   return [el("div", { class: "intro" },
     el("div", {}, el("h2", { text: "Before you begin" }),
-      el("p", { class: "lead", text: "This is a pre-task for your speaking performance. Listen to the example dialogue and practice speaking by following the steps in order. You need to complete all the steps. When you are ready, click Begin." })),
-    stage(),
+      el("p", { class: "lead", text: "This is a pre-task for your speaking performance. Listen to the dialogue from your textbook and practice speaking by following the steps in order. You need to complete all the steps." })),
     el("ol", { class: "steps-guide" },
       el("li", {}, el("b", { text: "1–2" }), el("span", { text: "Listen: put the meanings in order, then build the dialogue." })),
-      el("li", {}, el("b", { text: "3–8" }), el("span", { text: "Speak: repeat, follow, speak as each person, answer with a cue card, and talk about yourself. These steps are recorded as one video." })),
+      el("li", {}, el("b", { text: "3–4" }), el("span", { text: "Repeat each line, then follow the whole dialogue." })),
+      el("li", {}, el("b", { text: "5–8" }), el("span", { text: "Speak as Jenny and as Michael, practice with cue cards, and talk about yourself. These steps are recorded as one video." })),
       el("li", {}, el("b", { text: "9" }), el("span", { text: "Download: save your speech log (PDF) and your video, then submit both on Canvas." }))),
     el("p", { class: "sub", style: "margin:0", text: "You need a microphone and a camera. Use Chrome on a computer, and headphones if you have them. Reloading the page starts everything again." }),
     el("div", { class: "field" },
-      el("label", { for: "start-name", text: "Your name" }),
-      el("input", { id: "start-name", type: "text", autocomplete: "name", value: S.name, oninput: (e) => {
-        S.name = e.target.value; $("begin").disabled = !S.name.trim();
-        document.querySelectorAll('[data-avatar="student"]').forEach((a) => { a.querySelector(".face").textContent = (S.name.trim()[0] || "Y").toUpperCase(); a.querySelector(".nm").firstChild.textContent = S.name.trim() || "You"; });
-      } })),
-    el("div", { class: "pick-row" },
-      el("div", { class: "field" }, el("span", { id: "color-label", text: "Choose your color" }),
-        el("div", { class: "swatches", role: "radiogroup", "aria-labelledby": "color-label" }, STUDENT_COLORS.map(([nm, hex]) =>
-          el("button", { type: "button", class: "swatch", role: "radio", "aria-checked": S.color === hex ? "true" : "false", "aria-label": nm, title: nm, style: `--c:${hex}`, dataset: { fk: "sw" + nm },
-            onclick: () => { S.color = hex; render(); } })))),
-      avatarEl("student")),
-    el("div", { class: "row" }, begin))];
+      el("label", { for: "start-name", text: "1. Your name" }),
+      el("input", { id: "start-name", type: "text", autocomplete: "name", value: S.name, oninput: (e) => { S.name = e.target.value; $("begin").disabled = !canBegin(); } })),
+    el("div", { style: "display:grid;gap:8px;" },
+      el("span", { text: "2. Your photo" }),
+      el("p", { class: "sub", style: "margin:0", text: "Take a photo of your face. It is shown when you speak, and it goes on your speech log." }),
+      cam,
+      CAM.error && el("p", { class: "msg bad", text: CAM.error })),
+    el("div", { class: "field" }, el("span", { id: "color-label", text: "3. Choose your color" }),
+      el("div", { class: "swatches", role: "radiogroup", "aria-labelledby": "color-label" }, STUDENT_COLORS.map(([nm, hex]) =>
+        el("button", { type: "button", class: "swatch", role: "radio", "aria-checked": S.color === hex ? "true" : "false", "aria-label": nm, title: nm, style: `--c:${hex}`, dataset: { fk: "sw" + nm },
+          onclick: () => { S.color = hex; render(); } })))),
+    el("div", { class: "row" }, begin, !canBegin() && el("span", { class: "sub", text: !S.name.trim() && !S.photo ? "Enter your name and take a photo to begin." : !S.name.trim() ? "Enter your name to begin." : "Take a photo to begin." })))];
 }
 
 /* ---------- Page shell ---------- */
 function renderSteps() {
   const nav = $("steps"); nav.textContent = ""; nav.hidden = !S.started;
   STEPS.forEach((s, i) => nav.append(el("button", {
-    type: "button", class: S.done[s.key] ? "done" : "", "aria-current": i === S.step ? "step" : null, onclick: () => go(i),
-    title: s.label,
+    type: "button", class: S.done[s.key] ? "done" : "", "aria-current": i === S.step ? "step" : null, onclick: () => go(i), title: s.label,
   }, el("b", { text: String(i + 1) }), s.nav)));
 }
 function go(i) {
@@ -1620,33 +2009,35 @@ function go(i) {
   if (st) {
     st.listening = false; st.stopping = false;
     if (key === "follow") { st.playing = null; st.rows.forEach((r) => { r.listening = false; r.stopping = false; }); }
+    else if (key === "a3") { st.playing = false; }
+    else if (key === "jenny" || key === "michael") { if (!["idle", "done", "mine"].includes(st.phase)) S[key] = newSpeak(st.round); }
+    else if (key === "cue") { const c = st.cur; if (c) { c.listening = false; c.stopping = false; if (["partner", "between"].includes(c.phase)) st.cur = newTurn(st.deck, c.k); } }
+    else if (key === "talk") { if (["partner", "between"].includes(st.phase)) Object.assign(st, { phase: "ready", qi: 0, wrong: 0, history: [], note: null, error: null }); }
     else st.playing = false;
-    if (["a4", "a5", "cue", "talk"].includes(key) && st.phase !== "done" && st.phase !== "idle") S[key] = null;
-    if (key === "cue" && S.cue) S.cue.justDone = false;
-    if (key === "a3") st.listened = false;
   }
   renderSteps(); render(); renderRec(); window.scrollTo({ top: 0 });
 }
 function render() {
   const focused = document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.fk : null;
-  const view = !S.started ? viewStart() : { a1: viewA1, a2: viewA2, a3: viewA3, follow: viewFollow, a4: () => viewSpeak("a4", "A"), a5: () => viewSpeak("a5", "B"), cue: viewCue, talk: viewTalk, submit: viewSubmit }[STEPS[S.step].key]();
+  const view = !S.started ? viewStart() : { a1: viewA1, a2: viewA2, a3: viewA3, follow: viewFollow, jenny: () => viewSpeak("jenny"), michael: () => viewSpeak("michael"), cue: viewCue, talk: viewTalk, submit: viewSubmit }[STEPS[S.step].key]();
   const main = $("main"); main.textContent = "";
-  main.append(...view.flat().filter(Boolean));
+  main.append(...view.flat(Infinity).filter(Boolean));
   if (focused) { const n = main.querySelector(`[data-fk="${focused}"]`); if (n) n.focus({ preventScroll: true }); }
   paintSpeakers();
 }
 function renderLog() {
-  $("log-sum").textContent = `Speech log (${S.log.filter((e) => e.target).length})`;
-  const body = $("log-body"); body.textContent = "";
   const rows = S.log.filter((e) => e.target);
+  $("log-sum").textContent = `Speech log (${rows.length})`;
+  const body = $("log-body"); body.textContent = "";
   if (!rows.length) { body.append(el("span", { text: "What the recognizer returns appears here, so you can compare it with what you actually said. It stays in this tab and clears when the page reloads." })); return; }
-  const cols = ["time", "activity", "line", "speed", "target", "heard", "result"];
+  const cols = ["time", "activity", "round", "line", "try", "target", "heard", "result"];
+  const val = (r, c) => (c === "activity" ? ACT_NAME[r.activity] + (r.card && typeof r.card === "string" ? ` (${r.card})` : "") : r[c] ?? "");
   body.append(el("div", { class: "log-scroll" }, el("table", {},
     el("thead", {}, el("tr", {}, cols.map((c) => el("th", { text: c })))),
-    el("tbody", {}, rows.map((r) => el("tr", {}, cols.map((c) => el("td", { class: c === "time" || c === "line" ? "n" : "", lang: c === "target" || c === "heard" ? "ko" : null, text: r[c] ?? "" }))))))));
+    el("tbody", {}, rows.map((r) => el("tr", {}, cols.map((c) => el("td", { class: ["time", "line", "try", "round"].includes(c) ? "n" : "", lang: c === "target" || c === "heard" ? "ko" : null, text: String(val(r, c)) }))))))));
   const copyMsg = el("span", {});
   body.append(el("div", { class: "row" }, el("button", { type: "button", class: "btn", text: "Copy for a spreadsheet", onclick: () => {
-    const tsv = [cols.join("\t"), ...rows.map((r) => cols.map((c) => r[c] ?? "").join("\t"))].join("\n");
+    const tsv = [cols.join("\t"), ...rows.map((r) => cols.map((c) => val(r, c)).join("\t"))].join("\n");
     navigator.clipboard.writeText(tsv).then(() => (copyMsg.textContent = "Copied"), () => (copyMsg.textContent = "Copy was blocked by the browser"));
   } }), copyMsg));
 }
@@ -1659,13 +2050,15 @@ function renderStatus() {
   $("status-line").textContent = parts.join(" · ");
   const body = $("status-body"); body.textContent = "";
   body.append(el("p", {}, `Audio files found: ${found} of ${AUDIO_ITEMS.length}. Expected in the "${LESSON.audioFolder}" folder: `,
-    el("span", { class: "tnum", text: AUDIO_ITEMS.map((it) => Voice.has[it.file] ? it.file.replace(LESSON.audioFolder, "") + " ✓" : it.base.replace(LESSON.audioFolder, "") + " (.mp3 or .wav)").join(", ") })));
+    el("span", { class: "tnum", text: AUDIO_ITEMS.map((it) => Voice.has[it.file] ? it.file.replace(LESSON.audioFolder, "") + " ✓" : it.audio + " (.mp3 or .wav)").join(", ") })));
+  const imgs = IMAGE_NAMES.filter((n) => IMG.src[n]).length;
+  body.append(el("p", {}, `Pictures found: ${imgs} of ${IMAGE_NAMES.length}. Expected in the "${LESSON.imageFolder}" folder (.png, .webp or .jpg): `,
+    el("span", { text: IMAGE_NAMES.map((n) => (IMG.src[n] ? IMG.src[n].replace(LESSON.imageFolder, "") + " ✓" : n)).join(", ") })));
   if (noVoice && found < AUDIO_ITEMS.length) body.append(el("p", { class: "warn", text: "Install a Korean voice in the system settings or open this page in Chrome, Edge or Safari. The dialogue will not play without one." }));
   if (!STT.supported) body.append(el("p", { class: "warn", text: "This browser has no speech recognition. Use desktop Chrome for this test. An 'I said it' button replaces Record here." }));
   else if (STT.mode === "online") {
     body.append(el("p", { class: "warn", text: "Speech goes to the browser's online service (Google, in Chrome). Use this version with teacher voices only." }));
     if (STT.localState === "unknown" && typeof SR.available === "function") {
-      // Runs only on request: this browser call has crashed a page in a build without the on-device service.
       body.append(el("div", { class: "row" }, el("button", { type: "button", class: "btn", text: "Check for on-device Korean recognition", onclick: async () => { await STT.checkLocal(); renderStatus(); } })));
     } else if (STT.localState === "unavailable") {
       body.append(el("p", { text: "On-device Korean recognition is not available in this browser." }));
@@ -1682,7 +2075,7 @@ function renderStatus() {
         TTS.voices.forEach((v, i) => { const o = el("option", { value: i, text: v.name }); if (TTS.pick[who] === v) o.selected = true; s.append(o); });
         return s;
       })());
-    body.append(el("div", { class: "voice-row" }, select("A"), select("B")));
+    body.append(el("div", { class: "voice-row" }, Object.keys(LESSON.speakers).map(select)));
   }
 }
 
@@ -1691,7 +2084,8 @@ TTS.load();
 if (TTS.supported) speechSynthesis.addEventListener("voiceschanged", () => { TTS.load(); renderStatus(); });
 renderSteps(); render(); renderLog(); renderStatus(); renderRec();
 Voice.check().then(() => { renderStatus(); renderRec(); });
-window.addEventListener("pagehide", stopAll);
+IMG.check().then(() => { renderStatus(); if (S.started) render(); });
+window.addEventListener("pagehide", () => { stopAll(); CAM.close(); });
 window.addEventListener("beforeunload", (e) => { if (REC.state === "recording" || REC.state === "paused" || (REC.blob && !S.submit?.vidMsg)) { e.preventDefault(); e.returnValue = ""; } });
 </script>
 </body>
