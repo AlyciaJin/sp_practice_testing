@@ -446,7 +446,7 @@ const LESSON = {
   follow: { good: 0.8, tries: 3 },   // Step 4: 100% same = two thumbs, at least 80% = one thumb
   /* Steps 5–6. showEnFirst: round 1 shows the English meaning of your lines; later rounds hide it behind Hint. */
   roles: {
-    jenny: { bgs: ["bg1", "bg2"], showEnFirst: false },
+    jenny: { bgs: ["bg1", "bg2"], showEnFirst: true },
     michael: { bgs: ["bg3", "bg4"], showEnFirst: true },
   },
   rounds: 2,
@@ -1373,7 +1373,7 @@ function viewSpeak(role) {
   });
   const roundLabel = st.round <= LESSON.rounds ? `Round ${st.round} of ${LESSON.rounds}` : "Extra practice";
   const lead = role === "jenny"
-    ? "Michael asks you questions by voice. Answer as Jenny. Your lines stay blank. Use Hint if you need the meaning. If what you said is far from the line, try again; the second time, a note shows the line."
+    ? "Michael asks you questions by voice. Answer as Jenny. In round 1 you see the English meaning of your lines. After that they are hidden; use Hint if you need them. If what you said is far from the line, try again; the second time, a note shows the line."
     : "You start. Ask Jenny the questions and answer hers, as Michael. In round 1 you see the English meaning of your lines. After that they are hidden; use Hint if you need them. If what you said is far from the line, try again; the second time, a note shows the line.";
   const nodes = [
     el("div", {}, el("h2", { text: `Speak as ${enName(role)}` }), el("p", { class: "lead", text: lead })),
