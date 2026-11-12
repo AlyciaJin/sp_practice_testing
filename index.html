@@ -404,6 +404,7 @@ body.recbar-on { padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px));
           bg3, bg4          Be Michael rounds 1 and 2
           emily, james      steps 7–8, shown like the student's photo (portrait, about 11:15,
                             with its own background; the face is used when missing)
+          bg_cue, bg_talk   steps 7 and 8 background behind the two photos (optional)
           thumbs2, thumbs1, smile, sad   feedback pictures
           A missing picture is replaced by a coloured circle or the device's emoji.
    ============================================================ */
@@ -514,7 +515,7 @@ const MEANS = {
   subway: { en: "Subway", ko: "지하철로", re: "지하철(?:으로|로)?" },
   taxi: { en: "Taxi", ko: "택시로", re: "택시(?:으로|로)?" },
 };
-const IMAGE_NAMES = ["textbook", "michael_face", "jenny_face", "emily_face", "james_face", "michael", "jenny", "emily", "james", "bg1", "bg2", "bg3", "bg4", "thumbs2", "thumbs1", "smile", "sad"];
+const IMAGE_NAMES = ["textbook", "michael_face", "jenny_face", "emily_face", "james_face", "michael", "jenny", "emily", "james", "bg1", "bg2", "bg3", "bg4", "bg_cue", "bg_talk", "thumbs2", "thumbs1", "smile", "sad"];
 
 /* Derived lists */
 LESSON.segments = [...LESSON.lines.slice(0, 3), ...LESSON.extraSegments];
@@ -1509,7 +1510,7 @@ function viewCue() {
   }));
   const head = el("div", {}, el("h2", { text: "Practice with cue cards" }),
     el("p", { class: "lead", text: "Click the cards one at a time. With the first two cards, Emily asks you questions and you answer with the information on the card. With the last card, you ask the questions in Korean and listen to the answers." }));
-  const nodes = [head, scene({ left: partner, right: "student", middle: deck, photo: true })];
+  const nodes = [head, scene({ left: partner, right: "student", middle: deck, photo: true, bg: "bg_cue" })];
   if (!cur) { nodes.push(el("p", { class: "msg", text: "Click a card to start." })); return nodes; }
 
   const you = nameOf("student"), left = [], right = [];
@@ -1652,7 +1653,7 @@ function viewTalk() {
   const restart = () => { stopAll(); Object.assign(st, { phase: "ready", qi: 0, wrong: 0, history: [], note: null, error: null }); render(); };
   const head = el("div", {}, el("h2", { text: "Talk about yourself" }),
     el("p", { class: "lead", text: `${enName(T.partner)} asks you three questions about where you live. Answer in Korean with the information on your card. If your answer does not match, ${enName(T.partner)} asks again and shows a hint.` }),
-    scene({ left: T.partner, right: "student", photo: true }));
+    scene({ left: T.partner, right: "student", photo: true, bg: "bg_talk" }));
   const editCard = el("button", { type: "button", class: "linkbtn", disabled: !["ready", "done"].includes(st.phase), onclick: () => { stopAll(); Object.assign(st, { phase: "card", qi: 0, wrong: 0, history: [] }); render(); } }, "Edit my card");
   const side = [cardEl("My cue card", st.card), el("div", {}, editCard)];
   if (st.phase === "ready") return [head, split(side, [el("div", { class: "row" }, el("button", { type: "button", class: "btn primary", onclick: askCurrent }, icon("play"), "Start the conversation"))])];
